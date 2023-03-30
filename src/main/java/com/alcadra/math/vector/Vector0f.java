@@ -3,6 +3,7 @@ package com.alcadra.math.vector;
 import com.alcadra.math.matrix.Matrix3f;
 import com.alcadra.math.matrix.Matrix4f;
 import com.alcadra.math.point.Point1f;
+import com.alcadra.math.vector.axis.Axis;
 
 public class Vector0f extends AbstractVector2f {
 	
@@ -207,17 +208,23 @@ public class Vector0f extends AbstractVector2f {
 	@Override
 	public Vector3f xy1()
 	{
-		return Vector3f.of(0, 0, 1);
+		return Axis.Z;
 	}
 	
 	@Override
 	public Vector4f xyz1()
 	{
-		return Vector4f.of(0, 0, 0, 1);
+		return Axis.W;
 	}
 	
 	@Override
 	public Vector2f xy()
+	{
+		return this;
+	}
+	
+	@Override
+	public Vector2f zw()
 	{
 		return this;
 	}

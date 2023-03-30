@@ -181,6 +181,12 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 	}
 	
 	@Override
+	public Vector2f zw()
+	{
+		return new MutableVector2f(Z, W);
+	}
+	
+	@Override
 	public Vector3f xyz()
 	{
 		return new MutableVector3f(X, Y, Z);

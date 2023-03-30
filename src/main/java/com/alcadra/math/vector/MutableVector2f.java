@@ -256,6 +256,12 @@ public class MutableVector2f extends AbstractVector2f implements Vector2f, Vecto
 	}
 	
 	@Override
+	public Vector2f zw()
+	{
+		return Vector2f.origin();
+	}
+	
+	@Override
 	public Vector3f xy1()
 	{
 		return new MutableVector3f(X, Y, 1);

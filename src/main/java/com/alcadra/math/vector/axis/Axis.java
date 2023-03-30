@@ -12,7 +12,7 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	 */
 	Axis1f X = new Axis1f(1);
 	/**
-	 * The X Axis {1, 0, 0, 0}
+	 * The -X Axis {-1, 0, 0, 0}
 	 */
 	Axis1f NEGATIVE_X = new Axis1f(-1);
 	
@@ -22,7 +22,7 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	Axis2f Y = new Axis2f(0, 1);
 	
 	/**
-	 * The Y Axis {0, 1, 0, 0}
+	 * The -Y Axis {0, -1, 0, 0}
 	 */
 	Axis2f NEGATIVE_Y = new Axis2f(0, -1);
 	
@@ -32,7 +32,7 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	Axis3f Z = new Axis3f(0, 0, 1);
 	
 	/**
-	 * The Z Axis {0, 0, 1, 0}
+	 * The -Z Axis {0, 0, -1, 0}
 	 */
 	Axis3f NEGATIVE_Z = new Axis3f(0, 0, -1);
 	
@@ -42,7 +42,7 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	Axis4f W = new Axis4f(0, 0, 0, 1);
 	
 	/**
-	 * The W Axis {0, 0, 0, 1}
+	 * The -W Axis {0, 0, 0, -1}
 	 */
 	Axis4f NEGATIVE_W = new Axis4f(0, 0, 0, -1);
 	

@@ -215,6 +215,12 @@ public class ImmutableVector3f extends AbstractVector3f implements Vector3f, Vec
 	}
 	
 	@Override
+	public Vector2f zw()
+	{
+		return Vector3f.of(Z, 0);
+	}
+	
+	@Override
 	public Vector2f yzw()
 	{
 		return Vector3f.of(Y, Z);

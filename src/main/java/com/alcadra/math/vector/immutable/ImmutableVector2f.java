@@ -240,6 +240,12 @@ public class ImmutableVector2f extends AbstractVector2f implements Vector2f, Vec
 	}
 	
 	@Override
+	public Vector2f zw()
+	{
+		return Vector2f.origin();
+	}
+	
+	@Override
 	public Vector3f xy1()
 	{
 		return Vector2f.of(X, Y, 1);

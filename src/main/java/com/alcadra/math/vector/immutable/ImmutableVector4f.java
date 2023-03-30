@@ -149,6 +149,12 @@ public class ImmutableVector4f extends AbstractVector4f implements Vector4f {
 	}
 	
 	@Override
+	public Vector2f zw()
+	{
+		return Vector4f.of(Z, W);
+	}
+	
+	@Override
 	public Vector3f xyz()
 	{
 		return Vector4f.of(X, Y, Z);
