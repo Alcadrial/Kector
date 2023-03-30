@@ -33,6 +33,16 @@ public interface Vector2f extends Vector3f, Vector2fGetter {
 		return new MutableVector4f(v);
 	}
 	
+	static Vector4f of(Vector2f v, Vector2f w)
+	{
+		return new MutableVector4f(v.x(), v.y(), w.x(), w.y());
+	}
+	
+	static Vector4f of(Vector2i v, Vector2i w)
+	{
+		return new MutableVector4f(v.x(), v.y(), w.x(), w.y());
+	}
+	
 	static Vector3f of(Vector3i v)
 	{
 		return new MutableVector3f(v);
@@ -76,6 +86,16 @@ public interface Vector2f extends Vector3f, Vector2fGetter {
 	static Vector4f ofImmutable(Vector4i v)
 	{
 		return new ImmutableVector4f(v);
+	}
+	
+	static Vector4f ofImmutable(Vector2f v, Vector2f w)
+	{
+		return new ImmutableVector4f(v.x(), v.y(), w.x(), w.y());
+	}
+	
+	static Vector4f ofImmutable(Vector2i v, Vector2i w)
+	{
+		return new ImmutableVector4f(v.x(), v.y(), w.x(), w.y());
 	}
 	
 	static Vector3f ofImmutable(Vector3i v)

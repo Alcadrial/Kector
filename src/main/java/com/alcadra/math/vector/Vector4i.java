@@ -55,6 +55,21 @@ public interface Vector4i extends Vector4iGetter, NormalizableVector<Vector4f> {
 		return new MutableVector4i(v, roundingMode);
 	}
 	
+	static Vector4i of(Vector2i v, Vector2i w)
+	{
+		return new MutableVector4i(v.x(), v.y(), w.x(), w.y());
+	}
+	
+	static Vector4i of(Vector2f v, Vector2f w)
+	{
+		return new MutableVector4i(v.x(), v.y(), w.x(), w.y());
+	}
+	
+	static Vector4i of(Vector2f v, Vector2f w, RoundingMode roundingMode)
+	{
+		return new MutableVector4i(v.x(), v.y(), w.x(), w.y(), roundingMode);
+	}
+	
 	static Vector3i of(Vector3f v)
 	{
 		return new MutableVector3i(v);
@@ -128,6 +143,21 @@ public interface Vector4i extends Vector4iGetter, NormalizableVector<Vector4f> {
 	static Vector4i ofImmutable(Vector4f v, RoundingMode roundingMode)
 	{
 		return new ImmutableVector4i(v, roundingMode);
+	}
+	
+	static Vector4i ofImmutable(Vector2i v, Vector2i w)
+	{
+		return new ImmutableVector4i(v.x(), v.y(), w.x(), w.y());
+	}
+	
+	static Vector4i ofImmutable(Vector2f v, Vector2f w)
+	{
+		return new ImmutableVector4i(v.x(), v.y(), w.x(), w.y());
+	}
+	
+	static Vector4i ofImmutable(Vector2f v, Vector2f w, RoundingMode roundingMode)
+	{
+		return new ImmutableVector4i(v.x(), v.y(), w.x(), w.y(), roundingMode);
 	}
 	
 	static Vector3i ofImmutable(Vector3f v)
