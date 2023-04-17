@@ -1,0 +1,74 @@
+plugins {
+    id("java")
+    id("java-library")
+    id("maven-publish")
+    id("eclipse")
+}
+
+group = "com.alcadrial.kector"
+archivesBaseName = "Kector-${version}"
+
+eclipse {
+    classpath {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+    project.name = "Kector"
+}
+
+println("Configuring Kector's project")
+
+java {
+	toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    withSourcesJar()
+    withJavadocJar()
+}
+
+javadoc {
+    configure(options) {
+        tags("apiNote:a:Api Note:", "implSpec:a:Impl Spec:", "implNote:a:Impl Note:")
+        header = '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
+    }
+}
+
+tasks.sourcesJar {
+    duplicatesStrategy = "exclude"
+}
+
+tasks.javadoc {
+    options.addBooleanOption("-allow-script-in-comments", true)
+}
+
+repositories {
+	flatDir {
+		dirs("libs")
+	}
+	
+    maven {
+    	name = "Local Maven"
+    	url = "D:/maven"
+    }
+    mavenCentral()
+}
+
+jar.manifest.attributes([
+	"Name"		: "Kector",
+	"Version"	: version,
+	"Author"	: "Alcadrial",
+	"Timestamp"	: new Date().format("dd/MM/yyyy HH:mm:ss"),
+])
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+            artifact sourcesJar
+            artifact javadocJar
+        }
+    }
+    repositories {
+        maven {
+            url("file://D:/maven")
+        }
+    }
+}

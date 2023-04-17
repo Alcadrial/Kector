@@ -158,7 +158,7 @@ public class Matrix4f {
 	 * 
 	 * @param width of the box
 	 * @param height of the box
-	 * @param mousePos position of the center
+	 * @param centerPos position of the center
 	 * 
 	 * @return itself
 	 */
@@ -226,11 +226,11 @@ public class Matrix4f {
 	{
 		float scale = 1 / Math.tan(fieldOfViewRads / 2);
 		float frustum = maxDistance - minDistance;
-		values[0][0] = scale * aspectRatio;
+		values[0][0] = scale / aspectRatio;
 		values[1][1] = scale;
 		values[2][2] = -(maxDistance + minDistance) / frustum;
-		values[2][3] = -1;
-		values[3][2] = -maxDistance * minDistance * 2 / frustum;
+		values[3][2] = -1;
+		values[2][3] = -maxDistance * minDistance * 2 / frustum;
 		return this;
 	}
 	
@@ -744,7 +744,8 @@ public class Matrix4f {
 	
 	public float[] toArray()
 	{
-		return new float[] {values[0][0], values[0][1], values[0][2], values[0][3], values[1][0], values[1][1], values[1][2], values[1][3], values[2][0], values[2][1], values[2][2], values[2][3], values[3][0], values[3][1], values[3][2], values[3][3]};
+		return new float[] {values[0][0], values[0][1], values[0][2], values[0][3], values[1][0], values[1][1], values[1][2], values[1][3], values[2][0], values[2][1], values[2][2], values[2][3],
+			values[3][0], values[3][1], values[3][2], values[3][3]};
 	}
 	
 	@Override

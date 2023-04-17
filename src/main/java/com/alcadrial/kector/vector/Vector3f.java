@@ -156,13 +156,17 @@ public interface Vector3f extends Vector4f, Vector3fGetter {
 	
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f crossProduct(Vector3f vector);
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f crossProduct(Vector3i vector);
@@ -192,20 +196,20 @@ public interface Vector3f extends Vector4f, Vector3fGetter {
 	
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	@Override
 	Vector2f xy();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector2f xz();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector4f xyz1();

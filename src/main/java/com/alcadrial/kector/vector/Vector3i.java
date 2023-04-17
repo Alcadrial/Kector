@@ -207,20 +207,28 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	Vector3i add(int x, int y, int z);
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f add(Vector3f vector);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param value
+	 * 
 	 * @return
 	 */
 	@Override
 	Vector3f addAll(float value);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param x
+	 * @param y
+	 * @param z
+	 * 
 	 * @return
 	 */
 	Vector3f add(float x, float y, float z);
@@ -231,20 +239,28 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	Vector3i subtract(int x, int y, int z);
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f subtract(Vector3f vector);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param value
+	 * 
 	 * @return
 	 */
 	@Override
 	Vector3f subtractAll(float value);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param x
+	 * @param y
+	 * @param z
+	 * 
 	 * @return
 	 */
 	Vector3f subtract(float x, float y, float z);
@@ -255,32 +271,44 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	Vector3i multiply(int x, int y, int z);
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f multiply(Vector3f vector);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param value
+	 * 
 	 * @return
 	 */
 	@Override
 	Vector3f multiplyAll(float value);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param x
+	 * @param y
+	 * @param z
+	 * 
 	 * @return
 	 */
 	Vector3f multiply(float x, float y, float z);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param matrix
+	 * 
 	 * @return
 	 */
 	Vector3f multiply(Matrix3f matrix);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param matrix
+	 * 
 	 * @return
 	 */
 	@Override
@@ -292,33 +320,45 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	Vector3i divide(int x, int y, int z);
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f divide(Vector3f vector);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param value
+	 * 
 	 * @return
 	 */
 	@Override
 	Vector3f divideAll(float value);
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
+	 * @param x
+	 * @param y
+	 * @param z
+	 * 
 	 * @return
 	 */
 	Vector3f divide(float x, float y, float z);
 	
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3i crossProduct(Vector3i vector);
 	/**
 	 * Instantiate a new Vector
+	 * 
 	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f crossProduct(Vector3f vector);
@@ -331,7 +371,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	Vector3i conjugate();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	@Override
@@ -353,20 +393,20 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	@Override
 	Vector2i xy();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector2i xz();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector4i xyz1();

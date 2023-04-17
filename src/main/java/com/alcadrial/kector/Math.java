@@ -74,6 +74,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the fraction of a
 	 */
 	public static double fraction(double a)
@@ -86,6 +87,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the fraction of a
 	 */
 	public static float fraction(float a)
@@ -98,6 +100,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the up fraction of a
 	 */
 	public static double fractionUp(double a)
@@ -110,6 +113,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the up fraction of a
 	 */
 	public static float fractionUp(float a)
@@ -122,6 +126,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -135,6 +140,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -148,6 +154,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -161,6 +168,7 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
+	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -250,7 +258,7 @@ public class Math {
 	}
 	
 	/**
-	 * @see java.lang.Math#toDegrees(double)o
+	 * @see java.lang.Math#toDegrees(double)
 	 */
 	public static double toDegrees(double angrad)
 	{

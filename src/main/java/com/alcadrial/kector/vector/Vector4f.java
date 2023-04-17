@@ -168,31 +168,31 @@ public interface Vector4f extends Vector4fGetter, NormalizableVector<Vector4f> {
 	
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector2f xy();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector2f zw();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f xyz();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector3f yzw();
 	/**
 	 * Instantiate a new Vector
-	 * @param vector
+	 * 
 	 * @return
 	 */
 	Vector4f zwxy();
