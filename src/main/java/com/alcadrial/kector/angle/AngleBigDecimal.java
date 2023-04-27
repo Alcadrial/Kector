@@ -14,6 +14,20 @@ public class AngleBigDecimal implements Angle {
 	}
 	
 	@Override
+	public Angle add(Angle angle)
+	{
+		value = value.add(unit == angle.getUnit() ? angle.asBigDecimal() : angle.asBigDecimal(unit));
+		return this;
+	}
+	
+	@Override
+	public Angle opposite()
+	{
+		value = value.negate();
+		return this;
+	}
+	
+	@Override
 	public float asFloat()
 	{
 		return value.floatValue();
@@ -50,15 +64,39 @@ public class AngleBigDecimal implements Angle {
 	}
 	
 	@Override
+	public AngleUnit getUnit()
+	{
+		return unit;
+	}
+	
+	@Override
+	public void setValue(float value)
+	{
+		this.value = new BigDecimal(value);
+	}
+	
+	@Override
 	public void setValue(AngleUnit unit, float value)
 	{
 		this.value = this.unit.from(unit, new BigDecimal(value));
 	}
 	
 	@Override
+	public void setValue(double value)
+	{
+		this.value = new BigDecimal(value);
+	}
+	
+	@Override
 	public void setValue(AngleUnit unit, double value)
 	{
 		this.value = this.unit.from(unit, new BigDecimal(value));
+	}
+	
+	@Override
+	public void setValue(BigDecimal value)
+	{
+		this.value = value;
 	}
 	
 	@Override

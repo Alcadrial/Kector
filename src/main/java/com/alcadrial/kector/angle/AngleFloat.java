@@ -14,6 +14,20 @@ public class AngleFloat implements Angle {
 	}
 	
 	@Override
+	public Angle add(Angle angle)
+	{
+		value += unit == angle.getUnit() ? angle.asFloat() : angle.asFloat(unit);
+		return this;
+	}
+	
+	@Override
+	public Angle opposite()
+	{
+		value = -value;
+		return this;
+	}
+	
+	@Override
 	public float asFloat()
 	{
 		return value;
@@ -50,15 +64,39 @@ public class AngleFloat implements Angle {
 	}
 	
 	@Override
+	public AngleUnit getUnit()
+	{
+		return unit;
+	}
+	
+	@Override
+	public void setValue(float value)
+	{
+		this.value = value;
+	}
+	
+	@Override
 	public void setValue(AngleUnit unit, float value)
 	{
 		this.value = (float) this.unit.from(unit, value);
 	}
 	
 	@Override
+	public void setValue(double value)
+	{
+		this.value = (float) value;
+	}
+	
+	@Override
 	public void setValue(AngleUnit unit, double value)
 	{
 		this.value = (float) this.unit.from(unit, value);
+	}
+	
+	@Override
+	public void setValue(BigDecimal value)
+	{
+		this.value = value.floatValue();
 	}
 	
 	@Override
