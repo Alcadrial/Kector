@@ -292,6 +292,14 @@ public class Math {
 	/**
 	 * @see java.lang.Math#sqrt(double)
 	 */
+	public static float sqrt(float a)
+	{
+		return (float) java.lang.Math.sqrt(a);
+	}
+	
+	/**
+	 * @see java.lang.Math#sqrt(double)
+	 */
 	public static double sqrt(double a)
 	{
 		return java.lang.Math.sqrt(a);

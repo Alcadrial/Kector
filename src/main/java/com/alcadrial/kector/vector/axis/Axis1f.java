@@ -7,7 +7,6 @@ import com.alcadrial.kector.vector.immutable.ImmutableVector2f;
  */
 public final class Axis1f extends ImmutableVector2f implements Axis {
 	
-	/***/
 	Axis1f(float x)
 	{
 		super(x < 0 ? -1 : 1, 0);

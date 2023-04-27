@@ -8,7 +8,6 @@ import com.alcadrial.kector.vector.immutable.ImmutableVector3f;
  */
 public final class Axis3f extends ImmutableVector3f implements Axis {
 	
-	/***/
 	Axis3f(float x, float y, float z)
 	{
 		super(Vector3f.of(x, y, z).unitary());

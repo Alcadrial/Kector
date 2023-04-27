@@ -1,5 +1,7 @@
 package com.alcadrial.kector.vector.axis;
 
+import java.util.Locale;
+
 import com.alcadrial.kector.vector.Vector4f;
 
 /**
@@ -46,10 +48,9 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	 */
 	Axis4f NEGATIVE_W = new Axis4f(0, 0, 0, -1);
 	
-	/***/
 	static Axis valueOf(String name)
 	{
-		return switch (name.toLowerCase())
+		return switch (name.toLowerCase(Locale.ROOT))
 		{
 			case "x" -> X;
 			case "y" -> Y;
@@ -65,6 +66,7 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	
 	/**
 	 * Returns an array containing the value of every <code>Axis</code> in this interface in the order: X, -X, Y, -Y, Z, -Z, W, -W
+	 * 
 	 * @return an array of <code>Axis</code>
 	 */
 	static Axis[] values()
@@ -74,6 +76,7 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	
 	/**
 	 * Returns an array containing the value of every positive <code>Axis</code> in this interface in the order: X, Y, Z, W
+	 * 
 	 * @return an array of <code>Axis</code>
 	 */
 	static Axis[] positiveValues()
@@ -83,6 +86,7 @@ public sealed interface Axis extends Vector4f permits Axis1f, Axis2f, Axis3f, Ax
 	
 	/**
 	 * Returns an array containing the value of every negative <code>Axis</code> in this interface in the order: -X, -Y, -Z, -W
+	 * 
 	 * @return an array of <code>Axis</code>
 	 */
 	static Axis[] negativeValues()
