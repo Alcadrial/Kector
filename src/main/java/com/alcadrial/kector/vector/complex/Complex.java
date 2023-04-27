@@ -1,65 +1,131 @@
 package com.alcadrial.kector.vector.complex;
 
-import com.alcadrial.kector.vector.MutableVector2f;
+import com.alcadrial.kector.angle.Angle;
+import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.vector.Vector2f;
 
-public class Complex extends MutableVector2f {
+public interface Complex {
 	
-	public Complex(Vector2f vector)
+	static Complex of(float r, float i)
 	{
-		this(vector.x(), vector.y());
+		return new CartesianComplex(r, i);
 	}
 	
-	public Complex(float r, float i)
+	static Complex of(Vector2f vector)
 	{
-		super(r, i);
-		unitary();
+		return new CartesianComplex(vector);
 	}
 	
-	public Complex multiply(Complex complex)
+	static Complex ofPolar(float magnitude, float angle)
 	{
-		return new Complex(r() * complex.r() - i() * complex.i(), r() * complex.i() + i() * complex.r());
+		return new PolarComplex(magnitude, Angle.of(angle, AngleUnit.RADIANS));
 	}
 	
-	public MutableVector2f rotate(Vector2f v)
+	static Complex ofPolar(float magnitude, Angle angle)
 	{
-		float r = r() * r();
-		float i = i() * i();
-		return new MutableVector2f(r * v.x() + i * v.x(), r * v.y() + i * v.y());
+		return new PolarComplex(magnitude, angle);
 	}
 	
-	@Override
-	public Complex conjugate()
+	static Complex ofPolar(Vector2f vector)
 	{
-		return (Complex) super.conjugate();
+		return new PolarComplex(vector, AngleUnit.RADIANS);
 	}
 	
-	public float r()
+	static Complex ofFullState(float r, float i)
 	{
-		return X;
+		return new FullStateComplex(r, i);
 	}
 	
-	public float i()
+	static Complex ofFullState(Vector2f vector)
 	{
-		return Y;
+		return new FullStateComplex(vector);
 	}
 	
-	@Override
-	public String toString()
+	static Complex ofFullStatePolar(float magnitude, float angle)
 	{
-		String s = "";
-		boolean b;
-		if (b = (int) (r() * 1000) != 0) s += r();
-		if ((int) (i() * 1000) != 0)
-		{
-			if (i() > 0)
-			{
-				if (b) s += " + ";
-				s += i();
-			}
-			else if (b) s += " - " + -i();
-			else s += i();
-		}
-		return s.length() == 0 ? "0" : s;
+		return new FullStateComplex(magnitude, Angle.of(angle, AngleUnit.RADIANS));
 	}
+	
+	static Complex ofFullStatePolar(float magnitude, Angle angle)
+	{
+		return new FullStateComplex(magnitude, angle);
+	}
+	
+	static Complex ofFullStatePolar(Vector2f vector)
+	{
+		return new FullStateComplex(vector.x(), Angle.of(vector.y(), AngleUnit.RADIANS));
+	}
+	
+	static Complex ofFullStatePolar(Vector2f vector, AngleUnit unit)
+	{
+		return new FullStateComplex(vector.x(), Angle.of(vector.y(), unit));
+	}
+	
+	static Complex ofImmutable(float r, float i)
+	{
+		return new ImmutableCartesianComplex(r, i);
+	}
+	
+	static Complex ofImmutable(Vector2f vector)
+	{
+		return new ImmutableCartesianComplex(vector);
+	}
+	
+	static Complex ofImmutablePolar(float magnitude, float angle)
+	{
+		return new ImmutablePolarComplex(magnitude, Angle.of(angle, AngleUnit.RADIANS));
+	}
+	
+	static Complex ofImmutablePolar(float magnitude, Angle angle)
+	{
+		return new ImmutablePolarComplex(magnitude, angle);
+	}
+	
+	static Complex ofImmutablePolar(Vector2f vector)
+	{
+		return new ImmutablePolarComplex(vector, AngleUnit.RADIANS);
+	}
+	
+	static Complex ofImmutablePolar(Vector2f vector, AngleUnit unit)
+	{
+		return new ImmutablePolarComplex(vector, unit);
+	}
+	
+	static Complex copyOf(Complex complex)
+	{
+		return new CartesianComplex(complex);
+	}
+	
+	static Complex copyOfPolar(Complex complex)
+	{
+		return new ImmutableCartesianComplex(complex);
+	}
+	
+	static Complex copyOfImmutable(Complex complex)
+	{
+		return new PolarComplex(complex);
+	}
+	
+	static Complex copyOfImmutablePolar(Complex complex)
+	{
+		return new ImmutablePolarComplex(complex);
+	}
+	
+	Complex add(Complex complex);
+	Complex multiply(Complex complex);
+	
+	Vector2f rotate(Vector2f v);
+	
+	Complex conjugate();
+	
+	Vector2f asVector();
+	
+	float r();
+	float i();
+	Angle angle();
+	float angle(AngleUnit unit);
+	float magnitude();
+	
+	Complex setR(float r);
+	Complex setI(float i);
 }

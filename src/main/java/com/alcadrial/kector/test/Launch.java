@@ -66,7 +66,7 @@ public class Launch {
 			Vector3f rx = ry.crossProduct(Axis.Z);
 			
 			Vector3f dimension = end.xyz().subtract(start);
-			Vector3f rDimension = new Complex(dimension.xy()).multiply(new Complex(direction.xy())).multiply(new Complex(Axis.X));
+			Vector3f rDimension = Complex.of(dimension.xy()).multiply(Complex.of(direction.xy())).multiply(Complex.of(Axis.X)).asVector();
 			
 			println("f°=" + toExternedRad(AngleUnit.RADIANS, angles(ry, null)).x() + "π");
 			println("d°=" + toExternedRad(AngleUnit.RADIANS, angles(dimension.xyz().unitary(), null)).x() + "π");
