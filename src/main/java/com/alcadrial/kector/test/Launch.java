@@ -26,20 +26,24 @@ public class Launch {
 			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> x));
 			endBlock();
 			
-			startBlock("Anti-Linear Interpolation");
-			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> 1 - x));
-			endBlock();
-			
 			startBlock("Cosine Interpolation");
-			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> Math.cos(x * Math.PIF / 2)));
+			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> 1 - Math.cos(x * Math.PIF / 2)));
 			endBlock();
 			
 			startBlock("Default Cosine Interpolation");
 			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.cosineInterpolation(a, b, i));
 			endBlock();
 			
+			startBlock("Half Cosine Interpolation");
+			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.halfCosineInterpolation(a, b, i));
+			endBlock();
+			
 			startBlock("Sine Interpolation");
 			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> Math.sin(x * Math.PIF / 2)));
+			endBlock();
+			
+			startBlock("Inverse Interpolation");
+			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> x / (2 - x)));
 			endBlock();
 			
 			startBlock("Square Interpolation");
@@ -48,13 +52,17 @@ public class Launch {
 			
 			startBlock("Square Cosine Interpolation");
 			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> {
-				double c = Math.cos(AngleUnit.RADIANS.fromTurns(x / 4D));
+				double c = 1 - Math.cos(AngleUnit.RADIANS.fromTurns(x / 4D));
 				return (float) (c * c);
 			}));
 			endBlock();
 			
 			startBlock("Cosine Square Interpolation");
-			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> (float) Math.cos(AngleUnit.RADIANS.fromTurns(x * x / 4D))));
+			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> 1 - (float) Math.cos(AngleUnit.RADIANS.fromTurns(x * x / 4D))));
+			endBlock();
+			
+			startBlock("Logarithmic Interpolation");
+			for (float i = 0; i <= 1; i += 0.125F) println("delta=" + i + " Result[" + a + "; " + b + "]=" + Math.interpolation(a, b, i, x -> (float) Math.log(x * (Math.E - 1) + 1)));
 			endBlock();
 		}
 		endBlock();

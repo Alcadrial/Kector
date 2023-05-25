@@ -3,6 +3,7 @@ package com.alcadrial.kector.vector.complex;
 import com.alcadrial.kector.Math;
 import com.alcadrial.kector.angle.Angle;
 import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.vector.MutableVector3f;
 import com.alcadrial.kector.vector.MutableVector4f;
 import com.alcadrial.kector.vector.Vector2f;
@@ -187,6 +188,21 @@ public class Quaternion extends MutableVector4f implements IQuaternion {
 	public Vector3f vector()
 	{
 		return rotate(Axis.X);
+	}
+	
+	public Matrix4f matrix()
+	{
+		double l = length();
+		float s = (float) (1 / (l * l));
+		float i2 = i() * i();
+		float j2 = j() * j();
+		float k2 = k() * k();
+		return new Matrix4f(new float[][] {
+			{1 - 2 * s * (j2 + k2), 2 * s * (i() * j() - k() * r()), 2 * s * (i() * k() + j() * r()), 0},
+			{2 * s * (i() * j() + k() * r()), 1 - 2 * s * (i2 + k2), 2 * s * (j() * k() - i() * r()), 0},
+			{2 * s * (i() * k() - j() * r()), 2 * s * (j() * k() + i() * r()), 1 - 2 * s * (i2 + j2), 0},
+			{0, 0, 0, 1}
+		});
 	}
 	
 	@Override

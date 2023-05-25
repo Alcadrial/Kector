@@ -337,7 +337,7 @@ public class MutableVector3i extends AbstractVector3i {
 	@Override
 	public boolean equals(Object obj)
 	{
-		return obj instanceof MutableVector3i v && v.x() == X && v.y() == Y && v.z() == Z;
+		return obj instanceof Vector3i v && v.x() == X && v.y() == Y && v.z() == Z;
 	}
 	
 	@Override

@@ -41,17 +41,32 @@ public class Math {
 	
 	public static double cosineInterpolation(double a, double b, double delta)
 	{
-		return (b - a) * cos(AngleUnit.RADIANS.fromTurns(delta / 4)) + a;
+		return (b - a) * ((1 - cos(AngleUnit.RADIANS.fromTurns(delta / 2))) * 0.5) + a;
 	}
 	
 	public static float cosineInterpolation(float a, float b, float delta)
 	{
-		return (float) ((b - a) * cos(AngleUnit.RADIANS.fromTurns(delta / 4D)) + a);
+		return (float) ((b - a) * ((1 - cos(AngleUnit.RADIANS.fromTurns(delta / 2D))) * 0.5) + a);
 	}
 	
 	public static Vector2f cosineInterpolation(Vector2f v, Vector2f w, float delta)
 	{
-		return Vector2f.copyOf(w).subtract(v).multiplyAll((float) cos(AngleUnit.RADIANS.fromTurns(delta / 4D))).add(v);
+		return Vector2f.copyOf(w).subtract(v).multiplyAll((float) ((1 - cos(AngleUnit.RADIANS.fromTurns(delta / 2D))) * 0.5)).add(v);
+	}
+	
+	public static double halfCosineInterpolation(double a, double b, double delta)
+	{
+		return (b - a) * (1 - cos(AngleUnit.RADIANS.fromTurns(delta / 4))) + a;
+	}
+	
+	public static float halfCosineInterpolation(float a, float b, float delta)
+	{
+		return (float) ((b - a) * (1 - cos(AngleUnit.RADIANS.fromTurns(delta / 4D))) + a);
+	}
+	
+	public static Vector2f halfCosineInterpolation(Vector2f v, Vector2f w, float delta)
+	{
+		return Vector2f.copyOf(w).subtract(v).multiplyAll((float) (1 - cos(AngleUnit.RADIANS.fromTurns(delta / 4D)))).add(v);
 	}
 	
 	public static double lerp(double a, double b, double delta)

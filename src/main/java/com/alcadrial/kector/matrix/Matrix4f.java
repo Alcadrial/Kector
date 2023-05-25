@@ -261,9 +261,7 @@ public class Matrix4f {
 	 */
 	public Matrix4f view(Vector3f position, Angle rotationX, Angle rotationY)
 	{
-		identity();
-		rawView(rotationX, rotationY);
-		return translate(Vector3f.copyOf(position).opposite());
+		return view(position, rotationX.asFloat(AngleUnit.RADIANS), rotationY.asFloat(AngleUnit.RADIANS));
 	}
 	
 	/**

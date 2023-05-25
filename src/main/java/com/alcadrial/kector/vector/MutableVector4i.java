@@ -255,7 +255,22 @@ public class MutableVector4i extends AbstractVector4i {
 	@Override
 	public boolean equals(Object obj)
 	{
-		return obj instanceof MutableVector4i v && v.x() == X && v.y() == Y && v.z() == Z && v.w() == W;
+		return obj instanceof Vector4i v && v.x() == X && v.y() == Y && v.z() == Z && v.w() == W;
+	}
+	
+	public boolean equals(Vector2i vector)
+	{
+		return vector.x() == X && vector.y() == Y && 0 == Z && 0 == W;
+	}
+	
+	public boolean equals(Vector3i vector)
+	{
+		return vector.x() == X && vector.y() == Y && vector.z() == Z && 0 == W;
+	}
+	
+	public boolean equals(Vector4i vector)
+	{
+		return vector.x() == X && vector.y() == Y && vector.z() == Z && vector.w() == W;
 	}
 	
 	@Override
