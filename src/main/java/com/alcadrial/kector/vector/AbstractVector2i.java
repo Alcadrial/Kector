@@ -107,6 +107,42 @@ public abstract class AbstractVector2i extends AbstractVector3i implements Vecto
 	}
 	
 	@Override
+	public float dotProduct(Vector2f vector)
+	{
+		return x() * vector.x() + y() * vector.y();
+	}
+	
+	@Override
+	public int dotProduct(Vector2i vector)
+	{
+		return x() * vector.x() + y() * vector.y();
+	}
+	
+	@Override
+	public float dotProduct(Vector3f vector)
+	{
+		return x() * vector.x() + y() * vector.y();
+	}
+	
+	@Override
+	public int dotProduct(Vector3i vector)
+	{
+		return x() * vector.x() + y() * vector.y();
+	}
+	
+	@Override
+	public float dotProduct(Vector4f vector)
+	{
+		return x() * vector.x() + y() * vector.y();
+	}
+	
+	@Override
+	public int dotProduct(Vector4i vector)
+	{
+		return x() * vector.x() + y() * vector.y();
+	}
+	
+	@Override
 	public Vector2f unitary()
 	{
 		return multiplyAll((float) (1 / length()));
@@ -137,9 +173,9 @@ public abstract class AbstractVector2i extends AbstractVector3i implements Vecto
 	}
 	
 	@Override
-	public double length()
+	public double squareLength()
 	{
-		return Math.sqrt((double) x() * x() + (double) y() * y());
+		return (double) x() * x() + (double) y() * y();
 	}
 	
 	@Override

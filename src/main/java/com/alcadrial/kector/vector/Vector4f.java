@@ -166,6 +166,9 @@ public interface Vector4f extends Vector4fGetter, NormalizableVector<Vector4f> {
 	Vector4f setAll(float x, float y, float z, float w);
 	Vector4f setAll(Vector4f vector);
 	
+	float dotProduct(Vector4f vector);
+	float dotProduct(Vector4i vector);
+	
 	/**
 	 * Instantiate a new Vector
 	 * 
@@ -198,6 +201,7 @@ public interface Vector4f extends Vector4fGetter, NormalizableVector<Vector4f> {
 	Vector4f zwxy();
 	Point4f asPoint();
 	
+	double squareLength();
 	double length();
 	double size();
 	double distance(Vector4f vector);

@@ -152,6 +152,9 @@ public interface Vector2f extends Vector3f, Vector2fGetter {
 	Vector2f divideAll(float value);
 	Vector2f divide(float x, float y);
 	
+	float dotProduct(Vector2f vector);
+	float dotProduct(Vector2i vector);
+	
 	Vector2f perpendicular();
 	@Override
 	Vector2f opposite();

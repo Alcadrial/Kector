@@ -171,6 +171,9 @@ public interface Vector3f extends Vector4f, Vector3fGetter {
 	 */
 	Vector3f crossProduct(Vector3i vector);
 	
+	float dotProduct(Vector3f vector);
+	float dotProduct(Vector3i vector);
+	
 	@Override
 	Vector3f opposite();
 	@Override

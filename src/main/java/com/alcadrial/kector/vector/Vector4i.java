@@ -229,6 +229,9 @@ public interface Vector4i extends Vector4iGetter, NormalizableVector<Vector4f> {
 	Vector4f divideAll(float value);
 	Vector4f divide(float x, float y, float z, float w);
 	
+	float dotProduct(Vector4f vector);
+	int dotProduct(Vector4i vector);
+	
 	Vector4i opposite();
 	Vector4i absolute();
 	Vector4i conjugate();
@@ -251,6 +254,7 @@ public interface Vector4i extends Vector4iGetter, NormalizableVector<Vector4f> {
 	Vector4i zwxy();
 	Point4f asPoint();
 	
+	double squareLength();
 	double length();
 	double size();
 	double distance(Vector4i vector);

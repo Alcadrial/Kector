@@ -107,6 +107,18 @@ public abstract class AbstractVector4i implements Vector4i {
 	}
 	
 	@Override
+	public float dotProduct(Vector4f vector)
+	{
+		return x() * vector.x() + y() * vector.y() + z() * vector.z() + w() * vector.w();
+	}
+	
+	@Override
+	public int dotProduct(Vector4i vector)
+	{
+		return x() * vector.x() + y() * vector.y() + z() * vector.z() + w() * vector.w();
+	}
+	
+	@Override
 	public Vector4f unitary()
 	{
 		return multiplyAll((float) (1 / length()));
@@ -137,9 +149,15 @@ public abstract class AbstractVector4i implements Vector4i {
 	}
 	
 	@Override
+	public double squareLength()
+	{
+		return (double) x() * x() + (double) y() * y() + (double) z() * z() + (double) w() * w();
+	}
+	
+	@Override
 	public double length()
 	{
-		return Math.sqrt((double) x() * x() + (double) y() * y() + (double) z() * z() + (double) w() * w());
+		return Math.sqrt(squareLength());
 	}
 	
 	@Override

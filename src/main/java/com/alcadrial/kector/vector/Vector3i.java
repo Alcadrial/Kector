@@ -353,7 +353,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @return
 	 */
-	Vector3i crossProduct(Vector3i vector);
+	Vector3f crossProduct(Vector3f vector);
 	/**
 	 * Instantiate a new Vector
 	 * 
@@ -361,7 +361,10 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @return
 	 */
-	Vector3f crossProduct(Vector3f vector);
+	Vector3i crossProduct(Vector3i vector);
+	
+	float dotProduct(Vector3f vector);
+	int dotProduct(Vector3i vector);
 	
 	@Override
 	Vector3i opposite();
