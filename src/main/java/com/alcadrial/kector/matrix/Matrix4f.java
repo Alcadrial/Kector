@@ -33,8 +33,18 @@ public class Matrix4f {
 	 */
 	public Matrix4f(Matrix4f sample)
 	{
-		values = new float[4][4];
-		for (int i = 0; i < values.length; i++) System.arraycopy(sample.values[i], 0, values[i], 0, sample.values.length);
+		this(sample.values);
+	}
+	
+	/**
+	 * Create a matrix using the given values
+	 * 
+	 * @param values used to initialize this matrix
+	 */
+	public Matrix4f(float[][] values)
+	{
+		this.values = new float[4][4];
+		for (int i = 0; i < values.length; i++) System.arraycopy(values[i], 0, this.values[i], 0, values.length);
 	}
 	
 	/**
