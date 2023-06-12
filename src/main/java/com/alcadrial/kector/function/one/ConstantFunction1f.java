@@ -40,11 +40,6 @@ public class ConstantFunction1f implements Function1f, CoefficientFunction1f {
 		return ZERO_FUNCTION;
 	}
 	
-	public float getConstant()
-	{
-		return constant;
-	}
-	
 	@Override
 	public boolean isZero()
 	{
@@ -54,12 +49,12 @@ public class ConstantFunction1f implements Function1f, CoefficientFunction1f {
 	@Override
 	public float getCoeffiecient()
 	{
-		return 0;
+		return constant;
 	}
 	
 	@Override
 	public String toString()
 	{
-		return "0";
+		return String.valueOf(constant);
 	}
 }

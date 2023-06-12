@@ -4,11 +4,11 @@ import com.alcadrial.kector.Math;
 
 /**
  * <p>A {@link Function1f} <i>f</i> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ax^p" /></blockquote>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ax^{\alpha}" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
- * <li> <i>m</i> is the coefficient;</li>
- * <li> <i>p</i> is the power;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?a" /> is the coefficient;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\alpha" /> is the power;</li>
  * </p>
  * 
  * @author Alcadrial

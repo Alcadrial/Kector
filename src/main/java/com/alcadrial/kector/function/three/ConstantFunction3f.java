@@ -42,11 +42,6 @@ public class ConstantFunction3f implements Function3f, CoefficientFunction3f {
 		return ZERO_FUNCTION;
 	}
 	
-	public Vector3f getConstant()
-	{
-		return constant;
-	}
-	
 	@Override
 	public boolean isZero()
 	{
@@ -56,12 +51,12 @@ public class ConstantFunction3f implements Function3f, CoefficientFunction3f {
 	@Override
 	public Vector3f getCoeffiecient()
 	{
-		return Vector3f.origin();
+		return constant;
 	}
 	
 	@Override
 	public String toString()
 	{
-		return "{0;0;0}";
+		return constant.toString();
 	}
 }

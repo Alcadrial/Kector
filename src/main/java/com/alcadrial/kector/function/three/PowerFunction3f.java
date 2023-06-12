@@ -5,11 +5,11 @@ import com.alcadrial.kector.vector.Vector3f;
 
 /**
  * <p>A {@link Function3f} <i>f</i> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{a}\vec{x}^{\vec{p}}" /></blockquote>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{a}\vec{x}^{\vec{\alpha}}" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{m}" /> is the coefficient;</li>
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{p}" /> is the power;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}" /> is the coefficient;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{\alpha}" /> is the power;</li>
  * </p>
  * 
  * @author Alcadrial
