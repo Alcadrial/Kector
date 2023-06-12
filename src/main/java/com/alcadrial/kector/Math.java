@@ -371,6 +371,14 @@ public class Math {
 	/**
 	 * @see java.lang.Math#pow(double, double)
 	 */
+	public static float pow(float a, float b)
+	{
+		return (float) java.lang.Math.pow(a, b);
+	}
+	
+	/**
+	 * @see java.lang.Math#pow(double, double)
+	 */
 	public static double pow(double a, double b)
 	{
 		return java.lang.Math.pow(a, b);
