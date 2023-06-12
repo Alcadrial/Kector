@@ -8,13 +8,7 @@ plugins {
 group = "com.alcadrial.kector"
 archivesBaseName = "Kector-${version}"
 
-eclipse {
-    classpath {
-        downloadJavadoc = true
-        downloadSources = true
-    }
-    project.name = "Kector"
-}
+eclipse.project.name = "Kector"
 
 println("Configuring Kector's project")
 
@@ -52,10 +46,13 @@ repositories {
 }
 
 jar.manifest.attributes([
-	"Name"		: "Kector",
-	"Version"	: version,
-	"Author"	: "Alcadrial",
-	"Timestamp"	: new Date().format("dd/MM/yyyy HH:mm:ss"),
+	"Specification-Title"     : "${eclipse.project.name}",
+	"Specification-Version"   : version,
+	"Specification-Vendor"    : "Alcadrial",
+	"Implementation-Title"    : "${eclipse.project.name}",
+	"Implementation-Version"  : version,
+	"Implementation-Vendor"   : "Alcadrial",
+	"Implementation-Timestamp": new Date().format("dd/MM/yyyy HH:mm:ss")
 ])
 
 publishing {

@@ -18,7 +18,6 @@ public class Sector {
 		return angle;
 	}
 	
-	
 	public float getRay()
 	{
 		return ray;
