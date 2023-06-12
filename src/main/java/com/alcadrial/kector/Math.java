@@ -298,6 +298,14 @@ public class Math {
 	}
 	
 	/**
+	 * @see java.lang.Math#exp(float)
+	 */
+	public static Vector3f exp(Vector3f a)
+	{
+		return Vector3f.ofImmutable(exp(a.x()), exp(a.y()), exp(a.z()));
+	}
+	
+	/**
 	 * @see java.lang.Math#log(double)
 	 */
 	public static float log(float a)
@@ -311,6 +319,14 @@ public class Math {
 	public static double log(double a)
 	{
 		return java.lang.Math.log(a);
+	}
+	
+	/**
+	 * @see java.lang.Math#log(double)
+	 */
+	public static Vector3f log(Vector3f a)
+	{
+		return Vector3f.ofImmutable(log(a.x()), log(a.y()), log(a.z()));
 	}
 	
 	/**
