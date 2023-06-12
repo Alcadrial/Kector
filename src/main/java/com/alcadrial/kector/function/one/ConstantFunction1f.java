@@ -1,9 +1,13 @@
-package com.alcadrial.kector.function;
+package com.alcadrial.kector.function.one;
 
 /**
  * <p>A {@link Function1f} <i>f</i> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=c" /></blockquote>
- * <p>where <i>c</i> is a constant.</p>
+ * <p>where:
+ * <ul style="list-style-type: none;">
+ * <li> <i>c</i> is a constant;</li>
+ * </p>
+ * 
  * @author Alcadrial
  */
 public class ConstantFunction1f implements Function1f, CoefficientFunction1f {
@@ -51,5 +55,11 @@ public class ConstantFunction1f implements Function1f, CoefficientFunction1f {
 	public float getCoeffiecient()
 	{
 		return 0;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return "0";
 	}
 }

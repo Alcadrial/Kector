@@ -1,7 +1,18 @@
-package com.alcadrial.kector.function;
+package com.alcadrial.kector.function.one;
 
 import com.alcadrial.kector.Math;
 
+/**
+ * <p>A {@link Function1f} <i>f</i> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ax^p" /></blockquote>
+ * <p>where:
+ * <ul style="list-style-type: none;">
+ * <li> <i>m</i> is the coefficient;</li>
+ * <li> <i>p</i> is the power;</li>
+ * </p>
+ * 
+ * @author Alcadrial
+ */
 public class PowerFunction1f implements Function1f, CoefficientFunction1f {
 	
 	private float power;
@@ -45,5 +56,11 @@ public class PowerFunction1f implements Function1f, CoefficientFunction1f {
 	public float getCoeffiecient()
 	{
 		return a;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return a + "x^" + power;
 	}
 }

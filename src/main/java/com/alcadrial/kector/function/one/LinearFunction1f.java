@@ -1,9 +1,13 @@
-package com.alcadrial.kector.function;
+package com.alcadrial.kector.function.one;
 
 /**
  * <p>A {@link Function1f} <i>f</i> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=mx" /></blockquote>
- * <p>where <i>m</i> is the angular coefficient of the line.</p>
+ * <p>where:
+ * <ul style="list-style-type: none;">
+ * <li> <i>m</i> is the angular coefficient of the line;</li>
+ * </p>
+ * 
  * @author Alcadrial
  */
 public class LinearFunction1f implements Function1f, CoefficientFunction1f {
@@ -63,5 +67,11 @@ public class LinearFunction1f implements Function1f, CoefficientFunction1f {
 	public float getCoeffiecient()
 	{
 		return m;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return m + "x";
 	}
 }

@@ -5,6 +5,7 @@ import java.util.function.Function;
 
 import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.vector.Vector2f;
+import com.alcadrial.kector.vector.Vector3f;
 
 public class Math {
 	
@@ -283,9 +284,25 @@ public class Math {
 	/**
 	 * @see java.lang.Math#exp(double)
 	 */
+	public static float exp(float a)
+	{
+		return (float) java.lang.Math.exp(a);
+	}
+	
+	/**
+	 * @see java.lang.Math#exp(double)
+	 */
 	public static double exp(double a)
 	{
 		return java.lang.Math.exp(a);
+	}
+	
+	/**
+	 * @see java.lang.Math#log(double)
+	 */
+	public static float log(float a)
+	{
+		return (float) java.lang.Math.log(a);
 	}
 	
 	/**
@@ -318,6 +335,14 @@ public class Math {
 	public static double sqrt(double a)
 	{
 		return java.lang.Math.sqrt(a);
+	}
+	
+	/**
+	 * @see java.lang.Math#cbrt(double)
+	 */
+	public static float cbrt(float a)
+	{
+		return (float) java.lang.Math.cbrt(a);
 	}
 	
 	/**
