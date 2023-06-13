@@ -4,13 +4,13 @@ import com.alcadrial.kector.Math;
 import com.alcadrial.kector.util.StringUtils;
 
 /**
- * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ax^{\alpha}" /></blockquote>
- * <p>where:
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ax^{\alpha}" alt="f(x)=ax^{\alpha}"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?a" /> is the coefficient;</li>
- * <li> <img src="http://latex.codecogs.com/png.latex?\alpha" /> is the power;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?a" alt="a"/> is the coefficient;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\alpha" alt="\alpha"/> is the power;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */

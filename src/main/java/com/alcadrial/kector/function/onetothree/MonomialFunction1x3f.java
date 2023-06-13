@@ -5,28 +5,28 @@ import com.alcadrial.kector.function.three.Function3f;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=\vec{a}x^{\alpha}" /></blockquote>
- * <p>where:
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=\vec{a}x^{\alpha}" alt="f(x)=\vec{a}x^{\alpha}"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}" /> is the coefficient;</li>
- * <li> <img src="http://latex.codecogs.com/png.latex?\alpha" /> is the power;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}" alt="\vec{a}"/> is the coefficient;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\alpha" alt="\alpha"/> is the power;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */
-public class PowerFunction1x3f implements Function1x3f, CoefficientFunction1x3f {
+public class MonomialFunction1x3f implements Function1x3f, CoefficientFunction1x3f {
 	
 	private float power;
 	private Vector3f a;
 	
-	PowerFunction1x3f(float power)
+	MonomialFunction1x3f(float power)
 	{
 		a = Vector3f.ofImmutable(1, 1, 1);
 		this.power = power;
 	}
 	
-	PowerFunction1x3f(Vector3f a, float power)
+	MonomialFunction1x3f(Vector3f a, float power)
 	{
 		this.a = Vector3f.copyOfImmutable(a);
 		this.power = power;

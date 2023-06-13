@@ -4,15 +4,15 @@ import com.alcadrial.kector.Math;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{a}\vec{b}^{\vec{x}}" /></blockquote>
- * <p>where:
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{a}\vec{b}^{\vec{x}}" alt="f(\vec{x})=\vec{a}\vec{b}^{\vec{x}}"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}" /> is the coefficient;</li>
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{b}" /> is the base;</li>
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}\vec{b}" /> is the scalar product of 
- * <img src="http://latex.codecogs.com/png.latex?\vec{a}" /> and <img src="http://latex.codecogs.com/png.latex?\vec{b}" />;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}" alt="\vec{a}"/> is the coefficient;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{b}" alt="\vec{b}"/> is the base;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}\vec{b}" alt="\vec{a}\vec{b}"/> is the scalar product of 
+ * <img src="http://latex.codecogs.com/png.latex?\vec{a}" alt="\vec{a}"/> and <img src="http://latex.codecogs.com/png.latex?\vec{b}" alt="\vec{b}"/>;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */

@@ -3,12 +3,12 @@ package com.alcadrial.kector.function.three;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{m}\vec{x}" /></blockquote>
- * <p>where:
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{m}\vec{x}" alt="f(\vec{x})=\vec{m}\vec{x}"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{m}" /> is the angular coefficient of the line;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{m}" alt="\vec{m}"/> is the angular coefficient of the line;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */
@@ -63,7 +63,7 @@ public class LinearFunction3f implements Function3f, CoefficientFunction3f {
 	}
 	
 	/**
-	 * @return the value <img src="http://latex.codecogs.com/png.latex?\vec{m}" />
+	 * @return the value <img src="http://latex.codecogs.com/png.latex?\vec{m}" alt="\vec{m}"/>
 	 */
 	@Override
 	public Vector3f getCoeffiecient()

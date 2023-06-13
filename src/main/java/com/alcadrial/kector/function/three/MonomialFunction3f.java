@@ -4,13 +4,13 @@ import com.alcadrial.kector.Math;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{a}\vec{x}^{\vec{\alpha}}" /></blockquote>
- * <p>where:
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{a}\vec{x}^{\vec{\alpha}}" alt="f(\vec{x})=\vec{a}\vec{x}^{\vec{\alpha}}"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}" /> is the coefficient;</li>
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{\alpha}" /> is the power;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{a}" alt="\vec{a}"/> is the coefficient;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{\alpha}" alt="\vec{\alpha}"/> is the power;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */

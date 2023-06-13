@@ -3,13 +3,13 @@ package com.alcadrial.kector.function.one;
 import com.alcadrial.kector.Math;
 
 /**
- * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ab^x" /></blockquote>
- * <p>where:
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ab^x" alt="f(x)=ab^x"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?a" /> is the coefficient;</li>
- * <li> <img src="http://latex.codecogs.com/png.latex?b" /> is the base;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?a" alt="a"/> is the coefficient;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?b" alt="b"/> is the base;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */
