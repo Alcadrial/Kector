@@ -39,14 +39,14 @@ public interface Function1x3f extends Function<Float, Vector3f> {
 		return new MultiplicationFunction1x3f(function0, function1);
 	}
 	
-	static MonomialFunction1x3f ofPower(float power)
+	static MonomialFunction1x3f ofMonomial(float grade)
 	{
-		return new MonomialFunction1x3f(power);
+		return new MonomialFunction1x3f(grade);
 	}
 	
-	static MonomialFunction1x3f ofPower(Vector3f a, float power)
+	static MonomialFunction1x3f ofMonomial(Vector3f a, float grade)
 	{
-		return new MonomialFunction1x3f(a, power);
+		return new MonomialFunction1x3f(a, grade);
 	}
 	
 	@Override

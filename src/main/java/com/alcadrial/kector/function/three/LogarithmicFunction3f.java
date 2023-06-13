@@ -26,7 +26,7 @@ public class LogarithmicFunction3f implements Function3f {
 		@Override
 		public Function3f devirate()
 		{
-			return Function3f.ofPower(Vector3f.of(-1, -1, -1));
+			return Function3f.ofMonomial(Vector3f.of(-1, -1, -1));
 		}
 	};
 	
@@ -48,7 +48,7 @@ public class LogarithmicFunction3f implements Function3f {
 	@Override
 	public Function3f devirate()
 	{
-		return Function3f.ofPower(correction, Vector3f.of(-1, -1, -1));
+		return Function3f.ofMonomial(correction, Vector3f.of(-1, -1, -1));
 	}
 	
 	@Override

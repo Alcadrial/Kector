@@ -181,7 +181,7 @@ public class Launch {
 	
 	private static Function1f movementFunction(float a, float b, float c)
 	{
-		return Function1f.ofAddition(Function1f.ofAddition(Function1f.ofPower(a, 2), Function1f.ofLinear(b)), Function1f.ofConstant(c));
+		return Function1f.ofAddition(Function1f.ofAddition(Function1f.ofMonomial(a, 2), Function1f.ofLinear(b)), Function1f.ofConstant(c));
 	}
 	
 	private static void parabolicTest(float a, float b, float c)
