@@ -26,7 +26,7 @@ public class LogarithmicFunction1f implements Function1f {
 		@Override
 		public Function1f devirate()
 		{
-			return Function1f.ofPower(-1);
+			return Function1f.ofMonomial(-1);
 		}
 		
 		@Override
@@ -54,7 +54,7 @@ public class LogarithmicFunction1f implements Function1f {
 	@Override
 	public Function1f devirate()
 	{
-		return Function1f.ofPower(correction, -1);
+		return Function1f.ofMonomial(correction, -1);
 	}
 	
 	@Override

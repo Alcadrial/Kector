@@ -47,14 +47,14 @@ public interface Function1f extends FunctionNxMf<Float, Float> {
 		return new MultiplicationFunction1f(function0, function1);
 	}
 	
-	static MonomialFunction1f ofPower(float power)
+	static MonomialFunction1f ofMonomial(float grade)
 	{
-		return new MonomialFunction1f(power);
+		return new MonomialFunction1f(grade);
 	}
 	
-	static MonomialFunction1f ofPower(float a, float power)
+	static MonomialFunction1f ofMonomial(float a, float grade)
 	{
-		return new MonomialFunction1f(a, power);
+		return new MonomialFunction1f(a, grade);
 	}
 	
 	static ExponentialFunction1f ofExponential()

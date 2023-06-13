@@ -16,35 +16,35 @@ import com.alcadrial.kector.util.StringUtils;
  */
 public class MonomialFunction1f implements Function1f, CoefficientFunction1f {
 	
-	private float power;
+	private float grade;
 	private float a;
 	
-	MonomialFunction1f(float power)
+	MonomialFunction1f(float grade)
 	{
 		a = 1;
-		this.power = power;
+		this.grade = grade;
 	}
 	
-	MonomialFunction1f(float a, float power)
+	MonomialFunction1f(float a, float grade)
 	{
 		this.a = a;
-		this.power = power;
+		this.grade = grade;
 	}
 	
 	@Override
 	public Float apply(Float x)
 	{
 		if (a == 0) return a;
-		return a * Math.pow(x, power);
+		return a * Math.pow(x, grade);
 	}
 	
 	@Override
 	public CoefficientFunction1f devirate()
 	{
-		if (a == 0 || power == 0) return Function1f.ofZero();
-		if (power == 1) return Function1f.ofConstant(a * power);
-		if (power == 2) return Function1f.ofLinear(a * power);
-		return Function1f.ofPower(a * power, power - 1);
+		if (a == 0 || grade == 0) return Function1f.ofZero();
+		if (grade == 1) return Function1f.ofConstant(a * grade);
+		if (grade == 2) return Function1f.ofLinear(a * grade);
+		return Function1f.ofMonomial(a * grade, grade - 1);
 	}
 	
 	@Override
@@ -63,21 +63,21 @@ public class MonomialFunction1f implements Function1f, CoefficientFunction1f {
 	public String toString()
 	{
 		if (a == 0) return "0";
-		if (power == 0) return StringUtils.toString(a);
-		if (power == 1)
+		if (grade == 0) return StringUtils.toString(a);
+		if (grade == 1)
 		{
 			if (a == 1) return "x";
 			if (a == -1) return "-x";
 			return StringUtils.toString(a) + "x";
 		}
-		if (power < 0)
+		if (grade < 0)
 		{
-			if (a == 1) return "x^(" + StringUtils.toString(power) + ")";
-			if (a == -1) return "-x^(" + StringUtils.toString(power) + ")";
-			return StringUtils.toString(a) + "x^(" + StringUtils.toString(power) + ")";
+			if (a == 1) return "x^(" + StringUtils.toString(grade) + ")";
+			if (a == -1) return "-x^(" + StringUtils.toString(grade) + ")";
+			return StringUtils.toString(a) + "x^(" + StringUtils.toString(grade) + ")";
 		}
-		if (a == 1) return "x^" + StringUtils.toString(power);
-		if (a == -1) return "-x^" + StringUtils.toString(power);
-		return StringUtils.toString(a) + "x^" + StringUtils.toString(power);
+		if (a == 1) return "x^" + StringUtils.toString(grade);
+		if (a == -1) return "-x^" + StringUtils.toString(grade);
+		return StringUtils.toString(a) + "x^" + StringUtils.toString(grade);
 	}
 }

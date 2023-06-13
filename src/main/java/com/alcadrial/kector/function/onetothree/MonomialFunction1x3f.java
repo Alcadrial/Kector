@@ -17,35 +17,35 @@ import com.alcadrial.kector.vector.Vector3f;
  */
 public class MonomialFunction1x3f implements Function1x3f, CoefficientFunction1x3f {
 	
-	private float power;
+	private float grade;
 	private Vector3f a;
 	
-	MonomialFunction1x3f(float power)
+	MonomialFunction1x3f(float grade)
 	{
 		a = Vector3f.ofImmutable(1, 1, 1);
-		this.power = power;
+		this.grade = grade;
 	}
 	
-	MonomialFunction1x3f(Vector3f a, float power)
+	MonomialFunction1x3f(Vector3f a, float grade)
 	{
 		this.a = Vector3f.copyOfImmutable(a);
-		this.power = power;
+		this.grade = grade;
 	}
 	
 	@Override
 	public Vector3f apply(Float x)
 	{
 		if (a.equals(Vector3f.origin())) return a;
-		return a.multiplyAll(Math.pow(x, power));
+		return a.multiplyAll(Math.pow(x, grade));
 	}
 	
 	@Override
 	public CoefficientFunction1x3f devirate()
 	{
-		if (a.equals(Vector3f.origin()) || power == 0) return Function1x3f.ofZero();
-		if (power == 1) return Function1x3f.ofConstant(a.multiplyAll(power));
-		if (power == 2) return Function1x3f.ofLinear(a.multiplyAll(power));
-		return Function1x3f.ofPower(a.multiplyAll(power), power - 1);
+		if (a.equals(Vector3f.origin()) || grade == 0) return Function1x3f.ofZero();
+		if (grade == 1) return Function1x3f.ofConstant(a.multiplyAll(grade));
+		if (grade == 2) return Function1x3f.ofLinear(a.multiplyAll(grade));
+		return Function1x3f.ofMonomial(a.multiplyAll(grade), grade - 1);
 	}
 	
 	@Override
@@ -63,6 +63,6 @@ public class MonomialFunction1x3f implements Function1x3f, CoefficientFunction1x
 	@Override
 	public String toString()
 	{
-		return a + "x^" + power;
+		return a + "x^" + grade;
 	}
 }
