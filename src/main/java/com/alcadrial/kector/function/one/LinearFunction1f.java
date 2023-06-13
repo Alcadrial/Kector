@@ -3,12 +3,12 @@ package com.alcadrial.kector.function.one;
 import com.alcadrial.kector.util.StringUtils;
 
 /**
- * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=mx" /></blockquote>
- * <p>where:
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=mx" alt="f(x)=mx"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?m" /> is the angular coefficient of the line;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?m" alt="m"/> is the angular coefficient of the line;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */
@@ -63,7 +63,7 @@ public class LinearFunction1f implements Function1f, CoefficientFunction1f {
 	}
 	
 	/**
-	 * @return the value <i>m</i>
+	 * @return the value <img src="http://latex.codecogs.com/png.latex?m" alt="m"/>
 	 */
 	@Override
 	public float getCoeffiecient()

@@ -4,12 +4,12 @@ import com.alcadrial.kector.Math;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=log_{\vec{b}}(\vec{x})" /></blockquote>
- * <p>where:
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=log_{\vec{b}}(\vec{x})" alt="f(\vec{x})=log_{\vec{b}}(\vec{x})"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?\vec{b}" /> is the base;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?\vec{b}" alt="\vec{b}"/> is the base;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */

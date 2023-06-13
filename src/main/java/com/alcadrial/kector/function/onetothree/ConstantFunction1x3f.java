@@ -3,12 +3,12 @@ package com.alcadrial.kector.function.onetothree;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function1x3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=c" /></blockquote>
- * <p>where:
+ * <p>A {@link Function1x3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=c" alt="f(x)=c"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?c" /> is a constant;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?c" alt="c"/> is a constant;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */

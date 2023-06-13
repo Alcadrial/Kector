@@ -4,12 +4,12 @@ import com.alcadrial.kector.Math;
 import com.alcadrial.kector.util.StringUtils;
 
 /**
- * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=b^x" /></blockquote>
- * <p>where:
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=b^x" alt="f(x)=b^x"/></blockquote>
+ * where:
  * <ul style="list-style-type: none;">
- * <li> <img src="http://latex.codecogs.com/png.latex?b" /> is the base;</li>
- * </p>
+ * <li> <img src="http://latex.codecogs.com/png.latex?b" alt="b"/> is the base;</li>
+ * </ul>
  * 
  * @author Alcadrial
  */
