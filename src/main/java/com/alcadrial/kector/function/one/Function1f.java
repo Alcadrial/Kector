@@ -1,8 +1,8 @@
 package com.alcadrial.kector.function.one;
 
-import java.util.function.Function;
+import com.alcadrial.kector.function.FunctionNxMf;
 
-public interface Function1f extends Function<Float, Float> {
+public interface Function1f extends FunctionNxMf<Float, Float> {
 	
 	static ConstantFunction1f ofZero()
 	{
@@ -27,6 +27,16 @@ public interface Function1f extends Function<Float, Float> {
 		return new LinearFunction1f(m);
 	}
 	
+	static AdditionFunction1f ofAdditionZeroZero()
+	{
+		return AdditionFunction1f.ZERO_PLUS_ZERO_FUNCTION;
+	}
+	
+	static AdditionFunction1f ofAdditionZero(Function1f function)
+	{
+		return ofAddition(function, ofZero());
+	}
+	
 	static AdditionFunction1f ofAddition(Function1f function0, Function1f function1)
 	{
 		return new AdditionFunction1f(function0, function1);
@@ -37,14 +47,14 @@ public interface Function1f extends Function<Float, Float> {
 		return new MultiplicationFunction1f(function0, function1);
 	}
 	
-	static PowerFunction1f ofPower(float power)
+	static MonomialFunction1f ofPower(float power)
 	{
-		return new PowerFunction1f(power);
+		return new MonomialFunction1f(power);
 	}
 	
-	static PowerFunction1f ofPower(float a, float power)
+	static MonomialFunction1f ofPower(float a, float power)
 	{
-		return new PowerFunction1f(a, power);
+		return new MonomialFunction1f(a, power);
 	}
 	
 	static ExponentialFunction1f ofExponential()
@@ -72,9 +82,15 @@ public interface Function1f extends Function<Float, Float> {
 		return new LogarithmicFunction1f(base);
 	}
 	
+	static FunctionOfFunction1fOf1f1f ofFunction(Function1f outer, Function1f inner)
+	{
+		return new FunctionOfFunction1fOf1f1f(outer, inner);
+	}
+	
 	@Override
 	Float apply(Float x);
 	
+	@Override
 	Function1f devirate();
 	
 	boolean isZero();

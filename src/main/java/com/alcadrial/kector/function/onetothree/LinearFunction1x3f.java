@@ -3,7 +3,7 @@ package com.alcadrial.kector.function.onetothree;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function1x3f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function1x3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=\vec{m}x" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">

@@ -4,7 +4,7 @@ import com.alcadrial.kector.Math;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=\vec{a}\vec{x}^{\vec{\alpha}}" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
@@ -14,18 +14,18 @@ import com.alcadrial.kector.vector.Vector3f;
  * 
  * @author Alcadrial
  */
-public class PowerFunction3f implements Function3f, CoefficientFunction3f {
+public class MonomialFunction3f implements Function3f, CoefficientFunction3f {
 	
 	private Vector3f power;
 	private Vector3f a;
 	
-	PowerFunction3f(Vector3f power)
+	MonomialFunction3f(Vector3f power)
 	{
 		a = Vector3f.ofImmutable(1, 1, 1);
 		this.power = Vector3f.copyOfImmutable(power);
 	}
 	
-	PowerFunction3f(Vector3f a, Vector3f power)
+	MonomialFunction3f(Vector3f a, Vector3f power)
 	{
 		this.a = Vector3f.copyOfImmutable(a);
 		this.power = Vector3f.copyOfImmutable(power);

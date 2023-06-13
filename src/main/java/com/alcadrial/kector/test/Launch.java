@@ -2,6 +2,7 @@ package com.alcadrial.kector.test;
 
 import com.alcadrial.kector.Math;
 import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.function.one.Function1f;
 import com.alcadrial.kector.shape.CubedShape;
 import com.alcadrial.kector.vector.Vector2f;
 import com.alcadrial.kector.vector.Vector3f;
@@ -106,9 +107,92 @@ public class Launch {
 			quaternionTest0(Vector3f.of(2, 2, 2), q, r);
 		}
 		endBlock();
+		startBlock("Functions Test");
+		{
+			startBlock("1->1 Test");
+			{
+				startBlock("parabolic Test");
+				{
+					for (int i = -1; i < 2; i++)
+					{
+						for (int j = -1; j < 2; j++)
+						{
+							for (int k = -1; k < 2; k++)
+							{
+								parabolicTest(i, j, k);
+								parabolicTest(2 * i, 2 * j, 2 * k);
+							}
+						}
+					}
+				}
+				endBlock();
+				
+				startBlock("exponential Test");
+				{
+					Function1f f = Function1f.ofExponential();
+					Function1f fd = f.devirate();
+					Function1f fdd = fd.devirate();
+					println(f + " " + fd + " " + fdd);
+					f = Function1f.ofMultiplication(Function1f.ofExponential(), Function1f.ofIdentity());
+					fd = f.devirate();
+					fdd = fd.devirate();
+					println(f + " " + fd + " " + fdd);
+				}
+				endBlock();
+				startBlock("exponential nest Test");
+				{
+					Function1f f = Function1f.ofFunction(Function1f.ofExponential(), Function1f.ofAddition(Function1f.ofExponential(), Function1f.ofLinear(-1)));
+					Function1f fd = f.devirate();
+					Function1f fdd = fd.devirate();
+					Function1f fddd = fdd.devirate();
+					println(f);
+					println(fd);
+					println(fdd);
+					println(fddd);
+				}
+				endBlock();
+				startBlock("logarithm Test");
+				{
+					Function1f f = Function1f.ofLn();
+					Function1f fd = f.devirate();
+					Function1f fdd = fd.devirate();
+					println(f + " " + fd + " " + fdd);
+					f = Function1f.ofMultiplication(Function1f.ofLn(), Function1f.ofIdentity());
+					fd = f.devirate();
+					fdd = fd.devirate();
+					println(f + " " + fd + " " + fdd);
+				}
+				endBlock();
+			}
+			endBlock();
+			startBlock("1->3 Test");
+			{
+				
+			}
+			endBlock();
+			startBlock("3->3 Test");
+			{
+				
+			}
+			endBlock();
+		}
+		endBlock();
 	}
 	
-	public static void quaternionTest0(Vector3f v, Quaternion q, Quaternion r)
+	private static Function1f movementFunction(float a, float b, float c)
+	{
+		return Function1f.ofAddition(Function1f.ofAddition(Function1f.ofPower(a, 2), Function1f.ofLinear(b)), Function1f.ofConstant(c));
+	}
+	
+	private static void parabolicTest(float a, float b, float c)
+	{
+		Function1f f = movementFunction(a, b, c);
+		Function1f fd = f.devirate();
+		Function1f fdd = fd.devirate();
+		println(f + " " + fd + " " + fdd);
+	}
+	
+	private static void quaternionTest0(Vector3f v, Quaternion q, Quaternion r)
 	{
 		startBlock();
 		println(v);

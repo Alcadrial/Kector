@@ -39,14 +39,14 @@ public interface Function3f extends Function<Vector3f, Vector3f> {
 		return new MultiplicationFunction3f(function0, function1);
 	}
 	
-	static PowerFunction3f ofPower(Vector3f power)
+	static MonomialFunction3f ofPower(Vector3f power)
 	{
-		return new PowerFunction3f(power);
+		return new MonomialFunction3f(power);
 	}
 	
-	static PowerFunction3f ofPower(Vector3f a, Vector3f power)
+	static MonomialFunction3f ofPower(Vector3f a, Vector3f power)
 	{
-		return new PowerFunction3f(a, power);
+		return new MonomialFunction3f(a, power);
 	}
 	
 	static ExponentialFunction3f ofExponential()

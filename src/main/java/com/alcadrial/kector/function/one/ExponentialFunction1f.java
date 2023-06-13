@@ -1,13 +1,14 @@
 package com.alcadrial.kector.function.one;
 
 import com.alcadrial.kector.Math;
+import com.alcadrial.kector.util.StringUtils;
 
 /**
- * <p>A {@link Function1f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=b^x" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
- * <li> <i>b</i> is the base;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?b" /> is the base;</li>
  * </p>
  * 
  * @author Alcadrial
@@ -26,6 +27,12 @@ public class ExponentialFunction1f implements Function1f {
 		public Function1f devirate()
 		{
 			return EXPONENTIAL_FUNCTION;
+		}
+		
+		@Override
+		public String toString()
+		{
+			return "e^x";
 		}
 	};
 	
@@ -59,5 +66,11 @@ public class ExponentialFunction1f implements Function1f {
 	public float getBase()
 	{
 		return base;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return StringUtils.toString(base) + "^x";
 	}
 }

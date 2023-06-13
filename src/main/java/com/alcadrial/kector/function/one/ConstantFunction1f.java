@@ -1,11 +1,13 @@
 package com.alcadrial.kector.function.one;
 
+import com.alcadrial.kector.util.StringUtils;
+
 /**
- * <p>A {@link Function1f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=c" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
- * <li> <i>c</i> is a constant;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?c" /> is a constant;</li>
  * </p>
  * 
  * @author Alcadrial
@@ -55,6 +57,6 @@ public class ConstantFunction1f implements Function1f, CoefficientFunction1f {
 	@Override
 	public String toString()
 	{
-		return String.valueOf(constant);
+		return StringUtils.toString(constant);
 	}
 }

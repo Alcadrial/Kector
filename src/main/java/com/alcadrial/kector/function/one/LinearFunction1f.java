@@ -1,11 +1,13 @@
 package com.alcadrial.kector.function.one;
 
+import com.alcadrial.kector.util.StringUtils;
+
 /**
- * <p>A {@link Function1f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=mx" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
- * <li> <i>m</i> is the angular coefficient of the line;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?m" /> is the angular coefficient of the line;</li>
  * </p>
  * 
  * @author Alcadrial
@@ -72,6 +74,9 @@ public class LinearFunction1f implements Function1f, CoefficientFunction1f {
 	@Override
 	public String toString()
 	{
-		return m + "x";
+		if (m == 0) return "0";
+		if (m == 1) return "x";
+		if (m == -1) return "-x";
+		return StringUtils.toString(m) + "x";
 	}
 }

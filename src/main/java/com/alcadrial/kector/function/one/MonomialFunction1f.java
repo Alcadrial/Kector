@@ -1,9 +1,10 @@
 package com.alcadrial.kector.function.one;
 
 import com.alcadrial.kector.Math;
+import com.alcadrial.kector.util.StringUtils;
 
 /**
- * <p>A {@link Function1f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ax^{\alpha}" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
@@ -13,18 +14,18 @@ import com.alcadrial.kector.Math;
  * 
  * @author Alcadrial
  */
-public class PowerFunction1f implements Function1f, CoefficientFunction1f {
+public class MonomialFunction1f implements Function1f, CoefficientFunction1f {
 	
 	private float power;
 	private float a;
 	
-	PowerFunction1f(float power)
+	MonomialFunction1f(float power)
 	{
 		a = 1;
 		this.power = power;
 	}
 	
-	PowerFunction1f(float a, float power)
+	MonomialFunction1f(float a, float power)
 	{
 		this.a = a;
 		this.power = power;
@@ -61,6 +62,22 @@ public class PowerFunction1f implements Function1f, CoefficientFunction1f {
 	@Override
 	public String toString()
 	{
-		return a + "x^" + power;
+		if (a == 0) return "0";
+		if (power == 0) return StringUtils.toString(a);
+		if (power == 1)
+		{
+			if (a == 1) return "x";
+			if (a == -1) return "-x";
+			return StringUtils.toString(a) + "x";
+		}
+		if (power < 0)
+		{
+			if (a == 1) return "x^(" + StringUtils.toString(power) + ")";
+			if (a == -1) return "-x^(" + StringUtils.toString(power) + ")";
+			return StringUtils.toString(a) + "x^(" + StringUtils.toString(power) + ")";
+		}
+		if (a == 1) return "x^" + StringUtils.toString(power);
+		if (a == -1) return "-x^" + StringUtils.toString(power);
+		return StringUtils.toString(a) + "x^" + StringUtils.toString(power);
 	}
 }

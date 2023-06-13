@@ -3,12 +3,12 @@ package com.alcadrial.kector.function.three;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=f_0(x)\times f_1(x)" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
- * <li> <i>f<sub>0</sub></i> is a function;</li>
- * <li> <i>f<sub>1</sub></i> is a function;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?f_0" /> is a function;</li>
+ * <li> <img src="http://latex.codecogs.com/png.latex?f_1" /> is a function;</li>
  * </p>
  * 
  * @author Alcadrial
@@ -33,7 +33,7 @@ public class MultiplicationFunction3f implements Function3f {
 	@Override
 	public AdditionFunction3f devirate()
 	{
-		return new AdditionFunction3f(new MultiplicationFunction3f(function0.devirate(), function1), new MultiplicationFunction3f(function0, function1.devirate()));
+		return Function3f.ofAddition(Function3f.ofMultiplication(function0.devirate(), function1), Function3f.ofMultiplication(function0, function1.devirate()));
 	}
 	
 	public Function3f getFunction0()

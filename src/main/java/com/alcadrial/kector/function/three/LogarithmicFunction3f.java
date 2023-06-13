@@ -4,7 +4,7 @@ import com.alcadrial.kector.Math;
 import com.alcadrial.kector.vector.Vector3f;
 
 /**
- * <p>A {@link Function3f} <i>f</i> equals to this:</p>
+ * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" /> equals to this:</p>
  * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=log_{\vec{b}}(\vec{x})" /></blockquote>
  * <p>where:
  * <ul style="list-style-type: none;">
