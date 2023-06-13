@@ -33,19 +33,19 @@ public class Line2f {
 	
 	public boolean contains(Point2f point)
 	{
-		if (angle.asFloat(AngleUnit.TURNS) == 1) return point.getX() == translation;
+		if (angle.asFloat(AngleUnit.TURNS) == 0.25) return point.getX() == translation;
 		return getY(point.getX()) == point.getY();
 	}
 	
 	public boolean contains(Vector2f point)
 	{
-		if (angle.asFloat(AngleUnit.TURNS) == 1) return point.x() == translation;
+		if (angle.asFloat(AngleUnit.TURNS) == 0.25) return point.x() == translation;
 		return getY(point.x()) == point.y();
 	}
 	
 	public float getY(float x)
 	{
-		if (angle.asFloat(AngleUnit.TURNS) == 1) return 0;
+		if (angle.asFloat(AngleUnit.TURNS) == 0.25) return 0;
 		return (float) (Math.tan(angle.asDouble(AngleUnit.RADIANS)) * x + translation);
 	}
 	
