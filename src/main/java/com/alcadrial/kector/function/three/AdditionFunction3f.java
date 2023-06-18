@@ -31,9 +31,21 @@ public class AdditionFunction3f implements Function3f {
 	}
 	
 	@Override
-	public AdditionFunction3f devirate()
+	public Function3f derivateX()
 	{
-		return Function3f.ofAddition(function0.devirate(), function1.devirate());
+		return Function3f.ofAddition(function0.derivateX(), function1.derivateX());
+	}
+	
+	@Override
+	public Function3f derivateY()
+	{
+		return Function3f.ofAddition(function0.derivateY(), function1.derivateY());
+	}
+	
+	@Override
+	public Function3f derivateZ()
+	{
+		return Function3f.ofAddition(function0.derivateZ(), function1.derivateZ());
 	}
 	
 	public Function3f getFunction0()

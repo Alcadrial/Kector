@@ -24,7 +24,19 @@ public class ExponentialFunction3f implements Function3f {
 		}
 		
 		@Override
-		public Function3f devirate()
+		public Function3f derivateX()
+		{
+			return EXPONENTIAL_FUNCTION;
+		}
+		
+		@Override
+		public Function3f derivateY()
+		{
+			return EXPONENTIAL_FUNCTION;
+		}
+		
+		@Override
+		public Function3f derivateZ()
 		{
 			return EXPONENTIAL_FUNCTION;
 		}
@@ -46,7 +58,19 @@ public class ExponentialFunction3f implements Function3f {
 	}
 	
 	@Override
-	public Function3f devirate()
+	public Function3f derivateX()
+	{
+		return Function3f.ofExponential(correction, base);
+	}
+	
+	@Override
+	public Function3f derivateY()
+	{
+		return Function3f.ofExponential(correction, base);
+	}
+	
+	@Override
+	public Function3f derivateZ()
 	{
 		return Function3f.ofExponential(correction, base);
 	}

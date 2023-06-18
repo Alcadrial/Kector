@@ -1,6 +1,6 @@
 package com.alcadrial.kector.function.one;
 
-import com.alcadrial.kector.function.FunctionNxMf;
+import com.alcadrial.kector.function.MathFunction;
 
 /**
  * <p>A {@link Function1f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
@@ -15,6 +15,6 @@ import com.alcadrial.kector.function.FunctionNxMf;
  */
 public interface FunctionOfFunction1f<INNER> extends Function1f {
 	
-	FunctionNxMf<Float, INNER> getOuterFunction();
-	FunctionNxMf<INNER, Float> getInnerFunction();
+	MathFunction<INNER, Float> getOuterFunction();
+	MathFunction<Float, INNER> getInnerFunction();
 }

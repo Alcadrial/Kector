@@ -1,8 +1,8 @@
 package com.alcadrial.kector.function.one;
 
-import com.alcadrial.kector.function.FunctionNxMf;
+import com.alcadrial.kector.function.MathFunction;
 
-public interface Function1f extends FunctionNxMf<Float, Float> {
+public interface Function1f extends MathFunction<Float, Float> {
 	
 	static ConstantFunction1f ofZero()
 	{
@@ -82,16 +82,10 @@ public interface Function1f extends FunctionNxMf<Float, Float> {
 		return new LogarithmicFunction1f(base);
 	}
 	
-	static FunctionOfFunction1fOf1f1f ofFunction(Function1f outer, Function1f inner)
+	static FunctionOfFunction1f<Float> ofFunction(Function1f outer, Function1f inner)
 	{
 		return new FunctionOfFunction1fOf1f1f(outer, inner);
 	}
 	
-	@Override
-	Float apply(Float x);
-	
-	@Override
 	Function1f devirate();
-	
-	boolean isZero();
 }
