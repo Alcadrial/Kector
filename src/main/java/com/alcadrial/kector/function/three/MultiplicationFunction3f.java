@@ -4,7 +4,7 @@ import com.alcadrial.kector.vector.Vector3f;
 
 /**
  * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
- * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=f_0(x)\times f_1(x)" alt="f(x)=f_0(x)\times f_1(x)"/></blockquote>
+ * <blockquote><img src="http://latex.codecogs.com/png.latex?f(\vec{x})=f_0(\vec{x})*f_1(\vec{x})" alt="f(\vec{x})=f_0(\vec{x})*f_1(\vec{x})"/></blockquote>
  * where:
  * <ul style="list-style-type: none;">
  * <li> <img src="http://latex.codecogs.com/png.latex?f_0" alt="f_0"/> is a function;</li>
@@ -31,9 +31,21 @@ public class MultiplicationFunction3f implements Function3f {
 	}
 	
 	@Override
-	public AdditionFunction3f devirate()
+	public Function3f derivateX()
 	{
-		return Function3f.ofAddition(Function3f.ofMultiplication(function0.devirate(), function1), Function3f.ofMultiplication(function0, function1.devirate()));
+		return Function3f.ofAddition(Function3f.ofMultiplication(function0.derivateX(), function1), Function3f.ofMultiplication(function0, function1.derivateX()));
+	}
+	
+	@Override
+	public Function3f derivateY()
+	{
+		return Function3f.ofAddition(Function3f.ofMultiplication(function0.derivateX(), function1), Function3f.ofMultiplication(function0, function1.derivateX()));
+	}
+	
+	@Override
+	public Function3f derivateZ()
+	{
+		return Function3f.ofAddition(Function3f.ofMultiplication(function0.derivateX(), function1), Function3f.ofMultiplication(function0, function1.derivateX()));
 	}
 	
 	public Function3f getFunction0()

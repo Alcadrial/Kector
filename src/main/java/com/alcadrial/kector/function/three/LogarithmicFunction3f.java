@@ -24,11 +24,24 @@ public class LogarithmicFunction3f implements Function3f {
 		}
 		
 		@Override
-		public Function3f devirate()
+		public Function3f derivateX()
 		{
-			return Function3f.ofMonomial(Vector3f.of(-1, -1, -1));
+			return INVERSE_LN_FUNCTION;
+		}
+		
+		@Override
+		public Function3f derivateY()
+		{
+			return INVERSE_LN_FUNCTION;
+		}
+		
+		@Override
+		public Function3f derivateZ()
+		{
+			return INVERSE_LN_FUNCTION;
 		}
 	};
+	static final MonomialFunction3f INVERSE_LN_FUNCTION = Function3f.ofMonomial(Vector3f.of(-1, -1, -1));
 	
 	private Vector3f base;
 	private Vector3f correction;
@@ -46,7 +59,19 @@ public class LogarithmicFunction3f implements Function3f {
 	}
 	
 	@Override
-	public Function3f devirate()
+	public Function3f derivateX()
+	{
+		return Function3f.ofMonomial(correction, Vector3f.of(-1, -1, -1));
+	}
+	
+	@Override
+	public Function3f derivateY()
+	{
+		return Function3f.ofMonomial(correction, Vector3f.of(-1, -1, -1));
+	}
+	
+	@Override
+	public Function3f derivateZ()
 	{
 		return Function3f.ofMonomial(correction, Vector3f.of(-1, -1, -1));
 	}

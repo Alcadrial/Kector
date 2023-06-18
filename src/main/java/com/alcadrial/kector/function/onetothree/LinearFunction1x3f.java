@@ -28,7 +28,7 @@ public class LinearFunction1x3f implements Function1x3f, CoefficientFunction1x3f
 			return true;
 		}
 	};
-	static final LinearFunction1x3f IDENTITY_FUNCTION = new LinearFunction1x3f(Vector3f.of(1, 1, 1)) {
+	static final LinearFunction1x3f TO_VECTOR_FUNCTION = new LinearFunction1x3f(Vector3f.of(1, 1, 1)) {
 		
 		@Override
 		public Vector3f apply(Float x)

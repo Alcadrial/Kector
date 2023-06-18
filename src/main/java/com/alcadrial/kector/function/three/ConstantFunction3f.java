@@ -37,7 +37,19 @@ public class ConstantFunction3f implements Function3f, CoefficientFunction3f {
 	}
 	
 	@Override
-	public ConstantFunction3f devirate()
+	public Function3f derivateX()
+	{
+		return ZERO_FUNCTION;
+	}
+	
+	@Override
+	public Function3f derivateY()
+	{
+		return ZERO_FUNCTION;
+	}
+	
+	@Override
+	public Function3f derivateZ()
 	{
 		return ZERO_FUNCTION;
 	}

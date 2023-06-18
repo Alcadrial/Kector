@@ -1,10 +1,10 @@
 package com.alcadrial.kector.function.three;
 
-import java.util.function.Function;
-
+import com.alcadrial.kector.function.MathFunction;
+import com.alcadrial.kector.function.threetoone.Function3x1f;
 import com.alcadrial.kector.vector.Vector3f;
 
-public interface Function3f extends Function<Vector3f, Vector3f> {
+public interface Function3f extends MathFunction<Vector3f, Vector3f> {
 	
 	static ConstantFunction3f ofZero()
 	{
@@ -74,10 +74,15 @@ public interface Function3f extends Function<Vector3f, Vector3f> {
 		return new LogarithmicFunction3f(base);
 	}
 	
+	static GradientFunction3f ofGradient(Function3x1f function)
+	{
+		return new GradientFunction3f(function);
+	}
+	
 	@Override
 	Vector3f apply(Vector3f x);
 	
-	Function3f devirate();
-	
-	boolean isZero();
+	Function3f derivateX();
+	Function3f derivateY();
+	Function3f derivateZ();
 }

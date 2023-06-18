@@ -2,6 +2,7 @@ package com.alcadrial.kector.function.three;
 
 import com.alcadrial.kector.Math;
 import com.alcadrial.kector.vector.Vector3f;
+import com.alcadrial.kector.vector.axis.Axis;
 
 /**
  * <p>A {@link Function3f} <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
@@ -39,12 +40,21 @@ public class MonomialFunction3f implements Function3f, CoefficientFunction3f {
 	}
 	
 	@Override
-	public CoefficientFunction3f devirate()
+	public Function3f derivateX()
 	{
-		if (a.equals(Vector3f.origin()) || grade.equals(Vector3f.origin())) return Function3f.ofZero();
-		if (grade.equals(Vector3f.of(1, 1, 1))) return Function3f.ofConstant(a.multiply(grade));
-		if (grade.equals(Vector3f.of(2, 2, 2))) return Function3f.ofLinear(a.multiply(grade));
-		return Function3f.ofMonomial(a.multiply(grade), grade.subtractAll(1));
+		return Function3f.ofMonomial(a.multiplyAll(grade.x()), grade.subtract(Axis.X));
+	}
+	
+	@Override
+	public Function3f derivateY()
+	{
+		return Function3f.ofMonomial(a.multiplyAll(grade.y()), grade.subtract(Axis.Y));
+	}
+	
+	@Override
+	public Function3f derivateZ()
+	{
+		return Function3f.ofMonomial(a.multiplyAll(grade.z()), grade.subtract(Axis.Z));
 	}
 	
 	@Override

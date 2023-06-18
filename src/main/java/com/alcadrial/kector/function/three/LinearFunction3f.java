@@ -51,7 +51,19 @@ public class LinearFunction3f implements Function3f, CoefficientFunction3f {
 	}
 	
 	@Override
-	public ConstantFunction3f devirate()
+	public Function3f derivateX()
+	{
+		return Function3f.ofConstant(m);
+	}
+	
+	@Override
+	public Function3f derivateY()
+	{
+		return Function3f.ofConstant(m);
+	}
+	
+	@Override
+	public Function3f derivateZ()
 	{
 		return Function3f.ofConstant(m);
 	}

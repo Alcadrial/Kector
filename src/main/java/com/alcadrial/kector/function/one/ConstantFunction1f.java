@@ -37,7 +37,7 @@ public class ConstantFunction1f implements Function1f, CoefficientFunction1f {
 	}
 	
 	@Override
-	public ConstantFunction1f devirate()
+	public Function1f devirate()
 	{
 		return ZERO_FUNCTION;
 	}

@@ -1,19 +1,20 @@
 package com.alcadrial.kector.function.onetothree;
 
-import java.util.function.Function;
-
+import com.alcadrial.kector.function.MathFunction;
+import com.alcadrial.kector.function.one.Function1f;
+import com.alcadrial.kector.function.three.Function3f;
 import com.alcadrial.kector.vector.Vector3f;
 
-public interface Function1x3f extends Function<Float, Vector3f> {
+public interface Function1x3f extends MathFunction<Float, Vector3f> {
 	
 	static ConstantFunction1x3f ofZero()
 	{
 		return ConstantFunction1x3f.ZERO_FUNCTION;
 	}
 	
-	static LinearFunction1x3f ofIdentity()
+	static LinearFunction1x3f ofToVector()
 	{
-		return LinearFunction1x3f.IDENTITY_FUNCTION;
+		return LinearFunction1x3f.TO_VECTOR_FUNCTION;
 	}
 	
 	static ConstantFunction1x3f ofConstant(Vector3f constant)
@@ -25,7 +26,7 @@ public interface Function1x3f extends Function<Float, Vector3f> {
 	static LinearFunction1x3f ofLinear(Vector3f m)
 	{
 		if (m.equals(Vector3f.origin())) return LinearFunction1x3f.ZERO_FUNCTION;
-		if (m.equals(Vector3f.of(1, 1, 1))) return LinearFunction1x3f.IDENTITY_FUNCTION;
+		if (m.equals(Vector3f.of(1, 1, 1))) return LinearFunction1x3f.TO_VECTOR_FUNCTION;
 		return new LinearFunction1x3f(m);
 	}
 	
@@ -39,6 +40,11 @@ public interface Function1x3f extends Function<Float, Vector3f> {
 		return new MultiplicationFunction1x3f(function0, function1);
 	}
 	
+	static MultiplicationFunction1x3f ofMultiplication(Function1x3f function0, Function1f function1)
+	{
+		return ofMultiplication(function0, ofFunction(ofToVector(), function1));
+	}
+	
 	static MonomialFunction1x3f ofMonomial(float grade)
 	{
 		return new MonomialFunction1x3f(grade);
@@ -49,10 +55,18 @@ public interface Function1x3f extends Function<Float, Vector3f> {
 		return new MonomialFunction1x3f(a, grade);
 	}
 	
+	static Function1x3f ofFunction(Function1x3f outer, Function1f inner)
+	{
+		return new FunctionOfFunction1x3fOf1f1x3f(outer, inner);
+	}
+	
+	static Function1x3f ofFunction(Function3f outer, Function1x3f inner)
+	{
+		return new FunctionOfFunction1x3fOf1x3f3f(outer, inner);
+	}
+	
 	@Override
 	Vector3f apply(Float x);
 	
 	Function1x3f devirate();
-	
-	boolean isZero();
 }
