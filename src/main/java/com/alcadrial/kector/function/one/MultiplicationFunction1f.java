@@ -66,10 +66,19 @@ public class MultiplicationFunction1f implements Function1f {
 		String s = f0.toString();
 		if (s.equals("0")) return "0";
 		String s0 = f1.toString();
-		if (s.equals("1")) return s0;
-		if (s.equals("-1") ^ s0.startsWith("-")) return "-" + s0;
 		if (s0.equals("0")) return "0";
-		if (s0.equals("1") || s0.equals("-1")) return s;
-		return StringUtils.multiplicationBounds(s) + "*" + StringUtils.multiplicationBounds(s0);
+		if (s.equals("1")) return s0;
+		if (s0.equals("1")) return s;
+		if (s.equals("-1"))
+		{
+			if (s0.startsWith("-")) return s0;
+			return "-" + s0;
+		}
+		if (s0.equals("-1"))
+		{
+			if (s.startsWith("-")) return s;
+			return "-" + s;
+		}
+		return (s.startsWith("-") && s0.startsWith("-") ? "" : "-") + StringUtils.multiplicationBounds(s) + "*" + StringUtils.multiplicationBounds(s0);
 	}
 }
