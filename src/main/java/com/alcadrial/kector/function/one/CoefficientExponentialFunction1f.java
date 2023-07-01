@@ -33,7 +33,7 @@ public class CoefficientExponentialFunction1f implements Function1f, Coefficient
 	}
 	
 	@Override
-	public Function1f devirate()
+	public Function1f derivate()
 	{
 		return Function1f.ofExponential(a * correction, base);
 	}

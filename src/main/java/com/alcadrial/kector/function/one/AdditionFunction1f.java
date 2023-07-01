@@ -38,9 +38,9 @@ public class AdditionFunction1f implements Function1f {
 	}
 	
 	@Override
-	public AdditionFunction1f devirate()
+	public AdditionFunction1f derivate()
 	{
-		return Function1f.ofAddition(function0.devirate(), function1.devirate());
+		return Function1f.ofAddition(function0.derivate(), function1.derivate());
 	}
 	
 	public Function1f getFunction0()

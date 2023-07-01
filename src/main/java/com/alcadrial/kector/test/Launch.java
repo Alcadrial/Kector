@@ -130,21 +130,21 @@ public class Launch {
 				startBlock("exponential Test");
 				{
 					Function1f f = Function1f.ofExponential();
-					Function1f fd = f.devirate();
-					Function1f fdd = fd.devirate();
+					Function1f fd = f.derivate();
+					Function1f fdd = fd.derivate();
 					println(f + " " + fd + " " + fdd);
 					f = Function1f.ofMultiplication(Function1f.ofExponential(), Function1f.ofIdentity());
-					fd = f.devirate();
-					fdd = fd.devirate();
+					fd = f.derivate();
+					fdd = fd.derivate();
 					println(f + " " + fd + " " + fdd);
 				}
 				endBlock();
 				startBlock("exponential nest Test");
 				{
 					Function1f f = Function1f.ofFunction(Function1f.ofExponential(), Function1f.ofAddition(Function1f.ofExponential(), Function1f.ofLinear(-1)));
-					Function1f fd = f.devirate();
-					Function1f fdd = fd.devirate();
-					Function1f fddd = fdd.devirate();
+					Function1f fd = f.derivate();
+					Function1f fdd = fd.derivate();
+					Function1f fddd = fdd.derivate();
 					println(f);
 					println(fd);
 					println(fdd);
@@ -154,12 +154,12 @@ public class Launch {
 				startBlock("logarithm Test");
 				{
 					Function1f f = Function1f.ofLn();
-					Function1f fd = f.devirate();
-					Function1f fdd = fd.devirate();
+					Function1f fd = f.derivate();
+					Function1f fdd = fd.derivate();
 					println(f + " " + fd + " " + fdd);
 					f = Function1f.ofMultiplication(Function1f.ofLn(), Function1f.ofIdentity());
-					fd = f.devirate();
-					fdd = fd.devirate();
+					fd = f.derivate();
+					fdd = fd.derivate();
 					println(f + " " + fd + " " + fdd);
 				}
 				endBlock();
@@ -187,8 +187,8 @@ public class Launch {
 	private static void parabolicTest(float a, float b, float c)
 	{
 		Function1f f = movementFunction(a, b, c);
-		Function1f fd = f.devirate();
-		Function1f fdd = fd.devirate();
+		Function1f fd = f.derivate();
+		Function1f fdd = fd.derivate();
 		println(f + " " + fd + " " + fdd);
 	}
 	

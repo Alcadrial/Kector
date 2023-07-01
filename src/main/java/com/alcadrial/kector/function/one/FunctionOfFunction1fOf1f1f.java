@@ -18,9 +18,9 @@ class FunctionOfFunction1fOf1f1f implements FunctionOfFunction1f<Float> {
 	}
 	
 	@Override
-	public MultiplicationFunction1f devirate()
+	public MultiplicationFunction1f derivate()
 	{
-		return Function1f.ofMultiplication(Function1f.ofFunction(outer.devirate(), inner), inner.devirate());
+		return Function1f.ofMultiplication(Function1f.ofFunction(outer.derivate(), inner), inner.derivate());
 	}
 	
 	@Override

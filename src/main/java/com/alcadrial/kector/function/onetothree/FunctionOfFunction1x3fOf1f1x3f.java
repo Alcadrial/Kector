@@ -23,7 +23,7 @@ class FunctionOfFunction1x3fOf1f1x3f implements FunctionOfFunction1x3f<Float> {
 	@Override
 	public MultiplicationFunction1x3f devirate()
 	{
-		return Function1x3f.ofMultiplication(Function1x3f.ofFunction(outer.devirate(), inner), inner.devirate());
+		return Function1x3f.ofMultiplication(Function1x3f.ofFunction(outer.devirate(), inner), inner.derivate());
 	}
 	
 	@Override

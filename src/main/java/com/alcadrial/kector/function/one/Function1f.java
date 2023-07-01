@@ -87,5 +87,5 @@ public interface Function1f extends MathFunction<Float, Float> {
 		return new FunctionOfFunction1fOf1f1f(outer, inner);
 	}
 	
-	Function1f devirate();
+	Function1f derivate();
 }

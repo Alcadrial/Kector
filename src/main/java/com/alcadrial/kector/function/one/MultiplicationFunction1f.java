@@ -31,16 +31,16 @@ public class MultiplicationFunction1f implements Function1f {
 	}
 	
 	@Override
-	public AdditionFunction1f devirate()
+	public Function1f derivate()
 	{
-		Function1f fd0 = f0.devirate();
-		Function1f fd1 = f1.devirate();
+		Function1f fd0 = f0.derivate();
+		Function1f fd1 = f1.derivate();
 		if (fd0.isZero())
 		{
-			if (fd1.isZero()) return Function1f.ofAdditionZeroZero();
-			return Function1f.ofAdditionZero(fd1);
+			if (fd1.isZero()) return Function1f.ofZero();
+			return Function1f.ofMultiplication(f0, fd1);
 		}
-		if (fd1.isZero()) return Function1f.ofAdditionZero(fd0);
+		if (fd1.isZero()) return Function1f.ofMultiplication(fd0, f1);
 		return Function1f.ofAddition(Function1f.ofMultiplication(fd0, f1), Function1f.ofMultiplication(f0, fd1));
 	}
 	
@@ -79,6 +79,10 @@ public class MultiplicationFunction1f implements Function1f {
 			if (s.startsWith("-")) return s;
 			return "-" + s;
 		}
-		return (s.startsWith("-") && s0.startsWith("-") ? "" : "-") + StringUtils.multiplicationBounds(s) + "*" + StringUtils.multiplicationBounds(s0);
+		if (s.startsWith("-") && s0.startsWith("-"))
+		{
+			return StringUtils.multiplicationBounds(s.substring(1)) + "*" + StringUtils.multiplicationBounds(s0.substring(1));
+		}
+		return StringUtils.multiplicationBounds(s) + "*" + StringUtils.multiplicationBounds(s0);
 	}
 }

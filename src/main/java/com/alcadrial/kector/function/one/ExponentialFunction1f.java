@@ -24,7 +24,7 @@ public class ExponentialFunction1f implements Function1f {
 		}
 		
 		@Override
-		public Function1f devirate()
+		public Function1f derivate()
 		{
 			return EXPONENTIAL_FUNCTION;
 		}
@@ -52,7 +52,7 @@ public class ExponentialFunction1f implements Function1f {
 	}
 	
 	@Override
-	public Function1f devirate()
+	public Function1f derivate()
 	{
 		return Function1f.ofExponential(correction, base);
 	}
