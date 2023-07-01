@@ -51,7 +51,7 @@ public class LinearFunction1f implements Function1f, CoefficientFunction1f {
 	}
 	
 	@Override
-	public ConstantFunction1f devirate()
+	public ConstantFunction1f derivate()
 	{
 		return Function1f.ofConstant(m);
 	}

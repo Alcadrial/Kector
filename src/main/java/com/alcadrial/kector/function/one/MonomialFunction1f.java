@@ -39,7 +39,7 @@ public class MonomialFunction1f implements Function1f, CoefficientFunction1f {
 	}
 	
 	@Override
-	public CoefficientFunction1f devirate()
+	public CoefficientFunction1f derivate()
 	{
 		if (a == 0 || grade == 0) return Function1f.ofZero();
 		if (grade == 1) return Function1f.ofConstant(a * grade);
