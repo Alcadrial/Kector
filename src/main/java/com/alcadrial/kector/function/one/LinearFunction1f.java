@@ -14,21 +14,7 @@ import com.alcadrial.kector.util.StringUtils;
  */
 public class LinearFunction1f implements Function1f, CoefficientFunction1f {
 	
-	static final LinearFunction1f ZERO_FUNCTION = new LinearFunction1f(0) {
-		
-		@Override
-		public Float apply(Float x)
-		{
-			return 0F;
-		}
-		
-		@Override
-		public boolean isZero()
-		{
-			return true;
-		}
-	};
-	static final LinearFunction1f IDENTITY_FUNCTION = new LinearFunction1f(1) {
+	static final LinearFunction1f IDENTITY_FUNCTION = new LinearFunction1f(1, 0) {
 		
 		@Override
 		public Float apply(Float x)
@@ -38,16 +24,18 @@ public class LinearFunction1f implements Function1f, CoefficientFunction1f {
 	};
 	
 	private float m;
+	private float q;
 	
-	LinearFunction1f(float m)
+	LinearFunction1f(float m, float q)
 	{
 		this.m = m;
+		this.q = q;
 	}
 	
 	@Override
 	public Float apply(Float x)
 	{
-		return m * x;
+		return m * x + q;
 	}
 	
 	@Override
@@ -71,12 +59,28 @@ public class LinearFunction1f implements Function1f, CoefficientFunction1f {
 		return m;
 	}
 	
+	public float getTranslation()
+	{
+		return q;
+	}
+	
 	@Override
 	public String toString()
 	{
-		if (m == 0) return "0";
-		if (m == 1) return "x";
-		if (m == -1) return "-x";
-		return StringUtils.toString(m) + "x";
+		if (m == 0) return StringUtils.toString(q);
+		if (m == 1)
+		{
+			if (q == 0) return "x";
+			if (q < 0) return "x" + StringUtils.toString(q);
+			return "x+" + StringUtils.toString(q);
+		}
+		if (m == -1)
+		{
+			if (q == 0) return "-x";
+			if (q < 0) return "-x" + StringUtils.toString(q);
+			return "-x+" + StringUtils.toString(q);
+		}
+		if (q < 0) return StringUtils.toString(m) + "x" + StringUtils.toString(q);
+		return StringUtils.toString(m) + "x-" + StringUtils.toString(q);
 	}
 }

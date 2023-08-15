@@ -71,6 +71,6 @@ public class LogarithmicFunction1f implements Function1f {
 	@Override
 	public String toString()
 	{
-		return "log" + StringUtils.toString(base) + "(x)";
+		return "log_" + StringUtils.toString(base) + "(x)";
 	}
 }

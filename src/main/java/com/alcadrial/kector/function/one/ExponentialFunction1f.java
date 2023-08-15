@@ -54,7 +54,7 @@ public class ExponentialFunction1f implements Function1f {
 	@Override
 	public Function1f derivate()
 	{
-		return Function1f.ofExponential(correction, base);
+		return Function1f.ofExponentialBase(correction, base);
 	}
 	
 	@Override
