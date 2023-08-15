@@ -43,7 +43,6 @@ public class MonomialFunction1f implements Function1f, CoefficientFunction1f {
 	{
 		if (a == 0 || grade == 0) return Function1f.ofZero();
 		if (grade == 1) return Function1f.ofConstant(a * grade);
-		if (grade == 2) return Function1f.ofLinear(a * grade);
 		return Function1f.ofMonomial(a * grade, grade - 1);
 	}
 	
@@ -57,6 +56,11 @@ public class MonomialFunction1f implements Function1f, CoefficientFunction1f {
 	public float getCoeffiecient()
 	{
 		return a;
+	}
+	
+	public float getGrade()
+	{
+		return grade;
 	}
 	
 	@Override

@@ -141,7 +141,7 @@ public class Launch {
 				endBlock();
 				startBlock("exponential nest Test");
 				{
-					Function1f f = Function1f.ofFunction(Function1f.ofExponential(), Function1f.ofAddition(Function1f.ofExponential(), Function1f.ofLinear(-1)));
+					Function1f f = Function1f.ofFunction(Function1f.ofExponential(), Function1f.ofAddition(Function1f.ofExponential(), Function1f.ofLinear(-1, 0)));
 					Function1f fd = f.derivate();
 					Function1f fdd = fd.derivate();
 					Function1f fddd = fdd.derivate();
@@ -181,7 +181,7 @@ public class Launch {
 	
 	private static Function1f movementFunction(float a, float b, float c)
 	{
-		return Function1f.ofAddition(Function1f.ofAddition(Function1f.ofMonomial(a, 2), Function1f.ofLinear(b)), Function1f.ofConstant(c));
+		return Function1f.ofAddition(Function1f.ofMonomial(a, 2), Function1f.ofLinear(b, c));
 	}
 	
 	private static void parabolicTest(float a, float b, float c)

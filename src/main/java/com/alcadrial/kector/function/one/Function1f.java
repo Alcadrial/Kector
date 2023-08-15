@@ -4,87 +4,198 @@ import com.alcadrial.kector.function.MathFunction;
 
 public interface Function1f extends MathFunction<Float, Float> {
 	
+	/**
+	 * <p>A Function <img src="http://latex.codecogs.com/png.latex?f" alt="f"/> equals to this:</p>
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=b^x" alt="f(x)=b^x"/></blockquote>
+	 * where:
+	 * <ul style="list-style-type: none;">
+	 * <li> <img src="http://latex.codecogs.com/png.latex?b" alt="b"/> is the base;</li>
+	 * </ul>
+	 * 
+	 * @author Alcadrial
+	 */
+	/**
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=0" alt="f(x)=0"/></blockquote>
+	 * @return a function
+	 */
 	static ConstantFunction1f ofZero()
 	{
 		return ConstantFunction1f.ZERO_FUNCTION;
 	}
 	
+	/**
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=x" alt="f(x)=x"/></blockquote>
+	 * @return a function
+	 */
 	static LinearFunction1f ofIdentity()
 	{
 		return LinearFunction1f.IDENTITY_FUNCTION;
 	}
 	
-	static ConstantFunction1f ofConstant(float constant)
+	/**
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=a" alt="f(x)=a"/></blockquote>
+	 * @param a is a constant
+	 * @return a function
+	 */
+	static ConstantFunction1f ofConstant(float a)
 	{
-		if (constant == 0) return ConstantFunction1f.ZERO_FUNCTION;
-		return new ConstantFunction1f(constant);
+		if (a == 0) return ConstantFunction1f.ZERO_FUNCTION;
+		return new ConstantFunction1f(a);
 	}
 	
-	static LinearFunction1f ofLinear(float m)
+	/**
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=mx+q" alt="f(x)=mx+q"/></blockquote>
+	 * @param m is a constant
+	 * @param q is a constant
+	 * @return a function
+	 */
+	static LinearFunction1f ofLinear(float m, float q)
 	{
-		if (m == 0) return LinearFunction1f.ZERO_FUNCTION;
-		if (m == 1) return LinearFunction1f.IDENTITY_FUNCTION;
-		return new LinearFunction1f(m);
+		return new LinearFunction1f(m, q);
 	}
 	
-	static AdditionFunction1f ofAdditionZeroZero()
+	/**
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=f_0(x)+f_1(x)" alt="f(x)=f_0(x)+f_1(x)"/></blockquote>
+	 * @param f0 is a function
+	 * @param f1 is a function
+	 * @return a function
+	 */
+	static AdditionFunction1f ofAddition(Function1f f0, Function1f f1)
 	{
-		return AdditionFunction1f.ZERO_PLUS_ZERO_FUNCTION;
+		return new AdditionFunction1f(f0, f1);
 	}
 	
-	static AdditionFunction1f ofAdditionZero(Function1f function)
+	/**
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=f_0(x)*f_1(x)" alt="f(x)=f_0(x)*f_1(x)"/></blockquote>
+	 * @param f0 is a function
+	 * @param f1 is a function
+	 * @return a function
+	 */
+	static MultiplicationFunction1f ofMultiplication(Function1f f0, Function1f f1)
 	{
-		return ofAddition(function, ofZero());
+		return new MultiplicationFunction1f(f0, f1);
 	}
 	
-	static AdditionFunction1f ofAddition(Function1f function0, Function1f function1)
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=x^{\alpha}" alt="f(x)=x^{\alpha}"/></blockquote>
+	 * @param alpha is a constant
+	 * @return a function
+	 */
+	static MonomialFunction1f ofMonomial(float alpha)
 	{
-		return new AdditionFunction1f(function0, function1);
+		return new MonomialFunction1f(alpha);
 	}
 	
-	static MultiplicationFunction1f ofMultiplication(Function1f function0, Function1f function1)
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ax^{\alpha}" alt="f(x)=ax^{\alpha}"/></blockquote>
+	 * @param a is a constant
+	 * @param alpha is a constant
+	 * @return a function
+	 */
+	static MonomialFunction1f ofMonomial(float a, float alpha)
 	{
-		return new MultiplicationFunction1f(function0, function1);
+		return new MonomialFunction1f(a, alpha);
 	}
 	
-	static MonomialFunction1f ofMonomial(float grade)
-	{
-		return new MonomialFunction1f(grade);
-	}
-	
-	static MonomialFunction1f ofMonomial(float a, float grade)
-	{
-		return new MonomialFunction1f(a, grade);
-	}
-	
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=e^x" alt="f(x)=e^x"/></blockquote>
+	 * <b>Where:</b>
+	 * <ul style="list-style-type: none;">
+	 * <li><b>e</b> is the euler number</li>
+	 * </ul>
+	 * @return a function
+	 */
 	static ExponentialFunction1f ofExponential()
 	{
 		return ExponentialFunction1f.EXPONENTIAL_FUNCTION;
 	}
 	
-	static ExponentialFunction1f ofExponential(float base)
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ae^x" alt="f(x)=ae^x"/></blockquote>
+	 * <b>Where:</b>
+	 * <ul style="list-style-type: none;">
+	 * <li><b>e</b> is the euler number</li>
+	 * </ul>
+	 * @param a is a constant
+	 * @return a function
+	 */
+	static CoefficientEBasedExponentialFunction1f ofExponential(float a)
 	{
-		return new ExponentialFunction1f(base);
+		return new CoefficientEBasedExponentialFunction1f(a);
 	}
 	
-	static CoefficientExponentialFunction1f ofExponential(float a, float base)
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=b^x" alt="f(x)=b^x"/></blockquote>
+	 * @param b is a constant
+	 * @return a function
+	 */
+	static ExponentialFunction1f ofExponentialBase(float b)
 	{
-		return new CoefficientExponentialFunction1f(a, base);
+		return new ExponentialFunction1f(b);
 	}
 	
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ab^x" alt="f(x)=ab^x"/></blockquote>
+	 * @param a is a constant
+	 * @param b is a constant
+	 * @return a function
+	 */
+	static CoefficientExponentialFunction1f ofExponentialBase(float a, float b)
+	{
+		return new CoefficientExponentialFunction1f(a, b);
+	}
+	
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=ln(x)" alt="f(x)=ln(x)"/></blockquote>
+	 * <b>Where:</b>
+	 * <ul style="list-style-type: none;">
+	 * <li><b>ln</b> is the natural logarithm</li>
+	 * </ul>
+	 * @return a function
+	 */
 	static LogarithmicFunction1f ofLn()
 	{
 		return LogarithmicFunction1f.LN_FUNCTION;
 	}
 	
-	static LogarithmicFunction1f ofLog(float base)
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=log_b(x)" alt="f(x)=log_b(x)"/></blockquote>
+	 * @param b is a constant
+	 * @return a function
+	 */
+	static LogarithmicFunction1f ofLog(float b)
 	{
-		return new LogarithmicFunction1f(base);
+		return new LogarithmicFunction1f(b);
 	}
 	
-	static FunctionOfFunction1f<Float> ofFunction(Function1f outer, Function1f inner)
+	/**
+	 * 
+	 * <blockquote><img src="http://latex.codecogs.com/png.latex?f(x)=f_0(f_1(x))" alt="f(x)=f_0(f_1(x))"/></blockquote>
+	 * @param f0 is a function
+	 * @param f1 is a function
+	 * @return a function
+	 */
+	static FunctionOfFunction1f<Float> ofFunction(Function1f f0, Function1f f1)
 	{
-		return new FunctionOfFunction1fOf1f1f(outer, inner);
+		return new FunctionOfFunction1fOf1f1f(f0, f1);
+	}
+	
+	static Function1f valueOf(String s)
+	{
+		return FunctionParser.valueOf(s);
+	}
+	
+	static Function1f valueOf(String s, char variable)
+	{
+		return FunctionParser.valueOf(s, variable);
 	}
 	
 	Function1f derivate();

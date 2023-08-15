@@ -35,7 +35,7 @@ public class CoefficientExponentialFunction1f implements Function1f, Coefficient
 	@Override
 	public Function1f derivate()
 	{
-		return Function1f.ofExponential(a * correction, base);
+		return Function1f.ofExponentialBase(a * correction, base);
 	}
 	
 	@Override
@@ -53,5 +53,11 @@ public class CoefficientExponentialFunction1f implements Function1f, Coefficient
 	public float getBase()
 	{
 		return base;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return a + "*" + base + "^x";
 	}
 }
