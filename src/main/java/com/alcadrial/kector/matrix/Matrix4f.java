@@ -18,7 +18,7 @@ public class Matrix4f {
 	protected float[][] values;
 	
 	/**
-	 * Initialize to identity
+	 * Initialize to identity.
 	 */
 	public Matrix4f()
 	{
@@ -27,7 +27,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Create a copy of the sample
+	 * Create a copy of the sample.
 	 * 
 	 * @param sample to copy from
 	 */
@@ -37,7 +37,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Create a matrix using the given values
+	 * Create a matrix using the given values.
 	 * 
 	 * @param values used to initialize this matrix
 	 */
@@ -48,7 +48,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to identity
+	 * Reset to identity.
 	 * 
 	 * @return itself
 	 */
@@ -64,7 +64,7 @@ public class Matrix4f {
 	/**
 	 * Reset to an orthographic matrix of a box
 	 * starting from (0; 0; 0) to (width; height; 100),
-	 * centered in (width/2; height/2; 50)
+	 * centered in (width/2; height/2; 50).
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -86,7 +86,7 @@ public class Matrix4f {
 	/**
 	 * Reset to an orthographic matrix of a box
 	 * starting from (-width/2; -height/2; -0) to (width/2; height/2; 100),
-	 * centered in the origin
+	 * centered in the origin.
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -105,7 +105,7 @@ public class Matrix4f {
 	/**
 	 * Reset to an orthographic matrix of a box
 	 * starting from (-width/2; -height/2; -length/2) to (width/2; height/2; length/2),
-	 * centered in the origin
+	 * centered in the origin.
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -124,7 +124,7 @@ public class Matrix4f {
 	
 	/**
 	 * Reset to an orthographic matrix of the box,
-	 * centered in the box center
+	 * centered in the box center.
 	 * 
 	 * @param boxShape the box
 	 * 
@@ -146,7 +146,7 @@ public class Matrix4f {
 	
 	/**
 	 * Reset to an orthographic matrix of a box
-	 * starting from (-width/2; -height/2; -1) to (width/2; height/2; 1),
+	 * starting from (-width/2; -height/2; -1) to (width/2; height/2; 1).
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -164,7 +164,7 @@ public class Matrix4f {
 	/**
 	 * Reset to an orthographic matrix of a box
 	 * starting from (-width/2; -height/2; -1) to (width/2; height/2; 1),
-	 * centered in pos
+	 * centered in pos.
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -180,7 +180,7 @@ public class Matrix4f {
 	/**
 	 * Reset to an orthographic matrix of a box
 	 * starting from (-width/2; -height/2; -1) to (width/2; height/2; 1),
-	 * centered in pos
+	 * centered in pos.
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -202,7 +202,7 @@ public class Matrix4f {
 	
 	/**
 	 * Reset to a projection matrix of a box to a frustum
-	 * starting from (-1; -1; -1) to (1; 1; 1)
+	 * starting from (-1; -1; -1) to (1; 1; 1).
 	 * 
 	 * @param fieldOfView fov in degrees
 	 * @param maxDistance of view
@@ -218,7 +218,7 @@ public class Matrix4f {
 	
 	/**
 	 * Reset to a projection matrix of a box to a frustum
-	 * starting from (-1; -1; -1) to (1; 1; 1)
+	 * starting from (-1; -1; -1) to (1; 1; 1).
 	 * 
 	 * @param fieldOfView fov
 	 * @param maxDistance of view
@@ -245,7 +245,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (first person) matrix centered in position
+	 * Reset to a view (first person) matrix centered in position.
 	 * 
 	 * @param position position
 	 * @param rotationX X axis rotation in degrees
@@ -261,7 +261,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (first person) matrix centered in position
+	 * Reset to a view (first person) matrix centered in position.
 	 * 
 	 * @param position position
 	 * @param rotationX X axis rotation
@@ -275,7 +275,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (third person) matrix centered in position
+	 * Reset to a view (third person) matrix centered in position.
 	 * 
 	 * @param position position
 	 * @param rotationX X axis rotation in degrees
@@ -292,7 +292,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (third person) matrix centered in position
+	 * Reset to a view (third person) matrix centered in position.
 	 * 
 	 * @param position position
 	 * @param rotationX X axis rotation
@@ -309,7 +309,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (third person) matrix centered in position with an inverted view
+	 * Reset to a view (third person) matrix centered in position with an inverted view.
 	 * 
 	 * @param position position
 	 * @param rotationX X axis rotation in degrees
@@ -327,7 +327,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (third person) matrix centered in position with an inverted view
+	 * Reset to a view (third person) matrix centered in position with an inverted view.
 	 * 
 	 * @param position position
 	 * @param rotationX X axis rotation
@@ -345,7 +345,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (first person) matrix
+	 * Reset to a view (first person) matrix.
 	 * 
 	 * @param rotationX X axis rotation in degrees
 	 * @param rotationY Y axis rotation in degrees
@@ -359,7 +359,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset to a view (first person) matrix
+	 * Reset to a view (first person) matrix.
 	 * 
 	 * @param rotationX X axis rotation
 	 * @param rotationY Y axis rotation
@@ -612,7 +612,7 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Apply the other matrix on this
+	 * Apply the given matrix on this
 	 * 
 	 * @param other matrix
 	 * 
@@ -639,7 +639,7 @@ public class Matrix4f {
 	 * 
 	 * @param vector
 	 * 
-	 * @return the trasformed vector
+	 * @return a newly instanced trasformed vector
 	 */
 	public Vector4f multiply(Vector4f vector)
 	{
@@ -689,12 +689,14 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Calculate this matrix inverse
+	 * Calculate this matrix inverse.
 	 * 
 	 * @return this matrix inverse
+	 * @throws ArithmeticException if this matrix has no inverse or if it's determinant is zero
 	 */
 	public Matrix4f inverse()
 	{
+		if (Float.isNaN(1 / determinant())) throw new ArithmeticException("divide by zero");
 		float[][] matrixBlock = new float[4][8];
 		
 		for (int j = 0; j < 4; j++)
@@ -752,8 +754,22 @@ public class Matrix4f {
 	
 	public float[] toArray()
 	{
-		return new float[] {values[0][0], values[0][1], values[0][2], values[0][3], values[1][0], values[1][1], values[1][2], values[1][3], values[2][0], values[2][1], values[2][2], values[2][3],
-			values[3][0], values[3][1], values[3][2], values[3][3]};
+		return new float[] {
+			values[0][0], values[0][1], values[0][2], values[0][3],
+			values[1][0], values[1][1], values[1][2], values[1][3],
+			values[2][0], values[2][1], values[2][2], values[2][3],
+			values[3][0], values[3][1], values[3][2], values[3][3]
+		};
+	}
+	
+	public float[] toTransposedArray()
+	{
+		return new float[] {
+			values[0][0], values[1][0], values[2][0], values[3][0],
+			values[0][1], values[1][1], values[2][1], values[3][1],
+			values[0][2], values[1][2], values[2][2], values[3][2],
+			values[0][3], values[1][3], values[2][3], values[3][3]
+		};
 	}
 	
 	@Override
@@ -770,9 +786,9 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Get an already instanced unmodifiable identity matrix
+	 * Gets an already instanced unmodifiable identity matrix.
 	 * 
-	 * @return
+	 * @return an immutable identity matrix
 	 */
 	public static Matrix4f getIdentity()
 	{

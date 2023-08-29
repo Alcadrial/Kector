@@ -170,33 +170,38 @@ public interface Vector4f extends Vector4fGetter, NormalizableVector<Vector4f> {
 	float dotProduct(Vector4i vector);
 	
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x and y coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector2f xy();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the z and w coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector2f zw();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x, y and z coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f xyz();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the y, z and w coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f yzw();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the z, w, x and y coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector4f zwxy();
 	Point4f asPoint();

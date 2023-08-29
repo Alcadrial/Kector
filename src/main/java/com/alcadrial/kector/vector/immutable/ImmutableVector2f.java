@@ -1,5 +1,7 @@
 package com.alcadrial.kector.vector.immutable;
 
+import com.alcadrial.kector.angle.Angle;
+import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.matrix.Matrix3f;
 import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.point.Point2f;
@@ -137,6 +139,14 @@ public class ImmutableVector2f extends AbstractVector2f implements Vector2f, Vec
 	public Vector3f crossProduct(Vector3i vector)
 	{
 		return Vector2f.of(Y * vector.z(), -X * vector.z(), X * vector.y() - Y * vector.x());
+	}
+	
+	@Override
+	public Vector2f rotate(Angle angle)
+	{
+		double a = angle.asDouble(AngleUnit.RADIANS) + Math.atan2(Y, X);
+		double l = length();
+		return Vector2f.of((float) (Math.cos(a) * l), (float) (Math.sin(a) * l));
 	}
 	
 	@Override

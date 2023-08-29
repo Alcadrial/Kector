@@ -155,19 +155,21 @@ public interface Vector3f extends Vector4f, Vector3fGetter {
 	Vector3f divide(float x, float y, float z);
 	
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector with the result of
+	 * the cross product between this and the given Vector.
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f crossProduct(Vector3f vector);
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector with the result of
+	 * the cross product between this and the given Vector.
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f crossProduct(Vector3i vector);
 	
@@ -198,22 +200,25 @@ public interface Vector3f extends Vector4f, Vector3fGetter {
 	Vector3f setAll(Vector3f vector);
 	
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x and y coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector2f xy();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x and z coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector2f xz();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x, y and z coordinates
+	 * of this Vector and setting the w coordinate to 1.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector4f xyz1();
 	@Override

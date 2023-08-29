@@ -2,6 +2,7 @@ package com.alcadrial.kector.vector;
 
 import java.util.List;
 
+import com.alcadrial.kector.angle.Angle;
 import com.alcadrial.kector.point.Point2f;
 import com.alcadrial.kector.vector.getter.Vector2fGetter;
 import com.alcadrial.kector.vector.immutable.ImmutableVector2f;
@@ -154,6 +155,8 @@ public interface Vector2f extends Vector3f, Vector2fGetter {
 	
 	float dotProduct(Vector2f vector);
 	float dotProduct(Vector2i vector);
+	
+	Vector2f rotate(Angle angle);
 	
 	Vector2f perpendicular();
 	@Override

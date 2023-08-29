@@ -1,5 +1,6 @@
 package com.alcadrial.kector.vector;
 
+import com.alcadrial.kector.angle.Angle;
 import com.alcadrial.kector.matrix.Matrix3f;
 import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.point.Point1f;
@@ -112,6 +113,12 @@ public class Vector0f extends AbstractVector2f {
 	public Vector2f perpendicular()
 	{
 		throw new ArithmeticException("0-dimensional vectors have no perpendicular");
+	}
+	
+	@Override
+	public Vector2f rotate(Angle angle)
+	{
+		return this;
 	}
 	
 	@Override
