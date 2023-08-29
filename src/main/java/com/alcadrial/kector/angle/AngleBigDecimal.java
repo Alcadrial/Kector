@@ -104,4 +104,10 @@ public class AngleBigDecimal implements Angle {
 	{
 		this.value = this.unit.from(unit, value);
 	}
+	
+	@Override
+	public boolean equals(Angle angle)
+	{
+		return value == angle.asBigDecimal(unit);
+	}
 }

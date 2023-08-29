@@ -298,7 +298,7 @@ public class Math {
 	}
 	
 	/**
-	 * @see java.lang.Math#exp(float)
+	 * @see java.lang.Math#exp(double)
 	 */
 	public static Vector3f exp(Vector3f a)
 	{

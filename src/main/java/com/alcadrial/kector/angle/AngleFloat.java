@@ -104,4 +104,10 @@ public class AngleFloat implements Angle {
 	{
 		this.value = this.unit.from(unit, value).floatValue();
 	}
+	
+	@Override
+	public boolean equals(Angle angle)
+	{
+		return value == angle.asFloat(unit);
+	}
 }

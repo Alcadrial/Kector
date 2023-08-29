@@ -104,4 +104,10 @@ public class AngleDouble implements Angle {
 	{
 		this.value = this.unit.from(unit, value).doubleValue();
 	}
+	
+	@Override
+	public boolean equals(Angle angle)
+	{
+		return value == angle.asDouble(unit);
+	}
 }
