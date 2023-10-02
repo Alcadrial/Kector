@@ -6,6 +6,12 @@ import com.alcadrial.kector.shape.api.ImplementationSpecialization;
 public interface Line2f {
 	
 	/**
+	 * The x component of the point on this line with the given y.
+	 * @param y
+	 * @return the corrispondent x value
+	 */
+	float getX(float y);
+	/**
 	 * The y component of the point on this line with the given x.
 	 * @param x
 	 * @return the corrispondent y value

@@ -2,21 +2,21 @@ package com.alcadrial.kector.shape.kector.quadrilateral;
 
 import com.alcadrial.kector.Math;
 import com.alcadrial.kector.shape.api.curve.Segment2f;
-import com.alcadrial.kector.shape.api.quadrilateral.AxisAlignedRectangle2f;
+import com.alcadrial.kector.shape.api.quadrilateral.AARectangle2f;
 import com.alcadrial.kector.shape.kector.curve.KectorSegment2fAB;
 import com.alcadrial.kector.vector.Vector2f;
 
-public class KectorRectangle2f implements AxisAlignedRectangle2f {
+public class KectorAARectangle2f implements AARectangle2f {
 	
+	private Vector2f position;
 	private float width;
 	private float height;
-	private Vector2f position;
 	
-	public KectorRectangle2f(float width, float height, Vector2f position)
+	public KectorAARectangle2f(Vector2f position, float width, float height)
 	{
+		this.position = Vector2f.copyOfImmutable(position);
 		this.width = width;
 		this.height = height;
-		this.position = Vector2f.copyOfImmutable(position);
 	}
 	
 	@Override

@@ -14,4 +14,10 @@ public enum ImplementationSpecialization {
 	{
 		return this == CONSTANT;
 	}
+	
+	public static ImplementationSpecialization preferConstant(ImplementationSpecialization s0, ImplementationSpecialization s1)
+	{
+		if (s0.useConstant() || s1.useConstant()) return CONSTANT;
+		return ANGLE;
+	}
 }

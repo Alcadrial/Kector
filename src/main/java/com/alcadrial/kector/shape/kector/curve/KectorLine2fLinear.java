@@ -46,14 +46,25 @@ public class KectorLine2fLinear implements Line2f {
 	}
 	
 	@Override
+	public float getX(float y)
+	{
+		if (Float.isInfinite(angularCoefficient))
+		{
+			if (getHorizontalTranslation() == y) return 0;
+			return Float.NaN;
+		}
+		return (y - getHorizontalTranslation()) / angularCoefficient;
+	}
+	
+	@Override
 	public float getY(float x)
 	{
 		if (Float.isInfinite(angularCoefficient))
 		{
-			if (translation == x) return 0;
+			if (getVerticalTranslation() == x) return 0;
 			return Float.NaN;
 		}
-		return angularCoefficient * x + translation;
+		return angularCoefficient * x + getVerticalTranslation();
 	}
 	
 	@Override

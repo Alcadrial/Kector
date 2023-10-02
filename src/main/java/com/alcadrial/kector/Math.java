@@ -90,7 +90,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the fraction of a
 	 */
 	public static double fraction(double a)
@@ -103,7 +102,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the fraction of a
 	 */
 	public static float fraction(float a)
@@ -116,7 +114,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the up fraction of a
 	 */
 	public static double fractionUp(double a)
@@ -129,7 +126,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the up fraction of a
 	 */
 	public static float fractionUp(float a)
@@ -142,7 +138,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -156,7 +151,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -170,7 +164,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -184,7 +177,6 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * 
 	 * @return the floor fraction of a
 	 */
 	
@@ -250,6 +242,14 @@ public class Math {
 	}
 	
 	/**
+	 * @see java.lang.Math#asin(double)
+	 */
+	public static float asin(float a)
+	{
+		return (float) java.lang.Math.asin(a);
+	}
+	
+	/**
 	 * @see java.lang.Math#acos(double)
 	 */
 	public static double acos(double a)
@@ -258,11 +258,47 @@ public class Math {
 	}
 	
 	/**
+	 * @see java.lang.Math#acos(double)
+	 */
+	public static float acos(float a)
+	{
+		return (float) java.lang.Math.acos(a);
+	}
+	
+	/**
 	 * @see java.lang.Math#atan(double)
 	 */
 	public static double atan(double a)
 	{
 		return java.lang.Math.atan(a);
+	}
+	
+	/**
+	 * @see java.lang.Math#atan(double)
+	 */
+	public static float atan(float a)
+	{
+		return (float) java.lang.Math.atan(a);
+	}
+	
+	/**
+	 * Returns the trigonometric cotangent of an angle.
+	 * 
+	 * @see java.lang.Math#tan(double)
+	 */
+	public static double cotan(double a)
+	{
+		return 1 / tan(a);
+	}
+	
+	/**
+	 * Returns the trigonometric cotangent of an angle.
+	 * 
+	 * @see java.lang.Math#tan(double)
+	 */
+	public static float cotan(float a)
+	{
+		return 1 / tan(a);
 	}
 	
 	/**
@@ -1059,5 +1095,45 @@ public class Math {
 				yield (long) d;
 			}
 		};
+	}
+	
+	public static double distance(double x, double y)
+	{
+		return sqrt(x * x + y * y);
+	}
+	
+	public static double distance(double x0, double y0, double x1, double y1)
+	{
+		return distance(x0 - x1, y0 - y1);
+	}
+	
+	public static double squareDistance(double x, double y)
+	{
+		return x * x + y * y;
+	}
+	
+	public static double squareDistance(double x0, double y0, double x1, double y1)
+	{
+		return squareDistance(x0 - x1, y0 - y1);
+	}
+	
+	public static float distance(float x, float y)
+	{
+		return sqrt(x * x + y * y);
+	}
+	
+	public static float distance(float x0, float y0, float x1, float y1)
+	{
+		return distance(x0 - x1, y0 - y1);
+	}
+	
+	public static float squareDistance(float x, float y)
+	{
+		return x * x + y * y;
+	}
+	
+	public static float squareDistance(float x0, float y0, float x1, float y1)
+	{
+		return squareDistance(x0 - x1, y0 - y1);
 	}
 }

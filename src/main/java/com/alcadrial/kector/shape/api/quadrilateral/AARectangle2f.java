@@ -2,7 +2,7 @@ package com.alcadrial.kector.shape.api.quadrilateral;
 
 import com.alcadrial.kector.angle.Angle;
 
-public interface AxisAlignedRectangle2f extends Rectangle2f {
+public interface AARectangle2f extends Rectangle2f {
 	
 	@Override
 	default Angle getAngleRdLdX()

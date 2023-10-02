@@ -46,14 +46,25 @@ public class KectorLine2fAngle implements Line2f {
 	}
 	
 	@Override
+	public float getX(float y)
+	{
+		if (angle.asFloat(AngleUnit.TURNS) == 0)
+		{
+			if (getHorizontalTranslation() == y) return 0;
+			return Float.NaN;
+		}
+		return (float) (Math.cotan(angle.asDouble()) * y + getHorizontalTranslation());
+	}
+	
+	@Override
 	public float getY(float x)
 	{
 		if (angle.asFloat(AngleUnit.TURNS) == 0.25)
 		{
-			if (translation == x) return 0;
+			if (getVerticalTranslation() == x) return 0;
 			return Float.NaN;
 		}
-		return (float) (Math.tan(angle.asDouble()) * x + translation);
+		return (float) (Math.tan(angle.asDouble()) * x + getVerticalTranslation());
 	}
 	
 	@Override

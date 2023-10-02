@@ -1,11 +1,11 @@
 package com.alcadrial.kector.shape.kector.quadrilateral;
 
 import com.alcadrial.kector.shape.api.curve.Segment2f;
-import com.alcadrial.kector.shape.api.quadrilateral.AxisAlignedSquare2f;
+import com.alcadrial.kector.shape.api.quadrilateral.AASquare2f;
 import com.alcadrial.kector.shape.kector.curve.KectorSegment2fAB;
 import com.alcadrial.kector.vector.Vector2f;
 
-public class KectorSquare2f implements AxisAlignedSquare2f {
+public class KectorSquare2f implements AASquare2f {
 	
 	private float size;
 	private Vector2f position;
