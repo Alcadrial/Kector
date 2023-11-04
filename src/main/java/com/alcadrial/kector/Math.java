@@ -978,7 +978,7 @@ public class Math {
 		return switch (mode)
 		{
 			case UP -> f % 1 == 0 ? (int) f : (int) f + (f < 0 ? -1 : 1);
-			case CEILING -> f <= 0 ? (int) f : f % 1 == 0 ? (int) f + 1 : (int) f;
+			case CEILING -> f <= 0 ? (int) f : f % 1 == 0 ? (int) f : (int) f + 1;
 			case DOWN -> (int) f;
 			case FLOOR -> f >= 0 ? (int) f : f % 1 < 0 ? (int) f - 1 : (int) f;
 			case HALF_DOWN ->
@@ -1009,7 +1009,7 @@ public class Math {
 		return switch (mode)
 		{
 			case UP -> d % 1 == 0 ? (int) d : (int) d + (d < 0 ? -1 : 1);
-			case CEILING -> d <= 0 ? (int) d : d % 1 == 0 ? (int) d + 1 : (int) d;
+			case CEILING -> d <= 0 ? (int) d : d % 1 == 0 ? (int) d : (int) d + 1;
 			case DOWN -> (int) d;
 			case FLOOR -> d >= 0 ? (int) d : d % 1 < 0 ? (int) d - 1 : (int) d;
 			case HALF_DOWN ->
@@ -1040,7 +1040,7 @@ public class Math {
 		return switch (mode)
 		{
 			case UP -> f % 1 == 0 ? (long) f : (long) f + (f < 0 ? -1 : 1);
-			case CEILING -> f <= 0 ? (long) f : f % 1 == 0 ? (long) f + 1 : (long) f;
+			case CEILING -> f <= 0 ? (long) f : f % 1 == 0 ? (long) f : (long) f + 1;
 			case DOWN -> (long) f;
 			case FLOOR -> f >= 0 ? (long) f : f % 1 < 0 ? (long) f - 1 : (long) f;
 			case HALF_DOWN ->
@@ -1071,7 +1071,7 @@ public class Math {
 		return switch (mode)
 		{
 			case UP -> d % 1 == 0 ? (long) d : (long) d + (d < 0 ? -1 : 1);
-			case CEILING -> d <= 0 ? (long) d : d % 1 == 0 ? (long) d + 1 : (long) d;
+			case CEILING -> d <= 0 ? (long) d : d % 1 == 0 ? (long) d : (long) d + 1;
 			case DOWN -> (long) d;
 			case FLOOR -> d >= 0 ? (long) d : d % 1 < 0 ? (long) d - 1 : (long) d;
 			case HALF_DOWN ->
