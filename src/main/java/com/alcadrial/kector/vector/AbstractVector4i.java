@@ -187,6 +187,38 @@ public abstract class AbstractVector4i implements Vector4i {
 	}
 	
 	@Override
+	public double axialLength()
+	{
+		return (double) x() + y() + z() + w();
+	}
+	
+	@Override
+	public double axialSize()
+	{
+		return axialLength();
+	}
+	
+	@Override
+	public double axialDistance(Vector4f vector)
+	{
+		float x = Math.abs(x() - vector.x());
+		float y = Math.abs(y() - vector.y());
+		float z = Math.abs(z() - vector.z());
+		float w = Math.abs(w() - vector.w());
+		return x + y + z + w;
+	}
+	
+	@Override
+	public double axialDistance(Vector4i vector)
+	{
+		double x = Math.abs(x() - vector.x());
+		double y = Math.abs(y() - vector.y());
+		double z = Math.abs(z() - vector.z());
+		double w = Math.abs(w() - vector.w());
+		return x + y + z + w;
+	}
+	
+	@Override
 	public Vector4i setAll(Vector4i vector)
 	{
 		return setAll(vector.x(), vector.y(), vector.z(), vector.w());

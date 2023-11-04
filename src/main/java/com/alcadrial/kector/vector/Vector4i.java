@@ -260,6 +260,11 @@ public interface Vector4i extends Vector4iGetter, NormalizableVector<Vector4f> {
 	double distance(Vector4i vector);
 	double distance(Vector4f vector);
 	
+	double axialLength();
+	double axialSize();
+	double axialDistance(Vector4i vector);
+	double axialDistance(Vector4f vector);
+	
 	List<Integer> getValues();
 	int[] getValuesArray();
 }
