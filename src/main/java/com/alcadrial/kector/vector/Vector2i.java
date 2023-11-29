@@ -274,6 +274,13 @@ public interface Vector2i extends Vector3i, Vector2iGetter {
 	double distance(Vector2f vector);
 	
 	@Override
+	double axialLength();
+	@Override
+	double axialSize();
+	double axialDistance(Vector2i vector);
+	double axialDistance(Vector2f vector);
+	
+	@Override
 	List<Integer> getValues();
 	@Override
 	int[] getValuesArray();

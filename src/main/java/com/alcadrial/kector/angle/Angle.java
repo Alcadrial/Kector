@@ -7,20 +7,20 @@ import com.alcadrial.kector.Math;
 /**
  * An interface representing an immutable angle and it's the measurement {@link AngleUnit unit}
  * that can be converted easily into other units with methods like {@link #asFloat(AngleUnit)}
- * or used in mathematical operation like {@link #add(Angle)}
+ * or used in mathematical operation like {@link #add(Angle)}.
  * <p>
  * This is meant for being used when angles with different units or precision are to be used
- * together without the need to know anything
+ * together without the need to know anything.
  * <p>
  * There are some pre-allocated constants for some of the most useful values like {@link #PI_RAD}
- * for an angle of π rads or {@link #V180_DEG} for an angle of 180°
+ * for an angle of π rads or {@link #V180_DEG} for an angle of 180°.
  * 
  * @author alcadrial
  */
 public interface Angle {
 	
 	/**
-	 * Construct a new angle with the given value and unit
+	 * Construct a new angle with the given value and unit.
 	 * 
 	 * @param angle the value of the new angle in the given unit
 	 * @param unit the unit of the angle
@@ -33,7 +33,7 @@ public interface Angle {
 	}
 	
 	/**
-	 * Construct a new angle with the given value and unit
+	 * Construct a new angle with the given value and unit.
 	 * 
 	 * @param angle the value of the new angle in the given unit
 	 * @param unit the unit of the angle
@@ -46,7 +46,7 @@ public interface Angle {
 	}
 	
 	/**
-	 * Construct a new angle with the given value and unit
+	 * Construct a new angle with the given value and unit.
 	 * 
 	 * @param angle the value of the new angle in the given unit
 	 * @param unit the unit of the angle
@@ -59,7 +59,7 @@ public interface Angle {
 	}
 	
 	/**
-	 * Construct a new angle as a copy of the given one
+	 * Construct a new angle as a copy of the given one.
 	 * 
 	 * @param angle the value to copy
 	 * 
@@ -72,130 +72,217 @@ public interface Angle {
 		return new AngleBigDecimal(angle.getUnit(), angle.asBigDecimal());
 	}
 	
+	/**
+	 * Construct a new angle, with the given unit, as a copy of the given one.
+	 * 
+	 * @param angle the value to copy
+	 * 
+	 * @return a copy of the given angle
+	 */
+	static Angle copyOf(Angle angle, AngleUnit unit)
+	{
+		if (angle instanceof AngleFloat) return new AngleFloat(unit, angle.asFloat(unit));
+		if (angle instanceof AngleDouble) return new AngleDouble(unit, angle.asDouble(unit));
+		return new AngleBigDecimal(unit, angle.asBigDecimal(unit));
+	}
+	
+	Angle NEGATIVE_HALF_PI_RAD = of(-Math.HALF_PI, AngleUnit.RADIANS);
 	Angle V0_RAD = of(0, AngleUnit.RADIANS);
 	Angle HALF_PI_RAD = of(Math.HALF_PI, AngleUnit.RADIANS);
 	Angle PI_RAD = of(Math.PI, AngleUnit.RADIANS);
-	Angle NEGATIVE_HALF_PI_RAD = of(-Math.HALF_PI, AngleUnit.RADIANS);
+	Angle DOUBLE_PI_RAD = of(2 * Math.PI, AngleUnit.RADIANS);
 	
 	Angle V0_GRAD = of(0D, AngleUnit.GRADIANS);
 	Angle V100_GRAD = of(100D, AngleUnit.GRADIANS);
 	Angle V200_GRAD = of(200D, AngleUnit.GRADIANS);
 	Angle V300_GRAD = of(300D, AngleUnit.GRADIANS);
+	Angle V400_GRAD = of(400D, AngleUnit.GRADIANS);
 	
 	Angle V0_TURN = of(0D, AngleUnit.TURNS);
 	Angle V0_5_TURN = of(0.5, AngleUnit.TURNS);
 	Angle V1_TURN = of(1D, AngleUnit.TURNS);
+	Angle V1_5_TURN = of(1.5, AngleUnit.TURNS);
 	Angle V2_TURN = of(2D, AngleUnit.TURNS);
 	
 	Angle V0_DEG = of(0D, AngleUnit.DEGREES);
 	Angle V90_DEG = of(90D, AngleUnit.DEGREES);
 	Angle V180_DEG = of(180D, AngleUnit.DEGREES);
 	Angle V270_DEG = of(270D, AngleUnit.DEGREES);
+	Angle V360_DEG = of(360D, AngleUnit.DEGREES);
 	
 	/**
-	 * Returns an angle being the sum of this and the given one
+	 * Returns an angle being the sum of this and the given one.
 	 * 
-	 * @param angle the angle to add
-	 * 
+	 * @param a the angle to add
 	 * @return the sum of this and the given one
 	 */
-	Angle add(Angle angle);
+	Angle add(Angle a);
 	
 	/**
-	 * Returns an angle like this but with the value negated
+	 * Returns this angle plus 0.5 turns, that is the opposite angle.
 	 * 
 	 * @return the opposite angle
 	 */
 	Angle opposite();
 	
 	/**
-	 * Returns the value of this angle
+	 * Returns an angle like this but with the value negated.
+	 * 
+	 * @return this angle negated
+	 */
+	Angle negative();
+	
+	/**
+	 * Returns the value of this angle.
 	 * 
 	 * @return the value of this angle
 	 */
 	float asFloat();
 	/**
-	 * Returns the value of this angle
+	 * Returns the value of this angle.
 	 * 
 	 * @return the value of this angle
 	 */
 	double asDouble();
 	/**
-	 * Returns the value of this angle
+	 * Returns the value of this angle.
 	 * 
 	 * @return the value of this angle
 	 */
 	BigDecimal asBigDecimal();
 	
 	/**
-	 * Convert the value of this angle to the given unit and returns it
+	 * Convert the value of this angle to the given unit.
 	 * 
 	 * @param unit the {@link AngleUnit} requested
-	 * 
 	 * @return the value in the requested unit
 	 */
 	float asFloat(AngleUnit unit);
 	/**
-	 * Convert the value of this angle to the given unit and returns it
+	 * Convert the value of this angle to the given unit.
 	 * 
 	 * @param unit the {@link AngleUnit} requested
-	 * 
 	 * @return the value in the requested unit
 	 */
 	double asDouble(AngleUnit unit);
 	/**
-	 * Convert the value of this angle to the given unit and returns it
+	 * Convert the value of this angle to the given unit.
 	 * 
 	 * @param unit the {@link AngleUnit} requested
-	 * 
 	 * @return the value in the requested unit
 	 */
 	BigDecimal asBigDecimal(AngleUnit unit);
 	
 	/**
-	 * The current unit used when extracting a value using {@link #asFloat()}, {@link #asDouble()} and {@link #asBigDecimal()}
+	 * Returns the value of this angle mapped to the unit's bounds, for example [0;2π] for RADIANS.
+	 * 
+	 * @return the value of this angle inside the unit's bounds
+	 */
+	float asFloatBounded();
+	/**
+	 * Returns the value of this angle mapped to the unit's bounds, for example [0;2π] for RADIANS.
+	 * 
+	 * @return the value of this angle inside the unit's bounds
+	 */
+	double asDoubleBounded();
+	/**
+	 * Returns the value of this angle mapped to the unit's bounds, for example [0;2π] for RADIANS.
+	 * 
+	 * @return the value of this angle inside the unit's bounds
+	 */
+	BigDecimal asBigDecimalBounded();
+	/**
+	 * Convert the value of this angle to the given unit and maps the value to the unit's bounds, for example [0;2π] for RADIANS.
+	 * 
+	 * @param unit the {@link AngleUnit} requested
+	 * @return the value in the requested unit inside the unit's bounds
+	 */
+	float asFloatBounded(AngleUnit unit);
+	/**
+	 * Convert the value of this angle to the given unit and maps the value to the unit's bounds, for example [0;2π] for RADIANS.
+	 * 
+	 * @param unit the {@link AngleUnit} requested
+	 * @return the value in the requested unit inside the unit's bounds
+	 */
+	double asDoubleBounded(AngleUnit unit);
+	/**
+	 * Convert the value of this angle to the given unit and maps the value to the unit's bounds, for example [0;2π] for RADIANS.
+	 * 
+	 * @param unit the {@link AngleUnit} requested
+	 * @return the value in the requested unit inside the unit's bounds
+	 */
+	BigDecimal asBigDecimalBounded(AngleUnit unit);
+	
+	/**
+	 * The current unit used when extracting a value using {@link #asFloat()}, {@link #asDouble()} and {@link #asBigDecimal()}.
 	 * 
 	 * @return the current unit
 	 */
 	AngleUnit getUnit();
 	
 	/**
-	 * Set the value of this angle using the current {@link AngleUnit unit}
+	 * Set the value of this angle using the current {@link AngleUnit unit}.
 	 * 
 	 * @param value the value to set
 	 */
 	void setValue(float value);
 	/**
-	 * Set the value of this angle using the given {@link AngleUnit unit}
+	 * Set the value of this angle using the given {@link AngleUnit unit}.
 	 * 
 	 * @param unit the {@link AngleUnit} of the value
 	 * @param value the value to set
 	 */
 	void setValue(AngleUnit unit, float value);
 	/**
-	 * Set the value of this angle using the current {@link AngleUnit unit}
+	 * Set the value of this angle using the current {@link AngleUnit unit}.
 	 * 
 	 * @param value the value to set
 	 */
 	void setValue(double value);
 	/**
-	 * Set the value of this angle using the given {@link AngleUnit unit}
+	 * Set the value of this angle using the given {@link AngleUnit unit}.
 	 * 
 	 * @param unit the {@link AngleUnit} of the value
 	 * @param value the value to set
 	 */
 	void setValue(AngleUnit unit, double value);
 	/**
-	 * Set the value of this angle using the current {@link AngleUnit unit}
+	 * Set the value of this angle using the current {@link AngleUnit unit}.
 	 * 
 	 * @param value the value to set
 	 */
 	void setValue(BigDecimal value);
 	/**
-	 * Set the value of this angle using the given {@link AngleUnit unit}
+	 * Set the value of this angle using the given {@link AngleUnit unit}.
 	 * 
 	 * @param unit the {@link AngleUnit} of the value
 	 * @param value the value to set
 	 */
 	void setValue(AngleUnit unit, BigDecimal value);
+	
+	/**
+	 * Compare this angle numerically with then given one in a common {@link AngleUnit unit}, resulting in -1, 0 or 1 if this
+	 * angle is less than, equal to, or greater than the given one.
+	 * 
+	 * @param a the angle to test
+	 * @return -1, 0 or 1 if less than, equal to, or greater than in a common {@link AngleUnit unit}
+	 */
+	int compareTo(Angle a);
+	
+	/**
+	 * Test whether this angle is the equal to the give one in a common {@link AngleUnit unit}.
+	 * 
+	 * @param a the angle to test
+	 * @return True if this angle is equal to the given one in a common {@link AngleUnit unit}
+	 */
+	boolean equals(Angle a);
+	
+	/**
+	 * Test whether this angle is greater than or equal to the first angle and less than the second angle in a common {@link AngleUnit unit}.
+	 * 
+	 * @param a the first angle value to test
+	 * @param b the second angle value to test
+	 * @return True if this angle value is between the first angle and the second angle in a common {@link AngleUnit unit}.
+	 */
+	boolean between(Angle a, Angle b);
 }

@@ -210,7 +210,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f add(Vector3f vector);
 	/**
@@ -218,7 +218,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param value
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector3f addAll(float value);
@@ -229,7 +229,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * @param y
 	 * @param z
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f add(float x, float y, float z);
 	
@@ -242,7 +242,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f subtract(Vector3f vector);
 	/**
@@ -250,7 +250,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param value
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector3f subtractAll(float value);
@@ -261,7 +261,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * @param y
 	 * @param z
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f subtract(float x, float y, float z);
 	
@@ -274,7 +274,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f multiply(Vector3f vector);
 	/**
@@ -282,7 +282,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param value
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector3f multiplyAll(float value);
@@ -293,7 +293,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * @param y
 	 * @param z
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f multiply(float x, float y, float z);
 	/**
@@ -301,7 +301,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param matrix
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f multiply(Matrix3f matrix);
 	/**
@@ -309,7 +309,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param matrix
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector3f multiply(Matrix4f matrix);
@@ -323,7 +323,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f divide(Vector3f vector);
 	/**
@@ -331,7 +331,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param value
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector3f divideAll(float value);
@@ -342,7 +342,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * @param y
 	 * @param z
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f divide(float x, float y, float z);
 	
@@ -351,7 +351,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3f crossProduct(Vector3f vector);
 	/**
@@ -359,7 +359,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	 * 
 	 * @param vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector3i crossProduct(Vector3i vector);
 	
@@ -375,7 +375,7 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	/**
 	 * Instantiate a new Vector
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector3f unitary();
@@ -395,22 +395,25 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	Vector3i setAll(Vector3i vector);
 	
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x and y coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	@Override
 	Vector2i xy();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x and z coordinates
+	 * of this Vector.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector2i xz();
 	/**
-	 * Instantiate a new Vector
+	 * Instantiate a new Vector using the x, y and z coordinates
+	 * of this Vector and setting the w coordinate to 1.
 	 * 
-	 * @return
+	 * @return a new Vector
 	 */
 	Vector4i xyz1();
 	@Override
@@ -422,6 +425,13 @@ public interface Vector3i extends Vector4i, Vector3iGetter {
 	double size();
 	double distance(Vector3i vector);
 	double distance(Vector3f vector);
+	
+	@Override
+	double axialLength();
+	@Override
+	double axialSize();
+	double axialDistance(Vector3i vector);
+	double axialDistance(Vector3f vector);
 	
 	@Override
 	List<Integer> getValues();

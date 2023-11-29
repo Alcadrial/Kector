@@ -195,6 +195,28 @@ public abstract class AbstractVector2i extends AbstractVector3i implements Vecto
 	}
 	
 	@Override
+	public double axialLength()
+	{
+		return (double) x() + y();
+	}
+	
+	@Override
+	public double axialDistance(Vector2f vector)
+	{
+		float x = Math.abs(x() - vector.x());
+		float y = Math.abs(y() - vector.y());
+		return x + y;
+	}
+	
+	@Override
+	public double axialDistance(Vector2i vector)
+	{
+		double x = Math.abs(x() - vector.x());
+		double y = Math.abs(y() - vector.y());
+		return x + y;
+	}
+	
+	@Override
 	public Vector2i setAll(Vector2i vector)
 	{
 		return setAll(vector.x(), vector.y());

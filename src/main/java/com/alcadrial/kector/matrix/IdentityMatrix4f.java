@@ -1,5 +1,6 @@
 package com.alcadrial.kector.matrix;
 
+import com.alcadrial.kector.angle.Angle;
 import com.alcadrial.kector.shape.OrthoShape;
 import com.alcadrial.kector.vector.Vector2f;
 import com.alcadrial.kector.vector.Vector3f;
@@ -10,7 +11,6 @@ import com.alcadrial.kector.vector.axis.Axis;
 class IdentityMatrix4f extends Matrix4f {
 	
 	public static final Matrix4f IDENTITY = new IdentityMatrix4f();
-	private static final String TO_STRING = "Matrix{[[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]}";
 	
 	private IdentityMatrix4f()
 	{
@@ -57,13 +57,25 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
+	public Matrix4f cursor(float width, float height, float centerX, float centerY)
+	{
+		return this;
+	}
+	
+	@Override
 	public Matrix4f cursor(float width, float height, Vector2f mousePos)
 	{
 		return this;
 	}
 	
 	@Override
-	public Matrix4f project(float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
+	public Matrix4f perspective(float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
+	{
+		return this;
+	}
+	
+	@Override
+	public Matrix4f perspective(Angle fieldOfView, float maxDistance, float minDistance, float aspectRatio)
 	{
 		return this;
 	}
@@ -75,7 +87,19 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
+	public Matrix4f view(Vector3f position, Angle rotationX, Angle rotationY)
+	{
+		return this;
+	}
+	
+	@Override
 	public Matrix4f awayView(Vector3f position, float rotationX, float rotationY)
+	{
+		return this;
+	}
+	
+	@Override
+	public Matrix4f awayView(Vector3f position, Angle rotationX, Angle rotationY)
 	{
 		return this;
 	}
@@ -87,7 +111,19 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
+	public Matrix4f invertedAwayView(Vector3f position, Angle rotationX, Angle rotationY)
+	{
+		return this;
+	}
+	
+	@Override
 	public Matrix4f rawView(float rotationX, float rotationY)
+	{
+		return this;
+	}
+	
+	@Override
+	public Matrix4f rawView(Angle rotationX, Angle rotationY)
 	{
 		return this;
 	}
@@ -171,6 +207,12 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
+	public Matrix4f rotate(Axis axis, Angle angle)
+	{
+		return this;
+	}
+	
+	@Override
 	public Matrix4f multiply(Matrix4f other)
 	{
 		return new Matrix4f(other);
@@ -179,7 +221,7 @@ class IdentityMatrix4f extends Matrix4f {
 	@Override
 	public Vector4f multiply(Vector4f vector)
 	{
-		return Vector3f.copyOf(vector);
+		return Vector4f.copyOf(vector);
 	}
 	
 	@Override
@@ -209,6 +251,6 @@ class IdentityMatrix4f extends Matrix4f {
 	@Override
 	public String toString()
 	{
-		return TO_STRING;
+		return "Matrix{[[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]}";
 	}
 }

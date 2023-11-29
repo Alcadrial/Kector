@@ -16,7 +16,7 @@ public enum AngleUnit {
 	private double fromTurns;
 	private double fromDegrees;
 	
-	private AngleUnit(double fromRadians, double fromGradians, double fromTurns, double fromDegrees)
+	AngleUnit(double fromRadians, double fromGradians, double fromTurns, double fromDegrees)
 	{
 		this.fromRadians = fromRadians;
 		this.fromGradians = fromGradians;
@@ -84,5 +84,10 @@ public enum AngleUnit {
 	public BigDecimal fromDegrees(BigDecimal angle)
 	{
 		return angle.multiply(new BigDecimal(fromDegrees));
+	}
+	
+	public double getTurnSize()
+	{
+		return fromTurns;
 	}
 }
