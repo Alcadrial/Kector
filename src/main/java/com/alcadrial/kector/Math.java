@@ -1,6 +1,7 @@
 package com.alcadrial.kector;
 
 import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.function.Function;
 
 import com.alcadrial.kector.angle.AngleUnit;
@@ -138,9 +139,8 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * @return the floor fraction of a
+	 * @return the ceiling fraction of a
 	 */
-	
 	public static double fractionCeiling(double a)
 	{
 		return a >= 0 ? a % 1 : 1 - a % 1;
@@ -151,9 +151,8 @@ public class Math {
 	 * The computed value is in range [-1; 1].
 	 * 
 	 * @param a a value
-	 * @return the floor fraction of a
+	 * @return the ceiling fraction of a
 	 */
-	
 	public static float fractionCeiling(float a)
 	{
 		return a >= 0 ? a % 1 : 1 - a % 1;
@@ -166,7 +165,6 @@ public class Math {
 	 * @param a a value
 	 * @return the floor fraction of a
 	 */
-	
 	public static double fractionFloor(double a)
 	{
 		return a > 0 ? 1 - a % 1 : a % 1;
@@ -179,7 +177,6 @@ public class Math {
 	 * @param a a value
 	 * @return the floor fraction of a
 	 */
-	
 	public static float fractionFloor(float a)
 	{
 		return a > 0 ? 1 - a % 1 : a % 1;
@@ -282,11 +279,51 @@ public class Math {
 	}
 	
 	/**
+	 * Returns the trigonometric cosecant of an angle.
+	 * 
+	 * @see java.lang.Math#cos(double)
+	 */
+	public static double csc(double a)
+	{
+		return 1 / cos(a);
+	}
+	
+	/**
+	 * Returns the trigonometric cosecant of an angle.
+	 * 
+	 * @see java.lang.Math#cos(double)
+	 */
+	public static float csc(float a)
+	{
+		return 1 / cos(a);
+	}
+	
+	/**
+	 * Returns the trigonometric secant of an angle.
+	 * 
+	 * @see java.lang.Math#sin(double)
+	 */
+	public static double sec(double a)
+	{
+		return 1 / sin(a);
+	}
+	
+	/**
+	 * Returns the trigonometric secant of an angle.
+	 * 
+	 * @see java.lang.Math#sin(double)
+	 */
+	public static float sec(float a)
+	{
+		return 1 / sin(a);
+	}
+	
+	/**
 	 * Returns the trigonometric cotangent of an angle.
 	 * 
 	 * @see java.lang.Math#tan(double)
 	 */
-	public static double cotan(double a)
+	public static double cot(double a)
 	{
 		return 1 / tan(a);
 	}
@@ -296,9 +333,69 @@ public class Math {
 	 * 
 	 * @see java.lang.Math#tan(double)
 	 */
-	public static float cotan(float a)
+	public static float cot(float a)
 	{
 		return 1 / tan(a);
+	}
+	
+	/**
+	 * Returns the trigonometric arc cosecant of an angle.
+	 * 
+	 * @see #csc(double)
+	 */
+	public static double acsc(double a)
+	{
+		return acos(1 / a);
+	}
+	
+	/**
+	 * Returns the trigonometric arc cosecant of an angle.
+	 * 
+	 * @see #csc(float)
+	 */
+	public static float acsc(float a)
+	{
+		return acos(1 / a);
+	}
+	
+	/**
+	 * Returns the trigonometric arc secant of an angle.
+	 * 
+	 * @see #sec(double)
+	 */
+	public static double asec(double a)
+	{
+		return asin(1 / a);
+	}
+	
+	/**
+	 * Returns the trigonometric arc secant of an angle.
+	 * 
+	 * @see #sec(float)
+	 */
+	public static float asec(float a)
+	{
+		return asin(1 / a);
+	}
+	
+	/**
+	 * Returns the trigonometric arc cotangent of an angle.
+	 * 
+	 * @see #cot(double)
+	 */
+	public static double acot(double a)
+	{
+		return atan(a);
+	}
+	
+	/**
+	 * Returns the trigonometric arc cotangent of an angle.
+	 * 
+	 * @see #cot(float)
+	 */
+	public static float acot(float a)
+	{
+		return atan(a);
 	}
 	
 	/**
@@ -1135,5 +1232,38 @@ public class Math {
 	public static float squareDistance(float x0, float y0, float x1, float y1)
 	{
 		return squareDistance(x0 - x1, y0 - y1);
+	}
+	
+	public static float distance(float... v)
+	{
+		if (v.length == 0) return 0;
+		if (v.length == 1) return v[0];
+		float z = v[0] * v[0];
+		for (int i = 1; i < v.length; i++) z += v[i] * v[i];
+		return sqrt(z);
+	}
+	
+	public static float distance(float[] v0, float[] v1)
+	{
+		if (v0.length != v1.length) throw new IllegalArgumentException("Cannot computed the distance of 2 vector with different coordinate number");
+		float[] v = Arrays.copyOf(v0, v0.length);
+		for (int i = 0; i < v.length; i++) v[i] -= v1[i];
+		return distance(v);
+	}
+	
+	public static float squareDistance(float... v)
+	{
+		if (v.length == 0) return 0;
+		float z = v[0] * v[0];
+		for (int i = 1; i < v.length; i++) z += v[i] * v[i];
+		return z;
+	}
+	
+	public static float squareDistance(float[] v0, float[] v1)
+	{
+		if (v0.length != v1.length) throw new IllegalArgumentException("Cannot computed the distance of 2 vector with different coordinate number");
+		float[] v = Arrays.copyOf(v0, v0.length);
+		for (int i = 0; i < v.length; i++) v[i] -= v1[i];
+		return squareDistance(v);
 	}
 }
