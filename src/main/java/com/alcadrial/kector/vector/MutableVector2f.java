@@ -144,11 +144,25 @@ public class MutableVector2f extends AbstractVector2f implements Vector2f, Vecto
 	{
 		return Vector3f.of(Y * vector.z(), -X * vector.z(), X * vector.y() - Y * vector.x());
 	}
-	
+
+	/**
+	 * @deprecated see {@link Angle}, use {@link #rotate(float)}
+	 */
+	@Deprecated
 	@Override
 	public Vector2f rotate(Angle angle)
 	{
 		double a = angle.asDouble(AngleUnit.RADIANS) + Math.atan2(Y, X);
+		double l = length();
+		X = (float) (Math.cos(a) * l);
+		Y = (float) (Math.sin(a) * l);
+		return this;
+	}
+	
+	@Override
+	public Vector2f rotate(@com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float angle)
+	{
+		double a = angle + Math.atan2(Y, X);
 		double l = length();
 		X = (float) (Math.cos(a) * l);
 		Y = (float) (Math.sin(a) * l);

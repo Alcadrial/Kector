@@ -1,16 +1,14 @@
 plugins {
-    id("java")
     id("java-library")
     id("maven-publish")
-    id("eclipse")
 }
 
 group = "com.alcadrial.kector"
-archivesBaseName = "Kector-${version}"
+base {
+	archivesName = "Kector-${version}"
+}
 
-eclipse.project.name = "Kector"
-
-println("Configuring Kector's project")
+ext.name = "Kector"
 
 java {
 	toolchain.languageVersion.set(JavaLanguageVersion.of(17))
@@ -23,6 +21,8 @@ javadoc {
         tags("apiNote:a:Api Note:", "implSpec:a:Impl Spec:", "implNote:a:Impl Note:")
         header = '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
     }
+	//failOnError = false
+	options.addStringOption('Xdoclint:none', '-quiet')
 }
 
 tasks.sourcesJar {
@@ -46,13 +46,12 @@ repositories {
 }
 
 jar.manifest.attributes([
-	"Specification-Title"     : "${eclipse.project.name}",
+	"Specification-Title"     : name,
 	"Specification-Version"   : version,
 	"Specification-Vendor"    : "Alcadrial",
-	"Implementation-Title"    : "${eclipse.project.name}",
+	"Implementation-Title"    : name,
 	"Implementation-Version"  : version,
-	"Implementation-Vendor"   : "Alcadrial",
-	"Implementation-Timestamp": new Date().format("dd/MM/yyyy HH:mm:ss")
+	"Implementation-Vendor"   : "Alcadrial"
 ])
 
 publishing {
@@ -65,7 +64,7 @@ publishing {
     }
     repositories {
         maven {
-            url("file://D:/maven")
+            url = "D:/maven"
         }
     }
 }

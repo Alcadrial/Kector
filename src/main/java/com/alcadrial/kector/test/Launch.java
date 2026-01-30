@@ -7,7 +7,6 @@ import com.alcadrial.kector.shape.CubedShape;
 import com.alcadrial.kector.vector.Vector2f;
 import com.alcadrial.kector.vector.Vector3f;
 import com.alcadrial.kector.vector.axis.Axis;
-import com.alcadrial.kector.vector.complex.Complex;
 import com.alcadrial.kector.vector.complex.Quaternion;
 
 public class Launch {
@@ -16,8 +15,8 @@ public class Launch {
 	
 	public static void main(String[] args)
 	{
-		Vector3f start = Vector3f.of(5, 10, 0);
-		Vector3f end = Vector3f.of(22, 15, 0);
+		Vector3f start = Vector3f.ofImmutable(5, 10, 0);
+		Vector3f end = Vector3f.ofImmutable(22, 15, 1);
 		
 		startBlock("Interpolation Test");
 		{
@@ -67,36 +66,18 @@ public class Launch {
 			endBlock();
 		}
 		endBlock();
-		startBlock("Shape Test");
-		{
-			Vector3f direction = Vector3f.of(65, 150, 0);
-			CubedShape cubedShape = new CubedShape(start, end, direction);
-			Vector3f ry = direction.crossProduct(Axis.X);
-			Vector3f rx = ry.crossProduct(Axis.Z);
-			
-			Vector3f dimension = end.xyz().subtract(start);
-			Vector3f rDimension = Complex.of(dimension.xy()).multiply(Complex.of(direction.xy())).multiply(Complex.of(Axis.X)).asVector();
-			
-			println("f°=" + toExternedRad(AngleUnit.RADIANS, angles(ry, null)).x() + "π");
-			println("d°=" + toExternedRad(AngleUnit.RADIANS, angles(dimension.xyz().unitary(), null)).x() + "π");
-			println("y'=" + ry);
-			println("y'°=" + toExternedRad(AngleUnit.RADIANS, angles(ry, null)).x() + "π");
-			println("x'=" + rx);
-			println("x'°=" + toExternedRad(AngleUnit.RADIANS, angles(rx, null)).x() + "π");
-			println("d'=" + rDimension);
-			println("d'°=" + toExternedRad(AngleUnit.RADIANS, angles(rDimension.xyz().unitary(), null)).x() + "π");
-			
-			println(cubedShape.getEnclosingCube());
-		}
-		endBlock();
 		startBlock("Quaternion Test");
 		{
-			Quaternion q = new Quaternion(0, 1, 0, 0);
-			Quaternion r = Quaternion.X_HALF;
+			Quaternion q = new Quaternion(Axis.Y, Math.HALF_PIF / 3);
+			Quaternion r = new Quaternion(Axis.X, Math.HALF_PIF / 3);
 			println(q);
 			println(r);
+			println(q.length());
+			println(r.length());
 			println(q.multiply(r));
 			println(r.multiply(q));
+			println(q.multiply(r).length());
+			println(r.multiply(q).length());
 			quaternionTest0(Vector3f.of(0, 0, 0), q, r);
 			quaternionTest0(Vector3f.of(2, 0, 0), q, r);
 			quaternionTest0(Vector3f.of(0, 2, 0), q, r);
@@ -105,6 +86,21 @@ public class Launch {
 			quaternionTest0(Vector3f.of(2, 0, 2), q, r);
 			quaternionTest0(Vector3f.of(0, 2, 2), q, r);
 			quaternionTest0(Vector3f.of(2, 2, 2), q, r);
+		}
+		endBlock();
+		startBlock("Shape Test");
+		{
+			Quaternion rotation = new Quaternion(Axis.Z, Math.HALF_PIF / 2);
+			CubedShape cubedShape = new CubedShape(start, end.subtract(start), rotation);
+
+			println("Start: " + start);
+			println("End: " + end);
+			println("Size: " + cubedShape.getSize());
+			startBlock("Vertices");
+			for (Vector3f vertex : cubedShape.getVertices()) println(vertex);
+			endBlock();
+			
+			println("Enclosing cube: " + cubedShape.getEnclosingCube());
 		}
 		endBlock();
 		startBlock("Functions Test");
@@ -167,7 +163,8 @@ public class Launch {
 			endBlock();
 			startBlock("1->3 Test");
 			{
-				
+				println(Function1f.ofFunction(Function1f.ofExponentialBase(11), Function1f.ofLn()));
+				println(Function1f.ofFunction(Function1f.ofExponentialBase(11), Function1f.ofLn()).derivate());
 			}
 			endBlock();
 			startBlock("3->3 Test");
@@ -196,8 +193,8 @@ public class Launch {
 	{
 		startBlock();
 		println(v);
-		println(q.rotate(v));
-		println(r.rotate(v));
+		println(q.rotate(v) + " " + q.rotate(v).length());
+		println(r.rotate(v) + " " + r.rotate(v).length());
 		endBlock();
 	}
 	

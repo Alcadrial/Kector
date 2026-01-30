@@ -1,8 +1,8 @@
 package com.alcadrial.kector.matrix;
 
 import com.alcadrial.kector.Math;
-import com.alcadrial.kector.angle.Angle;
 import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.shape.OrthoShape;
 import com.alcadrial.kector.vector.Vector2f;
 import com.alcadrial.kector.vector.Vector3f;
@@ -12,8 +12,6 @@ import com.alcadrial.kector.vector.axis.Axis;
 
 public class Matrix4f {
 	
-	private static final Matrix4f VIEW_REFINER_MATRIX_0 = new Matrix4f().translate(Vector3f.of(0, 0, -2));
-	private static final Matrix4f VIEW_REFINER_MATRIX_1 = new Matrix4f().rotate(Axis.Y, 180);
 	public static final Matrix4f IDENTITY = IdentityMatrix4f.IDENTITY;
 	protected float[][] values;
 	
@@ -210,31 +208,15 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f project(float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
+	public Matrix4f project(@Angle(AngleUnit.RADIANS) float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
 	{
 		identity();
-		return project0((float) AngleUnit.RADIANS.fromDegrees(fieldOfView), maxDistance, minDistance, aspectRatio);
+		return project0(fieldOfView, maxDistance, minDistance, aspectRatio);
 	}
 	
-	/**
-	 * Reset to a projection matrix of a box to a frustum
-	 * starting from (-1; -1; -1) to (1; 1; 1).
-	 * 
-	 * @param fieldOfView fov
-	 * @param maxDistance of view
-	 * @param aspectRatio width / height
-	 * 
-	 * @return itself
-	 */
-	public Matrix4f project(Angle fieldOfView, float maxDistance, float minDistance, float aspectRatio)
+	private Matrix4f project0(@Angle(AngleUnit.RADIANS) float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
 	{
-		identity();
-		return project0(fieldOfView.asFloat(AngleUnit.RADIANS), maxDistance, minDistance, aspectRatio);
-	}
-	
-	private Matrix4f project0(float fieldOfViewRads, float maxDistance, float minDistance, float aspectRatio)
-	{
-		float scale = 1 / Math.tan(fieldOfViewRads / 2);
+		float scale = 1 / Math.tan(fieldOfView / 2);
 		float frustum = maxDistance - minDistance;
 		values[0][0] = scale / aspectRatio;
 		values[1][1] = scale;
@@ -256,120 +238,22 @@ public class Matrix4f {
 	public Matrix4f view(Vector3f position, float rotationX, float rotationY)
 	{
 		identity();
-		rawView(rotationX, rotationY);
+		view(rotationX, rotationY);
 		return multiply(new Matrix4f().translate(Vector3f.copyOf(position).opposite()));
 	}
 	
 	/**
-	 * Reset to a view (first person) matrix centered in position.
-	 * 
-	 * @param position position
-	 * @param rotationX X axis rotation
-	 * @param rotationY Y axis rotation
-	 * 
-	 * @return itself
-	 */
-	public Matrix4f view(Vector3f position, Angle rotationX, Angle rotationY)
-	{
-		return view(position, rotationX.asFloat(AngleUnit.RADIANS), rotationY.asFloat(AngleUnit.RADIANS));
-	}
-	
-	/**
-	 * Reset to a view (third person) matrix centered in position.
-	 * 
-	 * @param position position
-	 * @param rotationX X axis rotation in degrees
-	 * @param rotationY Y axis rotation in degrees
-	 * 
-	 * @return itself
-	 */
-	public Matrix4f awayView(Vector3f position, float rotationX, float rotationY)
-	{
-		identity();
-		translate(Vector3f.copyOf(position).opposite());
-		rawView(rotationX, rotationY);
-		return multiply(VIEW_REFINER_MATRIX_0);
-	}
-	
-	/**
-	 * Reset to a view (third person) matrix centered in position.
-	 * 
-	 * @param position position
-	 * @param rotationX X axis rotation
-	 * @param rotationY Y axis rotation
-	 * 
-	 * @return itself
-	 */
-	public Matrix4f awayView(Vector3f position, Angle rotationX, Angle rotationY)
-	{
-		identity();
-		translate(Vector3f.copyOf(position).opposite());
-		rawView(rotationX, rotationY);
-		return multiply(VIEW_REFINER_MATRIX_0);
-	}
-	
-	/**
-	 * Reset to a view (third person) matrix centered in position with an inverted view.
-	 * 
-	 * @param position position
-	 * @param rotationX X axis rotation in degrees
-	 * @param rotationY Y axis rotation in degrees
-	 * 
-	 * @return itself
-	 */
-	public Matrix4f invertedAwayView(Vector3f position, float rotationX, float rotationY)
-	{
-		identity();
-		translate(Vector3f.copyOf(position).opposite());
-		rawView(rotationX, rotationY);
-		multiply(VIEW_REFINER_MATRIX_1);
-		return multiply(VIEW_REFINER_MATRIX_0);
-	}
-	
-	/**
-	 * Reset to a view (third person) matrix centered in position with an inverted view.
-	 * 
-	 * @param position position
-	 * @param rotationX X axis rotation
-	 * @param rotationY Y axis rotation
-	 * 
-	 * @return itself
-	 */
-	public Matrix4f invertedAwayView(Vector3f position, Angle rotationX, Angle rotationY)
-	{
-		identity();
-		translate(Vector3f.copyOf(position).opposite());
-		rawView(rotationX, rotationY);
-		multiply(VIEW_REFINER_MATRIX_1);
-		return multiply(VIEW_REFINER_MATRIX_0);
-	}
-	
-	/**
-	 * Reset to a view (first person) matrix.
-	 * 
-	 * @param rotationX X axis rotation in degrees
-	 * @param rotationY Y axis rotation in degrees
-	 * 
-	 * @return itself
-	 */
-	public Matrix4f rawView(float rotationX, float rotationY)
-	{
-		rotate(Axis.X, rotationX);
-		return multiply(new Matrix4f().rotate(Axis.Y, rotationY));
-	}
-	
-	/**
-	 * Reset to a view (first person) matrix.
+	 * Reset to a view matrix.
 	 * 
 	 * @param rotationX X axis rotation
 	 * @param rotationY Y axis rotation
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f rawView(Angle rotationX, Angle rotationY)
+	public Matrix4f view(@Angle(AngleUnit.RADIANS) float rotationX, @Angle(AngleUnit.RADIANS) float rotationY)
 	{
-		rotate(Axis.X, rotationX);
-		return multiply(new Matrix4f().rotate(Axis.Y, rotationY));
+		rotateX(rotationX);
+		return multiply(new Matrix4f().rotateY(rotationY));
 	}
 	
 	/**
@@ -542,72 +426,56 @@ public class Matrix4f {
 	}
 	
 	/**
-	 * Reset rotation
+	 * Reset rotation around {@link Axis#X}
 	 * 
-	 * @param axis rotation axis, must be orthogonal to X, Y or Z
-	 * @param angle rotation value degrees
+	 * @param angle rotation value
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f rotate(Axis axis, float angle)
+	public Matrix4f rotateX(@Angle(AngleUnit.RADIANS) float angle)
 	{
-		float r = (float) AngleUnit.RADIANS.fromDegrees(angle);
-		float cos = Math.cos(r);
-		float sin = Math.sin(r);
-		float coss = 1 - cos;
-		float x = axis.x();
-		float y = axis.y();
-		float z = axis.z();
-		float xCoss = x * coss;
-		float yCoss = y * coss;
-		float zCoss = z * coss;
-		float xSin = x * sin;
-		float ySin = y * sin;
-		float zSin = z * sin;
-		values[0][0] = x * xCoss + cos;
-		values[0][1] = x * yCoss - zSin;
-		values[0][2] = x * zCoss + ySin;
-		values[1][0] = y * xCoss + zSin;
-		values[1][1] = y * yCoss + cos;
-		values[1][2] = y * zCoss - xSin;
-		values[2][0] = z * xCoss - ySin;
-		values[2][1] = z * yCoss + xSin;
-		values[2][2] = z * zCoss + cos;
+		float cos = Math.cos(angle);
+		float sin = Math.sin(angle);
+		values[1][1] = cos;
+		values[1][2] = -sin;
+		values[2][1] = sin;
+		values[2][2] = cos;
 		return this;
 	}
 	
 	/**
-	 * Reset rotation
+	 * Reset rotation around {@link Axis#Y}
 	 * 
-	 * @param axis rotation axis, must be orthogonal to X, Y or Z
-	 * @param angle rotation value degrees
+	 * @param angle rotation value
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f rotate(Axis axis, Angle angle)
+	public Matrix4f rotateY(@Angle(AngleUnit.RADIANS) float angle)
 	{
-		float r = angle.asFloat(AngleUnit.RADIANS);
-		float cos = Math.cos(r);
-		float sin = Math.sin(r);
-		float coss = 1 - cos;
-		float x = axis.x();
-		float y = axis.y();
-		float z = axis.z();
-		float xCoss = x * coss;
-		float yCoss = y * coss;
-		float zCoss = z * coss;
-		float xSin = x * sin;
-		float ySin = y * sin;
-		float zSin = z * sin;
-		values[0][0] = x * xCoss + cos;
-		values[0][1] = x * yCoss - zSin;
-		values[0][2] = x * zCoss + ySin;
-		values[1][0] = y * xCoss + zSin;
-		values[1][1] = y * yCoss + cos;
-		values[1][2] = y * zCoss - xSin;
-		values[2][0] = z * xCoss - ySin;
-		values[2][1] = z * yCoss + xSin;
-		values[2][2] = z * zCoss + cos;
+		float cos = Math.cos(angle);
+		float sin = Math.sin(angle);
+		values[0][0] = cos;
+		values[0][2] = sin;
+		values[2][0] = -sin;
+		values[2][2] = cos;
+		return this;
+	}
+	
+	/**
+	 * Reset rotation around {@link Axis#Z}
+	 * 
+	 * @param angle rotation value
+	 * 
+	 * @return itself
+	 */
+	public Matrix4f rotateZ(@Angle(AngleUnit.RADIANS) float angle)
+	{
+		float cos = Math.cos(angle);
+		float sin = Math.sin(angle);
+		values[0][0] = cos;
+		values[0][1] = -sin;
+		values[1][0] = sin;
+		values[1][1] = cos;
 		return this;
 	}
 	
@@ -736,12 +604,9 @@ public class Matrix4f {
 							}
 						}
 						
-						for (int o = 0; o < 8; o++)
-						{
-							float c = matrixBlock[i][o];
-							matrixBlock[r][o] = matrixBlock[i][o];
-							matrixBlock[i][o] = c;
-						}
+						float[] c = matrixBlock[i];
+						matrixBlock[r] = matrixBlock[i];
+						matrixBlock[i] = c;
 					}
 				}
 			}
@@ -775,14 +640,18 @@ public class Matrix4f {
 	@Override
 	public String toString()
 	{
-		String s = "Matrix{";
+		StringBuilder ss = new StringBuilder(16 * 6 + 10);
+		ss.append("Matrix{");
 		for (int i = 0; i < 4; i++)
 		{
-			s += "[";
-			for (int j = 0; j < 4; j++) s += values[i][j] + ", ";
-			s = s.substring(0, s.length() - 2) + "], ";
+			ss.append("[");
+			for (int j = 0; j < 4; j++) ss.append(values[i][j]).append(", ");
+			ss.setCharAt(ss.length() - 2, ']');
+			ss.setCharAt(ss.length() - 1, ',');
+			ss.append(" ");
 		}
-		return s.substring(0, s.length() - 2) + "}";
+		ss.setCharAt(ss.length() - 2, '}');
+		return ss.substring(0, ss.length() - 1);
 	}
 	
 	/**

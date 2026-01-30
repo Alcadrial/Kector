@@ -1,45 +1,47 @@
 package com.alcadrial.kector.shape;
 
-import com.alcadrial.kector.angle.Angle;
+import java.util.List;
+
+import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.vector.Vector3f;
 import com.alcadrial.kector.vector.complex.Quaternion;
 
-public class SphereShape extends Shape {
+public class SphereShape implements Shape {
 	
 	private Vector3f origin;
-	private float size;
+	private float ray;
 	private OrthoShape enclosingCube;
 	
-	public SphereShape(Vector3f origin, float size)
+	public SphereShape(Vector3f origin, float ray)
 	{
-		this.origin = Vector3f.copyOf(origin);
-		this.size = size;
-		Vector3f halfDiagonal = Vector3f.of(size, size, size);
-		enclosingCube = new OrthoShape(Vector3f.copyOf(origin).subtract(halfDiagonal), halfDiagonal.add(origin));
+		this.origin = Vector3f.copyOfImmutable(origin);
+		this.ray = ray;
 	}
 	
 	@Override
 	public OrthoShape getEnclosingCube()
 	{
+		if (enclosingCube == null) enclosingCube = OrthoShape.byEnd(this.origin.subtract(ray, ray, ray), this.origin.add(ray, ray, ray));
 		return enclosingCube;
 	}
 	
 	@Override
-	public SphereShape rotate(Angle xRotation, Angle yRotation)
+	public Shape rotate(@Angle(AngleUnit.RADIANS) float xRotation, @Angle(AngleUnit.RADIANS) float yRotation)
 	{
-		return new SphereShape(origin, size);
+		return new SphereShape(origin, ray);
 	}
 	
 	@Override
 	public SphereShape rotate(Quaternion quaternion)
 	{
-		return new SphereShape(origin, size);
+		return new SphereShape(origin, ray);
 	}
 	
 	@Override
 	public SphereShape translate(float x, float y, float z)
 	{
-		return new SphereShape(Vector3f.copyOf(origin).add(x, y, z), size);
+		return new SphereShape(origin.add(x, y, z), ray);
 	}
 	
 	@Override
@@ -48,13 +50,13 @@ public class SphereShape extends Shape {
 		float x = pos.x() - origin.x();
 		float y = pos.y() - origin.y();
 		float z = pos.z() - origin.z();
-		return x * x + y * y + z * z <= size * size;
+		return x * x + y * y + z * z <= ray * ray;
 	}
 	
 	@Override
-	public Vector3f[] getVertices()
+	public Iterable<Vector3f> getVertices()
 	{
-		return new Vector3f[] {Vector3f.copyOf(origin), Vector3f.copyOf(origin).add(Vector3f.of(0, size, 0))};
+		return List.of(origin);
 	}
 	
 	public Vector3f getOrigin()
@@ -62,8 +64,8 @@ public class SphereShape extends Shape {
 		return origin;
 	}
 	
-	public float getSize()
+	public float getRay()
 	{
-		return size;
+		return ray;
 	}
 }

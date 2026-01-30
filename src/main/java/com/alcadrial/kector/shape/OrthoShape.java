@@ -1,21 +1,25 @@
 package com.alcadrial.kector.shape;
 
+import com.alcadrial.kector.shape.utils.FixedSizeIterator;
 import com.alcadrial.kector.vector.Vector3f;
-import com.alcadrial.kector.vector.axis.Axis;
 import com.alcadrial.kector.vector.complex.Quaternion;
 
-public class OrthoShape extends Shape {
+public class OrthoShape implements Shape {
 	
 	private Vector3f start;
 	private Vector3f end;
 	
-	public OrthoShape(Vector3f start, Vector3f end)
+	public static OrthoShape bySize(Vector3f start, Vector3f size)
 	{
-		this.start = Vector3f.of(Math.min(start.x(), end.x()), Math.min(start.y(), end.y()), Math.min(start.z(), end.z()));
-		this.end = Vector3f.of(Math.max(start.x(), end.x()), Math.max(start.y(), end.y()), Math.max(start.z(), end.z()));
+		return new OrthoShape(Vector3f.copyOfImmutable(start), Vector3f.copyOfImmutable(start).add(size));
 	}
 	
-	private OrthoShape(Vector3f start, Vector3f end, int i)
+	public static OrthoShape byEnd(Vector3f start, Vector3f end)
+	{
+		return new OrthoShape(Vector3f.copyOfImmutable(start), Vector3f.copyOfImmutable(end));
+	}
+	
+	private OrthoShape(Vector3f start, Vector3f end)
 	{
 		this.start = start;
 		this.end = end;
@@ -24,13 +28,13 @@ public class OrthoShape extends Shape {
 	@Override
 	public CubedShape rotate(Quaternion q)
 	{
-		return new CubedShape(q.rotate(start).xyz(), q.rotate(Vector3f.copyOf(end).add(start)).subtract(start), Axis.Z);
+		return new CubedShape(start, end.subtract(start), q);
 	}
 	
 	@Override
 	public OrthoShape translate(float x, float y, float z)
 	{
-		return new OrthoShape(Vector3f.copyOf(start).add(x, y, z), Vector3f.copyOf(end).add(x, y, z), 0);
+		return new OrthoShape(start.add(x, y, z), end.add(x, y, z));
 	}
 	
 	@Override
@@ -58,20 +62,40 @@ public class OrthoShape extends Shape {
 		for (Vector3f vertex : shape.getVertices()) if (isInside(vertex)) return new IntersectionResult(true, Vector3f.copyOf(shape.start), Vector3f.copyOf(vertex));
 		return new IntersectionResult(false, null, null);
 	}
-	
+
+	/**
+	 * Iteration order:
+	 * <p>
+	 * <code>s = {@link #start}</code><br>
+	 * <code>e = {@link #end}</code><br>
+	 * <ol start="0">
+	 *   <li><code>s.x + e.y + s.z</code></li>
+	 *   <li><code>e.x + e.y + s.z</code></li>
+	 *   <li><code>e.x + s.y + s.z</code></li>
+	 *   <li><code>s.x + s.y + s.z</code></li>
+	 *   <li><code>s.x + e.y + e.z</code></li>
+	 *   <li><code>e.x + e.y + e.z</code></li>
+	 *   <li><code>e.x + s.y + e.z</code></li>
+	 *   <li><code>s.x + s.y + e.z</code></li>
+	 * </ol>
+	 */
 	@Override
-	public Vector3f[] getVertices()
+	public Iterable<Vector3f> getVertices()
 	{
-		Vector3f[] vertices = new Vector3f[8];
-		vertices[0] = Vector3f.of(start.x(), end.y(), start.z());
-		vertices[1] = Vector3f.of(end.x(), end.y(), start.z());
-		vertices[2] = Vector3f.of(end.x(), start.y(), start.z());
-		vertices[3] = Vector3f.of(start.x(), start.y(), start.z());
-		vertices[4] = Vector3f.of(start.x(), end.y(), end.z());
-		vertices[5] = Vector3f.of(end.x(), end.y(), end.z());
-		vertices[6] = Vector3f.of(end.x(), start.y(), end.z());
-		vertices[7] = Vector3f.of(start.x(), start.y(), end.z());
-		return vertices;
+		return () -> {
+			Vector3f v = Vector3f.of(start.x(), end.y(), start.z());
+			return FixedSizeIterator.of(8, i -> {
+				switch (i % 4)
+				{
+					case 0 -> v.setY(end.y());
+					case 1 -> v.setX(end.x());
+					case 2 -> v.setY(start.y());
+					case 3 -> v.setX(start.x());
+				}
+				if (i == 4) v.setZ(end.z());
+				return v;
+			});
+		};
 	}
 	
 	@Override

@@ -3,6 +3,10 @@ package com.alcadrial.kector.vector.complex;
 import com.alcadrial.kector.Math;
 import com.alcadrial.kector.angle.Angle;
 import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.annotation.Direction;
+import com.alcadrial.kector.annotation.NoZeroComponents;
+import com.alcadrial.kector.annotation.Preserve;
+import com.alcadrial.kector.annotation.Unitary;
 import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.vector.MutableVector3f;
 import com.alcadrial.kector.vector.MutableVector4f;
@@ -28,59 +32,49 @@ import com.alcadrial.kector.vector.axis.Axis;
 public class Quaternion extends MutableVector4f implements IQuaternion {
 	
 	public static final Quaternion IDENTITY = new Quaternion(1, 0, 0, 0);
-	public static final Quaternion X_HALF = new Quaternion(Axis.X, Angle.V90_DEG);
-	public static final Quaternion X_OPPOSITE = new Quaternion(Axis.X, Angle.V180_DEG);
-	public static final Quaternion X_NEGATIVE_HALF = new Quaternion(Axis.X, Angle.V270_DEG);
-	public static final Quaternion Y_HALF = new Quaternion(Axis.Y, Angle.V90_DEG);
-	public static final Quaternion Y_OPPOSITE = new Quaternion(Axis.Y, Angle.V180_DEG);
-	public static final Quaternion Y_NEGATIVE_HALF = new Quaternion(Axis.Y, Angle.V270_DEG);
-	public static final Quaternion Z_HALF = new Quaternion(Axis.Z, Angle.V90_DEG);
-	public static final Quaternion Z_OPPOSITE = new Quaternion(Axis.Z, Angle.V180_DEG);
-	public static final Quaternion Z_NEGATIVE_HALF = new Quaternion(Axis.Z, Angle.V270_DEG);
+	public static final Quaternion X_HALF = new Quaternion(Axis.X, Math.HALF_PIF);
+	public static final Quaternion X_OPPOSITE = new Quaternion(Axis.X, Math.PIF);
+	public static final Quaternion X_NEGATIVE_HALF = new Quaternion(Axis.X, -Math.HALF_PIF);
+	public static final Quaternion Y_HALF = new Quaternion(Axis.Y, Math.HALF_PIF);
+	public static final Quaternion Y_OPPOSITE = new Quaternion(Axis.Y, Math.PIF);
+	public static final Quaternion Y_NEGATIVE_HALF = new Quaternion(Axis.Y, -Math.HALF_PIF);
+	public static final Quaternion Z_HALF = new Quaternion(Axis.Z, Math.HALF_PIF);
+	public static final Quaternion Z_OPPOSITE = new Quaternion(Axis.Z, Math.PIF);
+	public static final Quaternion Z_NEGATIVE_HALF = new Quaternion(Axis.Z, -Math.HALF_PIF);
 	
-	private static Vector4f factory(Vector3f axis, Angle angle)
+	@Deprecated
+	private static Vector4f factory(@Direction Vector3f axis, Angle angle)
 	{
-		float angleValue = angle.asFloat(AngleUnit.RADIANS) / 2;
-		float s = Math.sin(angleValue);
-		return new MutableVector4f(axis.x() * s, axis.y() * s, axis.z() * s, Math.cos(angleValue));
+		return factory(axis, angle.asFloat(AngleUnit.RADIANS));
 	}
 	
-	private static Vector4f factory(Vector3i axis, Angle angle)
+	@Deprecated
+	private static Vector4f factory(@Direction Vector3i axis, Angle angle)
 	{
-		float angleValue = angle.asFloat(AngleUnit.RADIANS) / 2;
-		float s = Math.sin(angleValue);
-		return new MutableVector4f(axis.x() * s, axis.y() * s, axis.z() * s, Math.cos(angleValue));
+		return factory(axis, angle.asFloat(AngleUnit.RADIANS));
 	}
 	
-	private static Vector4f factory(Vector3f axis, float angle)
+	private static Vector4f factory(@Direction Vector3f axis, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float angle)
 	{
 		float angleValue = angle / 2;
 		float s = Math.sin(angleValue);
 		return new MutableVector4f(axis.x() * s, axis.y() * s, axis.z() * s, Math.cos(angleValue));
 	}
 	
-	private static Vector4f factory(Vector3i axis, float angle)
+	private static Vector4f factory(@Direction Vector3i axis, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float angle)
 	{
 		float angleValue = angle / 2;
 		float s = Math.sin(angleValue);
 		return new MutableVector4f(axis.x() * s, axis.y() * s, axis.z() * s, Math.cos(angleValue));
 	}
 	
+	@Deprecated
 	private static Vector4f factory(Angle xRotation, Angle yRotation, Angle zRotation)
 	{
-		float xRotationValue = xRotation.asFloat(AngleUnit.RADIANS);
-		float yRotationValue = yRotation.asFloat(AngleUnit.RADIANS);
-		float zRotationValue = zRotation.asFloat(AngleUnit.RADIANS);
-		float xCos = Math.cos(xRotationValue);
-		float xSin = Math.sin(xRotationValue);
-		float yCos = Math.cos(yRotationValue);
-		float ySin = Math.sin(yRotationValue);
-		float zCos = Math.cos(zRotationValue);
-		float zSin = Math.sin(zRotationValue);
-		return new MutableVector4f(xSin * yCos * zCos - xCos * ySin * zSin, xCos * ySin * zCos + xSin * yCos * zSin, xCos * yCos * zSin - xSin * ySin * zCos, xCos * yCos * zCos + xSin * ySin * zSin);
+		return factory(xRotation.asFloat(AngleUnit.RADIANS), yRotation.asFloat(AngleUnit.RADIANS), zRotation.asFloat(AngleUnit.RADIANS));
 	}
 	
-	private static Vector4f factory(float xRotation, float yRotation, float zRotation)
+	private static Vector4f factory(@com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float xRotation, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float yRotation, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float zRotation)
 	{
 		float xCos = Math.cos(xRotation);
 		float xSin = Math.sin(xRotation);
@@ -91,39 +85,42 @@ public class Quaternion extends MutableVector4f implements IQuaternion {
 		return new MutableVector4f(xSin * yCos * zCos - xCos * ySin * zSin, xCos * ySin * zCos + xSin * yCos * zSin, xCos * yCos * zSin - xSin * ySin * zCos, xCos * yCos * zCos + xSin * ySin * zSin);
 	}
 	
-	public Quaternion(Vector3i axis, Angle angle)
+	@Deprecated
+	public Quaternion(@Direction Vector3i axis, Angle angle)
 	{
 		super(factory(axis, angle));
 	}
 	
-	public Quaternion(Vector3f axis, Angle angle)
+	@Deprecated
+	public Quaternion(@Direction Vector3f axis, Angle angle)
 	{
 		super(factory(axis, angle));
 	}
 	
-	public Quaternion(Vector3i axis, float angle)
+	public Quaternion(@Direction Vector3i axis, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float angle)
 	{
 		super(factory(axis, angle));
 	}
 	
-	public Quaternion(Vector3f axis, float angle)
+	public Quaternion(@Direction Vector3f axis, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float angle)
 	{
 		super(factory(axis, angle));
 	}
 	
-	public Quaternion(float xRotation, float yRotation, float zRotation)
+	public Quaternion(@com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float xRotation, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float yRotation, @com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float zRotation)
 	{
 		super(factory(xRotation, yRotation, zRotation));
 	}
 	
+	@Deprecated
 	public Quaternion(Angle xRotation, Angle yRotation, Angle zRotation)
 	{
 		super(factory(xRotation, yRotation, zRotation));
 	}
 	
-	public Quaternion(Vector4f quaternion)
+	public Quaternion(@Unitary Vector4f quaternion)
 	{
-		super(new MutableVector4f(quaternion).unitary());
+		super(quaternion);
 	}
 	
 	public Quaternion(float r, float i, float j, float k)
@@ -154,16 +151,18 @@ public class Quaternion extends MutableVector4f implements IQuaternion {
 	}
 	
 	@Override
+	@Preserve({NoZeroComponents.class, Unitary.class})
 	public Vector3f rotate(Vector2f v)
 	{
 		float r2 = r() * r();
 		float i2 = i() * i();
 		float j2 = j() * j();
 		float k2 = k() * k();
-		return new MutableVector3f(v.x() * (r2 + i2 - j2 - k2) + 2 * v.y() * (i() * j() - r() * k()), v.y() * (i2 - j2 + k2 - r2) + 2 * v.x() * (x() * w() + y() * z()), 2 * (v.x() * (-x() * z() + y() * w()) + v.y() * (x() * y() + z() * w())));
+		return new MutableVector3f(v.x() * (r2 + i2 - j2 - k2) + 2 * v.y() * (i() * j() - r() * k()), v.y() * (r2 - i2 + j2 - k2) + 2 * v.x() * (r() * k() + i() * j()), 2 * (v.x() * (-r() * j() + i() * k()) + v.y() * (r() * i() + j() * k())));
 	}
 	
 	@Override
+	@Preserve({NoZeroComponents.class, Unitary.class})
 	public Vector3f rotate(Vector3f v)
 	{
 		float r2 = r() * r();

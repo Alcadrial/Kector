@@ -4,6 +4,7 @@ import java.math.RoundingMode;
 import java.util.function.Function;
 
 import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.vector.Vector2f;
 import com.alcadrial.kector.vector.Vector3f;
 
@@ -188,7 +189,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#sin(double)
 	 */
-	public static double sin(double a)
+	public static double sin(@Angle(AngleUnit.RADIANS) double a)
 	{
 		return java.lang.Math.sin(a);
 	}
@@ -196,7 +197,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#sin(double)
 	 */
-	public static float sin(float a)
+	public static float sin(@Angle(AngleUnit.RADIANS) float a)
 	{
 		return (float) java.lang.Math.sin(a);
 	}
@@ -204,7 +205,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#cos(double)
 	 */
-	public static double cos(double a)
+	public static double cos(@Angle(AngleUnit.RADIANS) double a)
 	{
 		return java.lang.Math.cos(a);
 	}
@@ -212,7 +213,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#cos(double)
 	 */
-	public static float cos(float a)
+	public static float cos(@Angle(AngleUnit.RADIANS) float a)
 	{
 		return (float) java.lang.Math.cos(a);
 	}
@@ -220,7 +221,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#tan(double)
 	 */
-	public static double tan(double a)
+	public static double tan(@Angle(AngleUnit.RADIANS) double a)
 	{
 		return java.lang.Math.tan(a);
 	}
@@ -228,7 +229,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#tan(double)
 	 */
-	public static float tan(float a)
+	public static float tan(@Angle(AngleUnit.RADIANS) float a)
 	{
 		return (float) java.lang.Math.tan(a);
 	}
@@ -236,7 +237,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#asin(double)
 	 */
-	public static double asin(double a)
+	public static @Angle(AngleUnit.RADIANS) double asin(double a)
 	{
 		return java.lang.Math.asin(a);
 	}
@@ -244,7 +245,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#asin(double)
 	 */
-	public static float asin(float a)
+	public static @Angle(AngleUnit.RADIANS) float asin(float a)
 	{
 		return (float) java.lang.Math.asin(a);
 	}
@@ -252,7 +253,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#acos(double)
 	 */
-	public static double acos(double a)
+	public static @Angle(AngleUnit.RADIANS) double acos(double a)
 	{
 		return java.lang.Math.acos(a);
 	}
@@ -260,7 +261,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#acos(double)
 	 */
-	public static float acos(float a)
+	public static @Angle(AngleUnit.RADIANS) float acos(float a)
 	{
 		return (float) java.lang.Math.acos(a);
 	}
@@ -268,7 +269,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#atan(double)
 	 */
-	public static double atan(double a)
+	public static @Angle(AngleUnit.RADIANS) double atan(double a)
 	{
 		return java.lang.Math.atan(a);
 	}
@@ -276,7 +277,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#atan(double)
 	 */
-	public static float atan(float a)
+	public static @Angle(AngleUnit.RADIANS) float atan(float a)
 	{
 		return (float) java.lang.Math.atan(a);
 	}
@@ -286,7 +287,7 @@ public class Math {
 	 * 
 	 * @see java.lang.Math#tan(double)
 	 */
-	public static double cotan(double a)
+	public static double cotan(@Angle(AngleUnit.RADIANS) double a)
 	{
 		return 1 / tan(a);
 	}
@@ -296,7 +297,7 @@ public class Math {
 	 * 
 	 * @see java.lang.Math#tan(double)
 	 */
-	public static float cotan(float a)
+	public static float cotan(@Angle(AngleUnit.RADIANS) float a)
 	{
 		return 1 / tan(a);
 	}
@@ -304,7 +305,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#toRadians(double)
 	 */
-	public static double toRadians(double angdeg)
+	public static @Angle(AngleUnit.RADIANS) double toRadians(@Angle(AngleUnit.DEGREES) double angdeg)
 	{
 		return java.lang.Math.toRadians(angdeg);
 	}
@@ -312,7 +313,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#toDegrees(double)
 	 */
-	public static double toDegrees(double angrad)
+	public static @Angle(AngleUnit.DEGREES) double toDegrees(@Angle(AngleUnit.RADIANS) double angrad)
 	{
 		return java.lang.Math.toDegrees(angrad);
 	}
@@ -440,7 +441,7 @@ public class Math {
 	/**
 	 * @see java.lang.Math#atan2(double, double)
 	 */
-	public static double atan2(double y, double x)
+	public static @Angle(AngleUnit.RADIANS) double atan2(double y, double x)
 	{
 		return java.lang.Math.atan2(y, x);
 	}

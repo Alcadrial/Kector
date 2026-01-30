@@ -1,6 +1,7 @@
 package com.alcadrial.kector.vector;
 
 import com.alcadrial.kector.angle.Angle;
+import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.matrix.Matrix3f;
 import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.point.Point1f;
@@ -114,9 +115,19 @@ public class Vector0f extends AbstractVector2f {
 	{
 		throw new ArithmeticException("0-dimensional vectors have no perpendicular");
 	}
-	
+
+	/**
+	 * @deprecated see {@link Angle}, use {@link #rotate(float)}
+	 */
+	@Deprecated
 	@Override
 	public Vector2f rotate(Angle angle)
+	{
+		return this;
+	}
+	
+	@Override
+	public Vector2f rotate(@com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float angle)
 	{
 		return this;
 	}
@@ -135,6 +146,12 @@ public class Vector0f extends AbstractVector2f {
 	
 	@Override
 	public Vector2f conjugate()
+	{
+		return this;
+	}
+	
+	@Override
+	public Vector2f unitary()
 	{
 		return this;
 	}

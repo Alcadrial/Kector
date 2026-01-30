@@ -16,7 +16,10 @@ import com.alcadrial.kector.Math;
  * for an angle of π rads or {@link #V180_DEG} for an angle of 180°.
  * 
  * @author alcadrial
+ * 
+ * @deprecated in favor of {@link com.alcadrial.kector.annotation.Angle @Angle} annotation
  */
+@Deprecated
 public interface Angle {
 	
 	/**
@@ -27,6 +30,7 @@ public interface Angle {
 	 * 
 	 * @return a new angle with float precision
 	 */
+	@Deprecated
 	static Angle of(float angle, AngleUnit unit)
 	{
 		return new AngleFloat(unit, angle);
@@ -40,6 +44,7 @@ public interface Angle {
 	 * 
 	 * @return a new angle with double precision
 	 */
+	@Deprecated
 	static Angle of(double angle, AngleUnit unit)
 	{
 		return new AngleDouble(unit, angle);
@@ -53,6 +58,7 @@ public interface Angle {
 	 * 
 	 * @return a new angle with {@link BigDecimal}'s arbitrary precision
 	 */
+	@Deprecated
 	static Angle of(BigDecimal angle, AngleUnit unit)
 	{
 		return new AngleBigDecimal(unit, angle);
@@ -65,6 +71,7 @@ public interface Angle {
 	 * 
 	 * @return a copy of the given angle
 	 */
+	@Deprecated
 	static Angle copyOf(Angle angle)
 	{
 		if (angle instanceof AngleFloat) return new AngleFloat(angle.getUnit(), angle.asFloat());
@@ -79,6 +86,7 @@ public interface Angle {
 	 * 
 	 * @return a copy of the given angle
 	 */
+	@Deprecated
 	static Angle copyOf(Angle angle, AngleUnit unit)
 	{
 		if (angle instanceof AngleFloat) return new AngleFloat(unit, angle.asFloat(unit));
@@ -86,28 +94,48 @@ public interface Angle {
 		return new AngleBigDecimal(unit, angle.asBigDecimal(unit));
 	}
 	
+	@Deprecated
 	Angle NEGATIVE_HALF_PI_RAD = of(-Math.HALF_PI, AngleUnit.RADIANS);
+	@Deprecated
 	Angle V0_RAD = of(0, AngleUnit.RADIANS);
+	@Deprecated
 	Angle HALF_PI_RAD = of(Math.HALF_PI, AngleUnit.RADIANS);
+	@Deprecated
 	Angle PI_RAD = of(Math.PI, AngleUnit.RADIANS);
+	@Deprecated
 	Angle DOUBLE_PI_RAD = of(2 * Math.PI, AngleUnit.RADIANS);
 	
+	@Deprecated
 	Angle V0_GRAD = of(0D, AngleUnit.GRADIANS);
+	@Deprecated
 	Angle V100_GRAD = of(100D, AngleUnit.GRADIANS);
+	@Deprecated
 	Angle V200_GRAD = of(200D, AngleUnit.GRADIANS);
+	@Deprecated
 	Angle V300_GRAD = of(300D, AngleUnit.GRADIANS);
+	@Deprecated
 	Angle V400_GRAD = of(400D, AngleUnit.GRADIANS);
 	
+	@Deprecated
 	Angle V0_TURN = of(0D, AngleUnit.TURNS);
+	@Deprecated
 	Angle V0_5_TURN = of(0.5, AngleUnit.TURNS);
+	@Deprecated
 	Angle V1_TURN = of(1D, AngleUnit.TURNS);
+	@Deprecated
 	Angle V1_5_TURN = of(1.5, AngleUnit.TURNS);
+	@Deprecated
 	Angle V2_TURN = of(2D, AngleUnit.TURNS);
 	
+	@Deprecated
 	Angle V0_DEG = of(0D, AngleUnit.DEGREES);
+	@Deprecated
 	Angle V90_DEG = of(90D, AngleUnit.DEGREES);
+	@Deprecated
 	Angle V180_DEG = of(180D, AngleUnit.DEGREES);
+	@Deprecated
 	Angle V270_DEG = of(270D, AngleUnit.DEGREES);
+	@Deprecated
 	Angle V360_DEG = of(360D, AngleUnit.DEGREES);
 	
 	/**
@@ -116,6 +144,7 @@ public interface Angle {
 	 * @param a the angle to add
 	 * @return the sum of this and the given one
 	 */
+	@Deprecated
 	Angle add(Angle a);
 	
 	/**
@@ -123,6 +152,7 @@ public interface Angle {
 	 * 
 	 * @return the opposite angle
 	 */
+	@Deprecated
 	Angle opposite();
 	
 	/**
@@ -130,6 +160,7 @@ public interface Angle {
 	 * 
 	 * @return this angle negated
 	 */
+	@Deprecated
 	Angle negative();
 	
 	/**
@@ -137,18 +168,21 @@ public interface Angle {
 	 * 
 	 * @return the value of this angle
 	 */
+	@Deprecated
 	float asFloat();
 	/**
 	 * Returns the value of this angle.
 	 * 
 	 * @return the value of this angle
 	 */
+	@Deprecated
 	double asDouble();
 	/**
 	 * Returns the value of this angle.
 	 * 
 	 * @return the value of this angle
 	 */
+	@Deprecated
 	BigDecimal asBigDecimal();
 	
 	/**
@@ -157,6 +191,7 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} requested
 	 * @return the value in the requested unit
 	 */
+	@Deprecated
 	float asFloat(AngleUnit unit);
 	/**
 	 * Convert the value of this angle to the given unit.
@@ -164,6 +199,7 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} requested
 	 * @return the value in the requested unit
 	 */
+	@Deprecated
 	double asDouble(AngleUnit unit);
 	/**
 	 * Convert the value of this angle to the given unit.
@@ -171,6 +207,7 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} requested
 	 * @return the value in the requested unit
 	 */
+	@Deprecated
 	BigDecimal asBigDecimal(AngleUnit unit);
 	
 	/**
@@ -178,18 +215,21 @@ public interface Angle {
 	 * 
 	 * @return the value of this angle inside the unit's bounds
 	 */
+	@Deprecated
 	float asFloatBounded();
 	/**
 	 * Returns the value of this angle mapped to the unit's bounds, for example [0;2π] for RADIANS.
 	 * 
 	 * @return the value of this angle inside the unit's bounds
 	 */
+	@Deprecated
 	double asDoubleBounded();
 	/**
 	 * Returns the value of this angle mapped to the unit's bounds, for example [0;2π] for RADIANS.
 	 * 
 	 * @return the value of this angle inside the unit's bounds
 	 */
+	@Deprecated
 	BigDecimal asBigDecimalBounded();
 	/**
 	 * Convert the value of this angle to the given unit and maps the value to the unit's bounds, for example [0;2π] for RADIANS.
@@ -197,6 +237,7 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} requested
 	 * @return the value in the requested unit inside the unit's bounds
 	 */
+	@Deprecated
 	float asFloatBounded(AngleUnit unit);
 	/**
 	 * Convert the value of this angle to the given unit and maps the value to the unit's bounds, for example [0;2π] for RADIANS.
@@ -204,6 +245,7 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} requested
 	 * @return the value in the requested unit inside the unit's bounds
 	 */
+	@Deprecated
 	double asDoubleBounded(AngleUnit unit);
 	/**
 	 * Convert the value of this angle to the given unit and maps the value to the unit's bounds, for example [0;2π] for RADIANS.
@@ -211,6 +253,7 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} requested
 	 * @return the value in the requested unit inside the unit's bounds
 	 */
+	@Deprecated
 	BigDecimal asBigDecimalBounded(AngleUnit unit);
 	
 	/**
@@ -218,6 +261,7 @@ public interface Angle {
 	 * 
 	 * @return the current unit
 	 */
+	@Deprecated
 	AngleUnit getUnit();
 	
 	/**
@@ -225,6 +269,7 @@ public interface Angle {
 	 * 
 	 * @param value the value to set
 	 */
+	@Deprecated
 	void setValue(float value);
 	/**
 	 * Set the value of this angle using the given {@link AngleUnit unit}.
@@ -232,12 +277,14 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} of the value
 	 * @param value the value to set
 	 */
+	@Deprecated
 	void setValue(AngleUnit unit, float value);
 	/**
 	 * Set the value of this angle using the current {@link AngleUnit unit}.
 	 * 
 	 * @param value the value to set
 	 */
+	@Deprecated
 	void setValue(double value);
 	/**
 	 * Set the value of this angle using the given {@link AngleUnit unit}.
@@ -245,12 +292,14 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} of the value
 	 * @param value the value to set
 	 */
+	@Deprecated
 	void setValue(AngleUnit unit, double value);
 	/**
 	 * Set the value of this angle using the current {@link AngleUnit unit}.
 	 * 
 	 * @param value the value to set
 	 */
+	@Deprecated
 	void setValue(BigDecimal value);
 	/**
 	 * Set the value of this angle using the given {@link AngleUnit unit}.
@@ -258,6 +307,7 @@ public interface Angle {
 	 * @param unit the {@link AngleUnit} of the value
 	 * @param value the value to set
 	 */
+	@Deprecated
 	void setValue(AngleUnit unit, BigDecimal value);
 	
 	/**
@@ -267,6 +317,7 @@ public interface Angle {
 	 * @param a the angle to test
 	 * @return -1, 0 or 1 if less than, equal to, or greater than in a common {@link AngleUnit unit}
 	 */
+	@Deprecated
 	int compareTo(Angle a);
 	
 	/**
@@ -275,6 +326,7 @@ public interface Angle {
 	 * @param a the angle to test
 	 * @return True if this angle is equal to the given one in a common {@link AngleUnit unit}
 	 */
+	@Deprecated
 	boolean equals(Angle a);
 	
 	/**
@@ -284,5 +336,6 @@ public interface Angle {
 	 * @param b the second angle value to test
 	 * @return True if this angle value is between the first angle and the second angle in a common {@link AngleUnit unit}.
 	 */
+	@Deprecated
 	boolean between(Angle a, Angle b);
 }

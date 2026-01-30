@@ -1,73 +1,106 @@
 package com.alcadrial.kector.shape;
 
+import com.alcadrial.kector.annotation.NoZeroComponents;
+import com.alcadrial.kector.annotation.SharedInstance;
+import com.alcadrial.kector.shape.utils.FixedSizeIterator;
 import com.alcadrial.kector.vector.Vector3f;
+import com.alcadrial.kector.vector.axis.Axis;
 import com.alcadrial.kector.vector.complex.Quaternion;
 
-public class CubedShape extends Shape {
+public class CubedShape implements Shape {
 	
-	protected final Vector3f position, size, direction;
+	protected final Vector3f position;
+	protected final @NoZeroComponents Vector3f size;
+	protected final Quaternion rotation;
 	
-	public CubedShape(Vector3f position, Vector3f size, Vector3f direction)
+	public CubedShape(Vector3f position, @NoZeroComponents Vector3f size, Quaternion rotation)
 	{
-		this.position = Vector3f.copyOf(position);
-		this.size = Vector3f.copyOf(size);
-		this.direction = Vector3f.copyOf(direction);
+		this.position = Vector3f.copyOfImmutable(position);
+		this.size = Vector3f.copyOfImmutable(size);
+		this.rotation = new Quaternion(rotation);
 	}
 	
 	@Override
 	public OrthoShape getEnclosingCube()
 	{
-		Vector3f[] points = getVertices();
-		Vector3f min = points[0], max = points[0];
-		for (int i = 1; i < points.length; i++)
+		Vector3f min = Vector3f.copyOf(position);
+		Vector3f max = Vector3f.copyOf(position);
+		Vector3f x = rotation.rotate(Axis.X).multiplyAll(size.x());
+		Vector3f y = rotation.rotate(Axis.Y).multiplyAll(size.y());
+		Vector3f z = rotation.rotate(Axis.Z).multiplyAll(size.z());
+		
+		for (Vector3f v : new Vector3f[] {x, y, z})
 		{
-			min = Vector3f.of(Math.min(points[i].x(), min.x()), Math.min(points[i].y(), min.y()), Math.min(points[i].z(), min.z()));
-			max = Vector3f.of(Math.max(points[i].x(), max.x()), Math.max(points[i].y(), max.y()), Math.max(points[i].z(), max.z()));
+			if (v.x() < 0) min.setX(min.x() + v.x());
+			else if (v.x() > 0) max.setX(max.x() + v.x());
+			if (v.y() < 0) min.setY(min.y() + v.y());
+			else if (v.y() > 0) max.setY(max.y() + v.y());
+			if (v.z() < 0) min.setZ(min.z() + v.z());
+			else if (v.z() > 0) max.setZ(max.z() + v.z());
 		}
-		return new OrthoShape(min, max);
+		
+		return OrthoShape.byEnd(min, max);
 	}
 	
 	@Override
 	public CubedShape rotate(Quaternion q)
 	{
-		return new CubedShape(q.rotate(position), q.rotate(size), q.rotate(direction));
+		return new CubedShape(q.rotate(position), q.rotate(size), q.multiply(rotation));
 	}
 	
 	@Override
 	public CubedShape translate(float x, float y, float z)
 	{
-		return new CubedShape(Vector3f.copyOf(position).add(x, y, z), size, direction);
+		return new CubedShape(position.add(x, y, z), size, rotation);
 	}
 	
+	/**
+	 * Iteration order:
+	 * <p>
+	 * <code>v = {@link #position}</code><br>
+	 * <code>x = {@link #size}.x()</code><br>
+	 * <code>y = size.y()</code><br>
+	 * <code>z = size.z()</code><br>
+	 * <ol start="0">
+	 *   <li><code>v + y</code></li>
+	 *   <li><code>v + x + y</code></li>
+	 *   <li><code>v + x</code></li>
+	 *   <li><code>v</code></li>
+	 *   <li><code>v + z + y</code></li>
+	 *   <li><code>v + z + x + y</code></li>
+	 *   <li><code>v + z + x</code></li>
+	 *   <li><code>v + z</code></li>
+	 * </ol>
+	 */
 	@Override
-	public Vector3f[] getVertices()
+	@SharedInstance
+	public Iterable<Vector3f> getVertices()
 	{
-		Vector3f[] vertices = new Vector3f[8];
-		Quaternion q = getDirectionQuaternion().conjugate();
-		Vector3f v = q.rotate(size).xyz();
-		Vector3f x = Vector3f.of(v.x(), 0), y = Vector3f.of(0, v.y()), z = Vector3f.of(0, 0, v.z());
-		x = q.rotate(x).xyz();
-		y = q.rotate(y).xyz();
-		z = q.rotate(z).xyz();
-		vertices[0] = Vector3f.copyOf(position).add(y);
-		vertices[1] = Vector3f.copyOf(position).add(y).add(x);
-		vertices[2] = Vector3f.copyOf(position).add(x);
-		vertices[3] = Vector3f.copyOf(position);
-		vertices[4] = Vector3f.copyOf(position).add(z).add(y);
-		vertices[5] = Vector3f.copyOf(position).add(size);
-		vertices[6] = Vector3f.copyOf(position).add(z).add(x);
-		vertices[7] = Vector3f.copyOf(position).add(z);
-		return vertices;
+		Vector3f x = rotation.rotate(Axis.X).multiplyAll(size.x());
+		Vector3f y = rotation.rotate(Axis.Y).multiplyAll(size.y());
+		Vector3f z = rotation.rotate(Axis.Z).multiplyAll(size.z());
+		return () -> {
+			Vector3f v = Vector3f.copyOf(position);
+			return FixedSizeIterator.of(8, i -> {
+				switch (i % 4)
+				{
+					case 0 -> v.add(y);
+					case 1 -> v.add(x);
+					case 2 -> v.subtract(y);
+					case 3 -> v.subtract(x);
+				}
+				if (i == 4) v.add(z);
+				return v;
+			});
+		};
 	}
 	
 	@Override
 	public boolean isInside(Vector3f pos)
 	{
-		if (super.isInside(pos)) return true;
-		Quaternion q = getDirectionQuaternion().conjugate();
-		Vector3f v = q.rotate(pos);
-		Vector3f s = q.rotate(pos);
-		return v.isGreater(Vector3f.origin()) && v.isMinor(s);
+		Vector3f relativePos = rotation.rotate(pos.subtract(position));
+		if (!relativePos.isGreater(position)) return false;
+		return position.add(size).isGreater(relativePos);
 	}
 	
 	@Override
@@ -80,7 +113,7 @@ public class CubedShape extends Shape {
 	
 	public Vector3f getCenter()
 	{
-		return Vector3f.copyOf(position).add(size.x() * 0.5F, size.y() * 0.5F, size.z() * 0.5F);
+		return position.add(size.x() * 0.5F, size.y() * 0.5F, size.z() * 0.5F);
 	}
 	
 	public Vector3f getPosition()
@@ -88,18 +121,13 @@ public class CubedShape extends Shape {
 		return position;
 	}
 	
-	public Vector3f getSize()
+	public @NoZeroComponents Vector3f getSize()
 	{
 		return size;
 	}
 	
-	public Vector3f getDirection()
+	public Quaternion getRotation()
 	{
-		return direction;
-	}
-	
-	public Quaternion getDirectionQuaternion()
-	{
-		return new Quaternion(direction);
+		return rotation;
 	}
 }

@@ -1,10 +1,12 @@
 package com.alcadrial.kector.vector;
 
+import com.alcadrial.kector.annotation.Unitary;
+
 public interface NormalizableVector<V> {
 	
-	V unitary();
+	@Unitary V unitary();
 	
-	default V normalize()
+	default @Unitary V normalize()
 	{
 		return unitary();
 	}

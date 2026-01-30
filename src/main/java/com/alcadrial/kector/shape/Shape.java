@@ -1,54 +1,56 @@
 package com.alcadrial.kector.shape;
 
-import com.alcadrial.kector.angle.Angle;
+import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.vector.Vector3f;
 import com.alcadrial.kector.vector.complex.Quaternion;
 
-public abstract class Shape {
+public interface Shape {
 	
-	protected Shape()
-	{}
-	
-	public boolean isInside(Vector3f pos)
+	default boolean isInside(Vector3f pos)
 	{
 		return getEnclosingCube().isInside(pos);
 	}
 	
-	public boolean clip(OrthoShape shape)
+	default boolean clip(OrthoShape shape)
 	{
 		return getEnclosingCube().clip(shape);
 	}
 	
-	public boolean clip(Shape shape)
+	default boolean clip(Shape shape)
 	{
 		return getEnclosingCube().clip(shape);
 	}
 	
-	public IntersectionResult intersect(OrthoShape shape)
+	default IntersectionResult intersect(OrthoShape shape)
 	{
 		return getEnclosingCube().intersect(shape);
 	}
 	
-	public Vector3f getIntersectionPosition(Shape shape)
+	default Vector3f getIntersectionPosition(Shape shape)
 	{
 		return getEnclosingCube().getIntersectionPosition(shape);
 	}
 	
-	public abstract OrthoShape getEnclosingCube();
+	OrthoShape getEnclosingCube();
 	
-	public Shape rotate(Angle xRotation, Angle yRotation)
+	default Shape rotate(@Angle(AngleUnit.RADIANS) float xRotation, @Angle(AngleUnit.RADIANS) float yRotation)
 	{
-		return rotate(new Quaternion(xRotation, yRotation, Angle.V0_RAD));
+		return rotate(new Quaternion(xRotation, yRotation, 0));
 	}
 	
 	public abstract Shape rotate(Quaternion quaternion);
 	
-	public Shape translate(Vector3f vector)
+	default Shape translate(Vector3f vector)
 	{
 		return translate(vector.x(), vector.y(), vector.z());
 	}
 	
-	public abstract Shape translate(float x, float y, float z);
+	Shape translate(float x, float y, float z);
 	
-	public abstract Vector3f[] getVertices();
+	/**
+	 * Returns a lazy iterator over the vertices of this shape with no specific order,
+	 * check implementations documentation for a specific ordering
+	 */
+	Iterable<Vector3f> getVertices();
 }

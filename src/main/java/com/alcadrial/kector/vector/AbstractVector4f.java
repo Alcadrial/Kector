@@ -3,6 +3,8 @@ package com.alcadrial.kector.vector;
 import java.util.Arrays;
 import java.util.List;
 
+import com.alcadrial.kector.annotation.Unitary;
+
 public abstract class AbstractVector4f implements Vector4f {
 	
 	public AbstractVector4f()
@@ -95,7 +97,7 @@ public abstract class AbstractVector4f implements Vector4f {
 	}
 	
 	@Override
-	public Vector4f unitary()
+	public @Unitary Vector4f unitary()
 	{
 		return multiplyAll((float) (1 / length()));
 	}

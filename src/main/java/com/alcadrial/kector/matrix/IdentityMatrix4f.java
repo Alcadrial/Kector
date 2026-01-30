@@ -1,5 +1,7 @@
 package com.alcadrial.kector.matrix;
 
+import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.shape.OrthoShape;
 import com.alcadrial.kector.vector.Vector2f;
 import com.alcadrial.kector.vector.Vector3f;
@@ -63,31 +65,25 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
-	public Matrix4f project(float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
+	public Matrix4f cursor(float width, float height, float centerX, float centerY)
 	{
 		return this;
 	}
 	
 	@Override
-	public Matrix4f view(Vector3f position, float rotationX, float rotationY)
+	public Matrix4f project(@Angle(AngleUnit.RADIANS) float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
 	{
 		return this;
 	}
 	
 	@Override
-	public Matrix4f awayView(Vector3f position, float rotationX, float rotationY)
+	public Matrix4f view(Vector3f position, @Angle(AngleUnit.RADIANS) float rotationX, @Angle(AngleUnit.RADIANS) float rotationY)
 	{
 		return this;
 	}
 	
 	@Override
-	public Matrix4f invertedAwayView(Vector3f position, float rotationX, float rotationY)
-	{
-		return this;
-	}
-	
-	@Override
-	public Matrix4f rawView(float rotationX, float rotationY)
+	public Matrix4f view(@Angle(AngleUnit.RADIANS) float rotationX, @Angle(AngleUnit.RADIANS) float rotationY)
 	{
 		return this;
 	}
@@ -165,7 +161,19 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
-	public Matrix4f rotate(Axis axis, float angle)
+	public Matrix4f rotateX(@Angle(AngleUnit.RADIANS) float angle)
+	{
+		return this;
+	}
+	
+	@Override
+	public Matrix4f rotateY(@Angle(AngleUnit.RADIANS) float angle)
+	{
+		return this;
+	}
+	
+	@Override
+	public Matrix4f rotateZ(@Angle(AngleUnit.RADIANS) float angle)
 	{
 		return this;
 	}
@@ -204,6 +212,12 @@ class IdentityMatrix4f extends Matrix4f {
 	public float[] toArray()
 	{
 		return new float[] {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+	}
+	
+	@Override
+	public float[] toTransposedArray()
+	{
+		return toArray();
 	}
 	
 	@Override

@@ -140,11 +140,23 @@ public class ImmutableVector2f extends AbstractVector2f implements Vector2f, Vec
 	{
 		return Vector2f.of(Y * vector.z(), -X * vector.z(), X * vector.y() - Y * vector.x());
 	}
-	
+
+	/**
+	 * @deprecated see {@link Angle}, use {@link #rotate(float)}
+	 */
+	@Deprecated
 	@Override
 	public Vector2f rotate(Angle angle)
 	{
 		double a = angle.asDouble(AngleUnit.RADIANS) + Math.atan2(Y, X);
+		double l = length();
+		return Vector2f.of((float) (Math.cos(a) * l), (float) (Math.sin(a) * l));
+	}
+	
+	@Override
+	public Vector2f rotate(@com.alcadrial.kector.annotation.Angle(AngleUnit.RADIANS) float angle)
+	{
+		double a = angle + Math.atan2(Y, X);
 		double l = length();
 		return Vector2f.of((float) (Math.cos(a) * l), (float) (Math.sin(a) * l));
 	}
