@@ -480,6 +480,31 @@ public class Matrix4f {
 	}
 	
 	/**
+	 * Reset rotation around {@link Axis#X} of angleX, then around {@link Axis#Y} of angleY
+	 * 
+	 * @param angleX rotation value
+	 * @param angleY rotation value
+	 * 
+	 * @return itself
+	 */
+	public Matrix4f rotateXY(@Angle(AngleUnit.RADIANS) float angleX, @Angle(AngleUnit.RADIANS) float angleY)
+	{
+		float xCos = Math.cos(angleX);
+		float xSin = Math.sin(angleX);
+		float yCos = Math.cos(angleY);
+		float ySin = Math.sin(angleY);
+		values[0][0] = yCos;
+		values[0][2] = ySin;
+		values[1][0] = xSin * ySin;
+		values[1][1] = xCos;
+		values[1][2] = -xSin * yCos;
+		values[2][0] = -xCos * ySin;
+		values[2][1] = xSin;
+		values[2][2] = xCos * yCos;
+		return this;
+	}
+	
+	/**
 	 * Apply the given matrix on this
 	 * 
 	 * @param other matrix

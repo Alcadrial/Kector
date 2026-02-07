@@ -46,6 +46,26 @@ public enum AngleUnit {
 		};
 	}
 	
+	public float fromRadians(float angle)
+	{
+		return (float) (angle * fromRadians);
+	}
+	
+	public float fromGradians(float angle)
+	{
+		return (float) (angle * fromGradians);
+	}
+	
+	public float fromTurns(float angle)
+	{
+		return (float) (angle * fromTurns);
+	}
+	
+	public float fromDegrees(float angle)
+	{
+		return (float) (angle * fromDegrees);
+	}
+	
 	public double fromRadians(double angle)
 	{
 		return angle * fromRadians;
