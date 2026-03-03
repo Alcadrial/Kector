@@ -86,6 +86,46 @@ public class Math {
 		return Vector2f.copyOf(w).subtract(v).multiplyAll(delta).add(v);
 	}
 	
+	public static boolean looseEquals(float a, float b)
+	{
+		return looseEquals(a, b, 0.00001F);
+	}
+	
+	public static boolean looseEquals(float a, float b, float delta)
+	{
+		return abs(b - a) < delta;
+	}
+	
+	public static boolean looseEquals(double a, double b)
+	{
+		return looseEquals(a, b, 0.0000000001);
+	}
+	
+	public static boolean looseEquals(double a, double b, double delta)
+	{
+		return abs(b - a) < delta;
+	}
+	
+	public static boolean nearZero(float a)
+	{
+		return nearZero(a, 0.00001F);
+	}
+	
+	public static boolean nearZero(float a, float delta)
+	{
+		return -delta < a && a < delta;
+	}
+	
+	public static boolean nearZero(double a)
+	{
+		return nearZero(a, 0.0000000001);
+	}
+	
+	public static boolean nearZero(double a, double delta)
+	{
+		return -delta < a && a < delta;
+	}
+	
 	/**
 	 * Returns the fraction of the argument closest to zero.
 	 * The computed value is in range [-1; 1].

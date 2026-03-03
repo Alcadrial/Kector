@@ -21,7 +21,6 @@ javadoc {
         tags("apiNote:a:Api Note:", "implSpec:a:Impl Spec:", "implNote:a:Impl Note:")
         header = '<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>';
     }
-	//failOnError = false
 	options.addStringOption('Xdoclint:none', '-quiet')
 }
 
@@ -45,6 +44,12 @@ repositories {
     mavenCentral()
 }
 
+dependencies {
+	
+	testImplementation("org.junit.jupiter:junit-jupiter:5.10.0")
+	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
 jar.manifest.attributes([
 	"Specification-Title"     : name,
 	"Specification-Version"   : version,
@@ -53,6 +58,10 @@ jar.manifest.attributes([
 	"Implementation-Version"  : version,
 	"Implementation-Vendor"   : "Alcadrial"
 ])
+
+test {
+	useJUnitPlatform()
+}
 
 publishing {
     publications {

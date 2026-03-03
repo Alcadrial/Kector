@@ -7,7 +7,6 @@ import com.alcadrial.kector.vector.Vector2f;
 import com.alcadrial.kector.vector.Vector3f;
 import com.alcadrial.kector.vector.Vector3i;
 import com.alcadrial.kector.vector.Vector4f;
-import com.alcadrial.kector.vector.axis.Axis;
 
 class IdentityMatrix4f extends Matrix4f {
 	
@@ -16,10 +15,10 @@ class IdentityMatrix4f extends Matrix4f {
 	
 	private IdentityMatrix4f()
 	{
-		values[0] = Axis.X.getValuesArray();
-		values[1] = Axis.Y.getValuesArray();
-		values[2] = Axis.Z.getValuesArray();
-		values[3] = Axis.W.getValuesArray();
+		values[0] = new float[] {1, 0, 0, 0};
+		values[1] = new float[] {0, 1, 0, 0};
+		values[2] = new float[] {0, 0, 1, 0};
+		values[3] = new float[] {0, 0, 0, 1};
 	}
 	
 	@Override

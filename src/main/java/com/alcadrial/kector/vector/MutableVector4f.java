@@ -2,6 +2,9 @@ package com.alcadrial.kector.vector;
 
 import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.point.Point4f;
+import com.alcadrial.kector.vector.getter.Vector2fGetter;
+import com.alcadrial.kector.vector.getter.Vector3fGetter;
+import com.alcadrial.kector.vector.util.VectorUtils;
 
 public class MutableVector4f extends AbstractVector4f implements Vector4f {
 	
@@ -223,22 +226,22 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 	@Override
 	public boolean equals(Object o)
 	{
-		return o instanceof Vector4f v && equals(v);
+		return this == o || o instanceof Vector4f v && equals(v);
 	}
 	
 	public boolean equals(Vector2f vector)
 	{
-		return vector.x() == X && vector.y() == Y && 0 == Z && 0 == W;
+		return VectorUtils.equals(this, (Vector2fGetter) vector);
 	}
 	
 	public boolean equals(Vector3f vector)
 	{
-		return vector.x() == X && vector.y() == Y && vector.z() == Z && 0 == W;
+		return VectorUtils.equals(this, (Vector3fGetter) vector);
 	}
 	
 	public boolean equals(Vector4f vector)
 	{
-		return vector.x() == X && vector.y() == Y && vector.z() == Z && vector.w() == W;
+		return VectorUtils.equals(this, vector);
 	}
 	
 	@Override

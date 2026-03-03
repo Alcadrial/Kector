@@ -3,6 +3,9 @@ package com.alcadrial.kector.vector;
 import com.alcadrial.kector.matrix.Matrix3f;
 import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.point.Point3f;
+import com.alcadrial.kector.vector.getter.Vector2fGetter;
+import com.alcadrial.kector.vector.getter.Vector3fGetter;
+import com.alcadrial.kector.vector.util.VectorUtils;
 
 public class MutableVector3f extends AbstractVector3f implements Vector3f, Vector4f {
 	
@@ -281,17 +284,22 @@ public class MutableVector3f extends AbstractVector3f implements Vector3f, Vecto
 	@Override
 	public boolean equals(Object obj)
 	{
-		return obj instanceof Vector3f vector3f && equals(vector3f) || obj instanceof Vector4f vector4f && equals(vector4f);
+		return this == obj || obj instanceof Vector3f vector3f && equals(vector3f) || obj instanceof Vector4f vector4f && equals(vector4f);
+	}
+	
+	public boolean equals(Vector2f vector)
+	{
+		return VectorUtils.equals((Vector3fGetter) this, (Vector2fGetter) vector);
 	}
 	
 	public boolean equals(Vector3f vector)
 	{
-		return vector.x() == X && vector.y() == Y && vector.z() == Z;
+		return VectorUtils.equals((Vector3fGetter) this, (Vector3fGetter) vector);
 	}
 	
 	public boolean equals(Vector4f vector)
 	{
-		return vector.x() == X && vector.y() == Y && vector.z() == Z && vector.w() == 0;
+		return VectorUtils.equals((Vector3fGetter) this, vector);
 	}
 	
 	@Override

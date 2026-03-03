@@ -42,7 +42,7 @@ public class Matrix4f {
 	public Matrix4f(float[][] values)
 	{
 		this.values = new float[4][4];
-		for (int i = 0; i < values.length; i++) System.arraycopy(values[i], 0, this.values[i], 0, values.length);
+		for (int i = 0; i < 4; i++) System.arraycopy(values[i], 0, this.values[i], 0, 4);
 	}
 	
 	/**
@@ -77,13 +77,13 @@ public class Matrix4f {
 		values[2][2] = -0.02F;
 		values[0][3] = -1;
 		values[1][3] = -1;
-		values[2][3] = 0.9999F;
+		values[2][3] = 1;
 		return this;
 	}
 	
 	/**
 	 * Reset to an orthographic matrix of a box
-	 * starting from (-width/2; -height/2; -0) to (width/2; height/2; 100),
+	 * starting from (-width/2; -height/2; 0) to (width/2; height/2; 100),
 	 * centered in the origin.
 	 * 
 	 * @param width of the box
@@ -97,6 +97,7 @@ public class Matrix4f {
 		values[0][0] = 2 / width;
 		values[1][1] = 2 / height;
 		values[2][2] = -0.02F;
+		values[2][3] = 1;
 		return this;
 	}
 	
@@ -138,7 +139,7 @@ public class Matrix4f {
 		values[2][2] = -2 / (end.z() - start.z());
 		values[0][3] = -(end.x() + start.x()) / (end.x() - start.x());
 		values[1][3] = -(end.y() + start.y()) / (end.y() - start.y());
-		values[2][3] = -(end.z() + start.z()) / (end.z() - start.z());
+		values[2][3] = (end.z() + start.z()) / (end.z() - start.z());
 		return this;
 	}
 	
@@ -156,13 +157,14 @@ public class Matrix4f {
 		identity();
 		values[0][0] = 2 / width;
 		values[1][1] = 2 / height;
+		values[2][2] = -1;
 		return this;
 	}
 	
 	/**
 	 * Reset to an orthographic matrix of a box
 	 * starting from (-width/2; -height/2; -1) to (width/2; height/2; 1),
-	 * centered in pos.
+	 * translated by centerPos.
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -178,7 +180,7 @@ public class Matrix4f {
 	/**
 	 * Reset to an orthographic matrix of a box
 	 * starting from (-width/2; -height/2; -1) to (width/2; height/2; 1),
-	 * centered in pos.
+	 * translated by (centerX; centerY).
 	 * 
 	 * @param width of the box
 	 * @param height of the box
@@ -192,9 +194,9 @@ public class Matrix4f {
 		identity();
 		values[0][0] = 2 / width;
 		values[1][1] = 2 / height;
-		values[0][3] = values[0][0] * centerX - 1;
-		values[1][3] = values[1][1] * centerY - 1;
-		values[2][3] = -1;
+		values[0][3] = -values[0][0] * centerX;
+		values[1][3] = -values[1][1] * centerY;
+		values[2][2] = -1;
 		return this;
 	}
 	
@@ -202,7 +204,7 @@ public class Matrix4f {
 	 * Reset to a projection matrix of a box to a frustum
 	 * starting from (-1; -1; -1) to (1; 1; 1).
 	 * 
-	 * @param fieldOfView fov in degrees
+	 * @param fieldOfView
 	 * @param maxDistance of view
 	 * @param aspectRatio width / height
 	 * 
@@ -211,18 +213,38 @@ public class Matrix4f {
 	public Matrix4f project(@Angle(AngleUnit.RADIANS) float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
 	{
 		identity();
-		return project0(fieldOfView, maxDistance, minDistance, aspectRatio);
-	}
-	
-	private Matrix4f project0(@Angle(AngleUnit.RADIANS) float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
-	{
-		float scale = 1 / Math.tan(fieldOfView / 2);
+		float scale = Math.tan(fieldOfView / 2);
 		float frustum = maxDistance - minDistance;
-		values[0][0] = scale / aspectRatio;
-		values[1][1] = scale;
+		values[0][0] = 1 / scale;
+		values[1][1] = aspectRatio / scale;
 		values[2][2] = -(maxDistance + minDistance) / frustum;
 		values[3][2] = -1;
-		values[2][3] = -maxDistance * minDistance * 2 / frustum;
+		values[2][3] = -2 * maxDistance * minDistance / frustum;
+		values[3][3] = 0;
+		return this;
+	}
+	
+	/**
+	 * Reset to a projection matrix of a box to a frustum
+	 * starting from (-1; -1; 0) to (1; 1; 1).
+	 * 
+	 * @param fieldOfView
+	 * @param maxDistance of view
+	 * @param aspectRatio width / height
+	 * 
+	 * @return itself
+	 */
+	public Matrix4f projectPositiveZ(@Angle(AngleUnit.RADIANS) float fieldOfView, float maxDistance, float minDistance, float aspectRatio)
+	{
+		identity();
+		float scale = Math.tan(fieldOfView / 2);
+		float frustum = maxDistance - minDistance;
+		values[0][0] = 1 / scale;
+		values[1][1] = aspectRatio / scale;
+		values[2][2] = -(maxDistance) / frustum;
+		values[3][2] = -1;
+		values[2][3] = -maxDistance * minDistance / frustum;
+		values[3][3] = 0;
 		return this;
 	}
 	
@@ -230,8 +252,8 @@ public class Matrix4f {
 	 * Reset to a view (first person) matrix centered in position.
 	 * 
 	 * @param position position
-	 * @param rotationX X axis rotation in degrees
-	 * @param rotationY Y axis rotation in degrees
+	 * @param rotationX X axis rotation
+	 * @param rotationY Y axis rotation
 	 * 
 	 * @return itself
 	 */
@@ -532,7 +554,7 @@ public class Matrix4f {
 	 * 
 	 * @param vector
 	 * 
-	 * @return a newly instanced trasformed vector
+	 * @return a newly instanced transformed vector
 	 */
 	public Vector4f multiply(Vector4f vector)
 	{
@@ -584,7 +606,7 @@ public class Matrix4f {
 	/**
 	 * Calculate this matrix inverse.
 	 * 
-	 * @return this matrix inverse
+	 * @return this matrix inverse in a new instance
 	 * @throws ArithmeticException if this matrix has no inverse or if it's determinant is zero
 	 */
 	public Matrix4f inverse()
@@ -677,6 +699,24 @@ public class Matrix4f {
 		}
 		ss.setCharAt(ss.length() - 2, '}');
 		return ss.substring(0, ss.length() - 1);
+	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) return true;
+		if (obj instanceof Matrix4f m)
+		{
+			for (int i = 0; i < 4; i++)
+			{
+				for (int j = 0; j < 4; j++)
+				{
+					if (Math.abs(values[i][j] - m.values[i][j]) > 0.00001F) return false;
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	/**

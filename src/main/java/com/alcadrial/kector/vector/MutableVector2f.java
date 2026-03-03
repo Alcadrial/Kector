@@ -5,6 +5,9 @@ import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.matrix.Matrix3f;
 import com.alcadrial.kector.matrix.Matrix4f;
 import com.alcadrial.kector.point.Point2f;
+import com.alcadrial.kector.vector.getter.Vector2fGetter;
+import com.alcadrial.kector.vector.getter.Vector3fGetter;
+import com.alcadrial.kector.vector.util.VectorUtils;
 
 public class MutableVector2f extends AbstractVector2f implements Vector2f, Vector3f, Vector4f {
 	
@@ -338,7 +341,22 @@ public class MutableVector2f extends AbstractVector2f implements Vector2f, Vecto
 	@Override
 	public boolean equals(Object obj)
 	{
-		return obj instanceof Vector2f v && v.x() == X && v.y() == Y;
+		return this == obj || obj instanceof Vector2f v && equals(v);
+	}
+	
+	public boolean equals(Vector2f vector)
+	{
+		return VectorUtils.equals((Vector2fGetter) this, (Vector2fGetter) vector);
+	}
+	
+	public boolean equals(Vector3f vector)
+	{
+		return VectorUtils.equals((Vector2fGetter) this, (Vector3fGetter) vector);
+	}
+	
+	public boolean equals(Vector4f vector)
+	{
+		return VectorUtils.equals((Vector2fGetter) this, vector);
 	}
 	
 	@Override
