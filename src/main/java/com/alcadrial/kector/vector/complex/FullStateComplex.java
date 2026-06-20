@@ -1,10 +1,6 @@
 package com.alcadrial.kector.vector.complex;
 
-import com.alcadrial.kector.Math;
-import com.alcadrial.kector.angle.Angle;
-import com.alcadrial.kector.angle.AngleUnit;
-import com.alcadrial.kector.vector.Vector2f;
-
+/*
 public class FullStateComplex implements Complex {
 	
 	private float R;
@@ -138,3 +134,4 @@ public class FullStateComplex implements Complex {
 		angle.setValue(AngleUnit.RADIANS, Math.atan2(i(), r()));
 	}
 }
+*/

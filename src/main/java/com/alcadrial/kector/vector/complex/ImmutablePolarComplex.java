@@ -1,10 +1,6 @@
 package com.alcadrial.kector.vector.complex;
 
-import com.alcadrial.kector.Math;
-import com.alcadrial.kector.angle.Angle;
-import com.alcadrial.kector.angle.AngleUnit;
-import com.alcadrial.kector.vector.Vector2f;
-
+/*
 public class ImmutablePolarComplex implements Complex {
 	
 	private final float magnitude;
@@ -114,3 +110,4 @@ public class ImmutablePolarComplex implements Complex {
 		return new ImmutablePolarComplex(Math.sqrt(r * r + i * i), Angle.of(Math.atan2(i, r), AngleUnit.RADIANS), true);
 	}
 }
+*/

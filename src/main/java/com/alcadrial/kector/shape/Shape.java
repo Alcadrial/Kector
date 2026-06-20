@@ -1,13 +1,14 @@
 package com.alcadrial.kector.shape;
 
-import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.AngleUnit;
 import com.alcadrial.kector.annotation.Angle;
-import com.alcadrial.kector.vector.Vector3f;
-import com.alcadrial.kector.vector.complex.Quaternion;
+import com.alcadrial.kector.annotation.Temporary;
+import com.alcadrial.kector.vector.Vector3fr;
+import com.alcadrial.kector.vector.quaternion.Quaternionfr;
 
 public interface Shape {
 	
-	default boolean isInside(Vector3f pos)
+	default boolean isInside(Vector3fr pos)
 	{
 		return getEnclosingCube().isInside(pos);
 	}
@@ -27,7 +28,7 @@ public interface Shape {
 		return getEnclosingCube().intersect(shape);
 	}
 	
-	default Vector3f getIntersectionPosition(Shape shape)
+	default Vector3fr getIntersectionPosition(Shape shape)
 	{
 		return getEnclosingCube().getIntersectionPosition(shape);
 	}
@@ -36,12 +37,12 @@ public interface Shape {
 	
 	default Shape rotate(@Angle(AngleUnit.RADIANS) float xRotation, @Angle(AngleUnit.RADIANS) float yRotation)
 	{
-		return rotate(new Quaternion(xRotation, yRotation, 0));
+		return rotate(Quaternionfr.ofAngles(xRotation, yRotation, 0));
 	}
 	
-	public abstract Shape rotate(Quaternion quaternion);
+	public abstract Shape rotate(Quaternionfr quaternion);
 	
-	default Shape translate(Vector3f vector)
+	default Shape translate(Vector3fr vector)
 	{
 		return translate(vector.x(), vector.y(), vector.z());
 	}
@@ -52,5 +53,6 @@ public interface Shape {
 	 * Returns a lazy iterator over the vertices of this shape with no specific order,
 	 * check implementations documentation for a specific ordering
 	 */
-	Iterable<Vector3f> getVertices();
+	@Temporary
+	Iterable<Vector3fr> getVertices();
 }

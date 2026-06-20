@@ -1,11 +1,6 @@
 package com.alcadrial.kector.vector.complex;
 
-import com.alcadrial.kector.Math;
-import com.alcadrial.kector.angle.Angle;
-import com.alcadrial.kector.angle.AngleUnit;
-import com.alcadrial.kector.vector.MutableVector2f;
-import com.alcadrial.kector.vector.Vector2f;
-
+/*
 public class CartesianComplex extends MutableVector2f implements ComplexVector {
 	
 	public CartesianComplex(Vector2f vector)
@@ -123,3 +118,4 @@ public class CartesianComplex extends MutableVector2f implements ComplexVector {
 		return s.length() == 0 ? "0" : s;
 	}
 }
+*/

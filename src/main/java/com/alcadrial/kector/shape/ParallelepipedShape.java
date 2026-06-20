@@ -1,45 +1,48 @@
 package com.alcadrial.kector.shape;
 
+import com.alcadrial.kector.annotation.Temporary;
 import com.alcadrial.kector.shape.utils.FixedSizeIterator;
 import com.alcadrial.kector.vector.Vector3f;
-import com.alcadrial.kector.vector.complex.Quaternion;
+import com.alcadrial.kector.vector.Vector3fr;
+import com.alcadrial.kector.vector.quaternion.Quaternionfr;
 
 public class ParallelepipedShape implements Shape {
 	
-	private final Vector3f width, height, length, position;
+	private final Vector3fr width, height, length, position;
 	
-	public ParallelepipedShape(Vector3f width, Vector3f height, Vector3f length, Vector3f position)
+	public ParallelepipedShape(Vector3fr width, Vector3fr height, Vector3fr length, Vector3fr position)
 	{
-		this.width = Vector3f.copyOfImmutable(width);
-		this.height = Vector3f.copyOfImmutable(height);
-		this.length = Vector3f.copyOfImmutable(length);
-		this.position = Vector3f.copyOfImmutable(position);
+		this.width = width;
+		this.height = height;
+		this.length = length;
+		this.position = position;
 	}
 	
 	@Override
 	public OrthoShape getEnclosingCube()
 	{
-		return OrthoShape.byEnd(position, position.add(width).add(height).add(length));
+		return OrthoShape.byEnd(position, Vector3f.of(position).add(width).add(height).add(length));
 	}
 	
 	@Override
-	public ParallelepipedShape rotate(Quaternion q)
+	public ParallelepipedShape rotate(Quaternionfr q)
 	{
-		Vector3f newPosition = q.rotate(position);
-		return new ParallelepipedShape(q.rotate(width.add(position)).subtract(newPosition), q.rotate(height.add(position)).subtract(newPosition), q.rotate(length.add(position)).subtract(newPosition), newPosition);
+		Vector3f newPosition = q.rotate(Vector3f.of(position));
+		return new ParallelepipedShape(q.rotate(Vector3f.of(width).add(position)).subtract(newPosition), q.rotate(Vector3f.of(height).add(position)).subtract(newPosition), q.rotate(Vector3f.of(length).add(position)).subtract(newPosition), newPosition);
 	}
 	
 	@Override
 	public ParallelepipedShape translate(float x, float y, float z)
 	{
-		return new ParallelepipedShape(width, height, length, position.add(x, y, z));
+		return new ParallelepipedShape(width, height, length, Vector3f.of(position).add(x, y, z));
 	}
 	
 	@Override
-	public Iterable<Vector3f> getVertices()
+	@Temporary
+	public Iterable<Vector3fr> getVertices()
 	{
 		return () -> {
-			Vector3f v = Vector3f.copyOf(position);
+			Vector3f v = Vector3f.of(position);
 			return FixedSizeIterator.of(8, i -> {
 				switch (i % 4)
 				{
@@ -54,22 +57,22 @@ public class ParallelepipedShape implements Shape {
 		};
 	}
 	
-	public Vector3f getWidth()
+	public Vector3fr getWidth()
 	{
 		return width;
 	}
 	
-	public Vector3f getHeight()
+	public Vector3fr getHeight()
 	{
 		return height;
 	}
 	
-	public Vector3f getLength()
+	public Vector3fr getLength()
 	{
 		return length;
 	}
 	
-	public Vector3f getPosition()
+	public Vector3fr getPosition()
 	{
 		return position;
 	}

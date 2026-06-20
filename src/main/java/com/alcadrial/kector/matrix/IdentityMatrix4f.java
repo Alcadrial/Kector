@@ -1,24 +1,35 @@
 package com.alcadrial.kector.matrix;
 
-import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.AngleUnit;
 import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.shape.OrthoShape;
-import com.alcadrial.kector.vector.Vector2f;
-import com.alcadrial.kector.vector.Vector3f;
-import com.alcadrial.kector.vector.Vector3i;
+import com.alcadrial.kector.vector.Vector2fr;
+import com.alcadrial.kector.vector.Vector3fr;
+import com.alcadrial.kector.vector.Vector3ir;
 import com.alcadrial.kector.vector.Vector4f;
+import com.alcadrial.kector.vector.Vector4fr;
 
 class IdentityMatrix4f extends Matrix4f {
 	
 	public static final Matrix4f IDENTITY = new IdentityMatrix4f();
 	private static final String TO_STRING = "Matrix{[[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]]}";
+	private static final float[] VALUES = new float[] {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
 	
 	private IdentityMatrix4f()
 	{
-		values[0] = new float[] {1, 0, 0, 0};
-		values[1] = new float[] {0, 1, 0, 0};
-		values[2] = new float[] {0, 0, 1, 0};
-		values[3] = new float[] {0, 0, 0, 1};
+		values = VALUES;
+	}
+	
+	@Override
+	public float get(int i, int j)
+	{
+		return i == j ? 1 : 0;
+	}
+	
+	@Override
+	public Matrix4f set(int i, int j, float value)
+	{
+		return this;
 	}
 	
 	@Override
@@ -58,7 +69,7 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
-	public Matrix4f cursor(float width, float height, Vector2f mousePos)
+	public Matrix4f cursor(float width, float height, Vector2fr mousePos)
 	{
 		return this;
 	}
@@ -76,7 +87,7 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
-	public Matrix4f view(Vector3f position, @Angle(AngleUnit.RADIANS) float rotationX, @Angle(AngleUnit.RADIANS) float rotationY)
+	public Matrix4f view(Vector3fr position, @Angle(AngleUnit.RADIANS) float rotationX, @Angle(AngleUnit.RADIANS) float rotationY)
 	{
 		return this;
 	}
@@ -88,19 +99,19 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
-	public Matrix4f scale(Vector3f vector)
+	public Matrix4f scale(Vector3fr vector)
 	{
 		return this;
 	}
 	
 	@Override
-	public Matrix4f scaleRelative(Vector3f vector)
+	public Matrix4f scaleRelative(Vector3fr vector)
 	{
 		return this;
 	}
 	
 	@Override
-	public Matrix4f translateTo(Vector3i vector)
+	public Matrix4f translateTo(Vector3ir vector)
 	{
 		return this;
 	}
@@ -124,13 +135,13 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
-	public Matrix4f translateTo(Vector3f vector)
+	public Matrix4f translateTo(Vector3fr vector)
 	{
 		return this;
 	}
 	
 	@Override
-	public Matrix4f translate(Vector3i vector)
+	public Matrix4f translate(Vector3ir vector)
 	{
 		return this;
 	}
@@ -154,7 +165,7 @@ class IdentityMatrix4f extends Matrix4f {
 	}
 	
 	@Override
-	public Matrix4f translate(Vector3f vector)
+	public Matrix4f translate(Vector3fr vector)
 	{
 		return this;
 	}
@@ -180,13 +191,13 @@ class IdentityMatrix4f extends Matrix4f {
 	@Override
 	public Matrix4f multiply(Matrix4f other)
 	{
-		return new Matrix4f(other);
+		throw new UnsupportedOperationException("Immutable instance");
 	}
 	
 	@Override
-	public Vector4f multiply(Vector4f vector)
+	public Vector4f multiply(Vector4fr vector)
 	{
-		return Vector3f.copyOf(vector);
+		return Vector4f.of(vector);
 	}
 	
 	@Override
@@ -210,13 +221,13 @@ class IdentityMatrix4f extends Matrix4f {
 	@Override
 	public float[] toArray()
 	{
-		return new float[] {1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1};
+		return VALUES;
 	}
 	
 	@Override
 	public float[] toTransposedArray()
 	{
-		return toArray();
+		return VALUES;
 	}
 	
 	@Override

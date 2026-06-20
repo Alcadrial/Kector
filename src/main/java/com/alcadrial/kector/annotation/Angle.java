@@ -13,11 +13,11 @@ import static java.lang.annotation.RetentionPolicy.SOURCE;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import com.alcadrial.kector.angle.AngleUnit;
+import com.alcadrial.kector.AngleUnit;
 
 @Retention(SOURCE)
 @Target({FIELD, METHOD, PARAMETER, LOCAL_VARIABLE, ANNOTATION_TYPE, TYPE_PARAMETER, TYPE_USE, RECORD_COMPONENT})
 public @interface Angle {
 	
-	AngleUnit value();
+	AngleUnit value() default AngleUnit.RADIANS;
 }

@@ -5,6 +5,12 @@ public enum Direction1f {
 	POSITIVE,
 	NEGATIVE;
 	
+	public static Direction1f of(boolean positive)
+	{
+		if (positive) return POSITIVE;
+		return NEGATIVE;
+	}
+	
 	public boolean isPositive()
 	{
 		return this == POSITIVE;
@@ -15,9 +21,13 @@ public enum Direction1f {
 		return this == NEGATIVE;
 	}
 	
-	public static Direction1f of(boolean positive)
+	public int asInt()
 	{
-		if (positive) return POSITIVE;
-		return NEGATIVE;
+		return this == POSITIVE ? 1 : -1;
+	}
+	
+	public Direction1f getOpposite()
+	{
+		return this == POSITIVE ? NEGATIVE : POSITIVE;
 	}
 }

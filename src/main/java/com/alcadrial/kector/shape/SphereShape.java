@@ -2,38 +2,38 @@ package com.alcadrial.kector.shape;
 
 import java.util.List;
 
-import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.vector.Vector3f;
-import com.alcadrial.kector.vector.complex.Quaternion;
+import com.alcadrial.kector.vector.Vector3fr;
+import com.alcadrial.kector.vector.quaternion.Quaternionfr;
 
 public class SphereShape implements Shape {
 	
-	private Vector3f origin;
+	private Vector3fr origin;
 	private float ray;
 	private OrthoShape enclosingCube;
 	
-	public SphereShape(Vector3f origin, float ray)
+	public SphereShape(Vector3fr origin, float ray)
 	{
-		this.origin = Vector3f.copyOfImmutable(origin);
+		this.origin = origin;
 		this.ray = ray;
 	}
 	
 	@Override
 	public OrthoShape getEnclosingCube()
 	{
-		if (enclosingCube == null) enclosingCube = OrthoShape.byEnd(this.origin.subtract(ray, ray, ray), this.origin.add(ray, ray, ray));
+		if (enclosingCube == null) enclosingCube = OrthoShape.byEnd(Vector3f.of(origin).subtract(ray, ray, ray), Vector3f.of(origin).add(ray, ray, ray));
 		return enclosingCube;
 	}
 	
 	@Override
-	public Shape rotate(@Angle(AngleUnit.RADIANS) float xRotation, @Angle(AngleUnit.RADIANS) float yRotation)
+	public Shape rotate(@Angle float xRotation, @Angle float yRotation)
 	{
 		return new SphereShape(origin, ray);
 	}
 	
 	@Override
-	public SphereShape rotate(Quaternion quaternion)
+	public SphereShape rotate(Quaternionfr quaternion)
 	{
 		return new SphereShape(origin, ray);
 	}
@@ -41,25 +41,22 @@ public class SphereShape implements Shape {
 	@Override
 	public SphereShape translate(float x, float y, float z)
 	{
-		return new SphereShape(origin.add(x, y, z), ray);
+		return new SphereShape(Vector3f.of(origin).add(x, y, z), ray);
 	}
 	
 	@Override
-	public boolean isInside(Vector3f pos)
+	public boolean isInside(Vector3fr pos)
 	{
-		float x = pos.x() - origin.x();
-		float y = pos.y() - origin.y();
-		float z = pos.z() - origin.z();
-		return x * x + y * y + z * z <= ray * ray;
+		return pos.squareDistance(pos) <= ray * ray;
 	}
 	
 	@Override
-	public Iterable<Vector3f> getVertices()
+	public Iterable<Vector3fr> getVertices()
 	{
 		return List.of(origin);
 	}
 	
-	public Vector3f getOrigin()
+	public Vector3fr getOrigin()
 	{
 		return origin;
 	}

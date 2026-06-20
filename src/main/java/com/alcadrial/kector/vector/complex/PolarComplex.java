@@ -1,10 +1,6 @@
 package com.alcadrial.kector.vector.complex;
 
-import com.alcadrial.kector.Math;
-import com.alcadrial.kector.angle.Angle;
-import com.alcadrial.kector.angle.AngleUnit;
-import com.alcadrial.kector.vector.Vector2f;
-
+/*
 public class PolarComplex implements Complex {
 	
 	private float magnitude;
@@ -115,3 +111,4 @@ public class PolarComplex implements Complex {
 		return this;
 	}
 }
+*/

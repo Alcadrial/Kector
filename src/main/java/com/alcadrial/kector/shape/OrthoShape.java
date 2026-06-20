@@ -1,44 +1,46 @@
 package com.alcadrial.kector.shape;
 
+import com.alcadrial.kector.annotation.Temporary;
 import com.alcadrial.kector.shape.utils.FixedSizeIterator;
 import com.alcadrial.kector.vector.Vector3f;
-import com.alcadrial.kector.vector.complex.Quaternion;
+import com.alcadrial.kector.vector.Vector3fr;
+import com.alcadrial.kector.vector.quaternion.Quaternionfr;
 
 public class OrthoShape implements Shape {
 	
-	private Vector3f start;
-	private Vector3f end;
+	private Vector3fr start;
+	private Vector3fr end;
 	
-	public static OrthoShape bySize(Vector3f start, Vector3f size)
+	public static OrthoShape bySize(Vector3fr start, Vector3fr size)
 	{
-		return new OrthoShape(Vector3f.copyOfImmutable(start), Vector3f.copyOfImmutable(start).add(size));
+		return new OrthoShape(start, Vector3f.of(start).add(size));
 	}
 	
-	public static OrthoShape byEnd(Vector3f start, Vector3f end)
+	public static OrthoShape byEnd(Vector3fr start, Vector3fr end)
 	{
-		return new OrthoShape(Vector3f.copyOfImmutable(start), Vector3f.copyOfImmutable(end));
+		return new OrthoShape(start, end);
 	}
 	
-	private OrthoShape(Vector3f start, Vector3f end)
+	private OrthoShape(Vector3fr start, Vector3fr end)
 	{
 		this.start = start;
 		this.end = end;
 	}
 	
 	@Override
-	public CubedShape rotate(Quaternion q)
+	public CubedShape rotate(Quaternionfr q)
 	{
-		return new CubedShape(start, end.subtract(start), q);
+		return new CubedShape(start, Vector3f.of(end).subtract(start), q);
 	}
 	
 	@Override
 	public OrthoShape translate(float x, float y, float z)
 	{
-		return new OrthoShape(start.add(x, y, z), end.add(x, y, z));
+		return new OrthoShape(Vector3f.of(start).add(x, y, z), Vector3f.of(end).add(x, y, z));
 	}
 	
 	@Override
-	public boolean isInside(Vector3f pos)
+	public boolean isInside(Vector3fr pos)
 	{
 		return pos.isGreater(start) && pos.isMinor(end);
 	}
@@ -58,8 +60,8 @@ public class OrthoShape implements Shape {
 	@Override
 	public IntersectionResult intersect(OrthoShape shape)
 	{
-		for (Vector3f vertex : getVertices()) if (shape.isInside(vertex)) return new IntersectionResult(true, Vector3f.copyOf(start), Vector3f.copyOf(vertex));
-		for (Vector3f vertex : shape.getVertices()) if (isInside(vertex)) return new IntersectionResult(true, Vector3f.copyOf(shape.start), Vector3f.copyOf(vertex));
+		for (Vector3fr vertex : getVertices()) if (shape.isInside(vertex)) return new IntersectionResult(true, Vector3f.of(start), Vector3f.of(vertex));
+		for (Vector3fr vertex : shape.getVertices()) if (isInside(vertex)) return new IntersectionResult(true, Vector3f.of(shape.start), Vector3f.of(vertex));
 		return new IntersectionResult(false, null, null);
 	}
 
@@ -80,7 +82,8 @@ public class OrthoShape implements Shape {
 	 * </ol>
 	 */
 	@Override
-	public Iterable<Vector3f> getVertices()
+	@Temporary
+	public Iterable<Vector3fr> getVertices()
 	{
 		return () -> {
 			Vector3f v = Vector3f.of(start.x(), end.y(), start.z());
@@ -104,12 +107,12 @@ public class OrthoShape implements Shape {
 		return this;
 	}
 	
-	public Vector3f getStart()
+	public Vector3fr getStart()
 	{
 		return start;
 	}
 	
-	public Vector3f getEnd()
+	public Vector3fr getEnd()
 	{
 		return end;
 	}

@@ -1,9 +1,6 @@
 package com.alcadrial.kector.vector.complex;
 
-import com.alcadrial.kector.angle.Angle;
-import com.alcadrial.kector.angle.AngleUnit;
-import com.alcadrial.kector.vector.Vector2f;
-
+/*
 public interface Complex {
 	
 	static Complex of(float r, float i)
@@ -129,3 +126,4 @@ public interface Complex {
 	Complex setR(float r);
 	Complex setI(float i);
 }
+*/

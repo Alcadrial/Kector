@@ -1,11 +1,6 @@
 package com.alcadrial.kector.vector.complex;
 
-import com.alcadrial.kector.Math;
-import com.alcadrial.kector.angle.Angle;
-import com.alcadrial.kector.angle.AngleUnit;
-import com.alcadrial.kector.vector.Vector2f;
-import com.alcadrial.kector.vector.immutable.ImmutableVector2f;
-
+/*
 public class ImmutableCartesianComplex extends ImmutableVector2f implements ComplexVector {
 	
 	private String toString;
@@ -131,3 +126,4 @@ public class ImmutableCartesianComplex extends ImmutableVector2f implements Comp
 		return toString;
 	}
 }
+*/

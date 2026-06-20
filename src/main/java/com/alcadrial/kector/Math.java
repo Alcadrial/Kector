@@ -3,15 +3,16 @@ package com.alcadrial.kector;
 import java.math.RoundingMode;
 import java.util.function.Function;
 
-import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.vector.Vector2f;
+import com.alcadrial.kector.vector.Vector2fr;
 import com.alcadrial.kector.vector.Vector3f;
 
 public class Math {
 	
 	public static final double PI = java.lang.Math.PI;
 	public static final double HALF_PI = PI / 2;
+	public static final double DOUBLE_PI = 2 * PI;
 	public static final double E = java.lang.Math.E;
 	public static final double SQUARE_ROOT_3 = sqrt(3);
 	public static final double HALF_SQUARE_ROOT_3 = SQUARE_ROOT_3 / 2;
@@ -20,6 +21,7 @@ public class Math {
 	
 	public static final float PIF = (float) PI;
 	public static final float HALF_PIF = (float) HALF_PI;
+	public static final float DOUBLE_PIF = (float) DOUBLE_PI;
 	public static final float EF = (float) E;
 	public static final float SQUARE_ROOT_3F = (float) SQUARE_ROOT_3;
 	public static final float HALF_SQUARE_ROOT_3F = (float) HALF_SQUARE_ROOT_3;
@@ -36,9 +38,9 @@ public class Math {
 		return (b - a) * interpolationFunction.apply(delta) + a;
 	}
 	
-	public static Vector2f interpolation(Vector2f v, Vector2f w, float delta, Function<Float, Float> interpolationFunction)
+	public static Vector2f interpolation(Vector2fr v, Vector2fr w, float delta, Function<Float, Float> interpolationFunction)
 	{
-		return Vector2f.copyOf(w).subtract(v).multiplyAll(interpolationFunction.apply(delta)).add(v);
+		return Vector2f.of(w).subtract(v).multiplyAll(interpolationFunction.apply(delta)).add(v);
 	}
 	
 	public static double cosineInterpolation(double a, double b, double delta)
@@ -51,9 +53,9 @@ public class Math {
 		return (float) ((b - a) * ((1 - cos(AngleUnit.RADIANS.fromTurns(delta / 2D))) * 0.5) + a);
 	}
 	
-	public static Vector2f cosineInterpolation(Vector2f v, Vector2f w, float delta)
+	public static Vector2f cosineInterpolation(Vector2fr v, Vector2fr w, float delta)
 	{
-		return Vector2f.copyOf(w).subtract(v).multiplyAll((float) ((1 - cos(AngleUnit.RADIANS.fromTurns(delta / 2D))) * 0.5)).add(v);
+		return Vector2f.of(w).subtract(v).multiplyAll((float) ((1 - cos(AngleUnit.RADIANS.fromTurns(delta / 2D))) * 0.5)).add(v);
 	}
 	
 	public static double halfCosineInterpolation(double a, double b, double delta)
@@ -66,9 +68,9 @@ public class Math {
 		return (float) ((b - a) * (1 - cos(AngleUnit.RADIANS.fromTurns(delta / 4D))) + a);
 	}
 	
-	public static Vector2f halfCosineInterpolation(Vector2f v, Vector2f w, float delta)
+	public static Vector2f halfCosineInterpolation(Vector2fr v, Vector2fr w, float delta)
 	{
-		return Vector2f.copyOf(w).subtract(v).multiplyAll((float) (1 - cos(AngleUnit.RADIANS.fromTurns(delta / 4D)))).add(v);
+		return Vector2f.of(w).subtract(v).multiplyAll((float) (1 - cos(AngleUnit.RADIANS.fromTurns(delta / 4D)))).add(v);
 	}
 	
 	public static double lerp(double a, double b, double delta)
@@ -81,9 +83,9 @@ public class Math {
 		return (b - a) * delta + a;
 	}
 	
-	public static Vector2f lerp(Vector2f v, Vector2f w, float delta)
+	public static Vector2f lerp(Vector2fr v, Vector2fr w, float delta)
 	{
-		return Vector2f.copyOf(w).subtract(v).multiplyAll(delta).add(v);
+		return Vector2f.of(w).subtract(v).multiplyAll(delta).add(v);
 	}
 	
 	public static boolean looseEquals(float a, float b)
@@ -379,7 +381,7 @@ public class Math {
 	 */
 	public static Vector3f exp(Vector3f a)
 	{
-		return Vector3f.ofImmutable(exp(a.x()), exp(a.y()), exp(a.z()));
+		return Vector3f.of(exp(a.x()), exp(a.y()), exp(a.z()));
 	}
 	
 	/**
@@ -403,7 +405,7 @@ public class Math {
 	 */
 	public static Vector3f log(Vector3f a)
 	{
-		return Vector3f.ofImmutable(log(a.x()), log(a.y()), log(a.z()));
+		return Vector3f.of(log(a.x()), log(a.y()), log(a.z()));
 	}
 	
 	/**

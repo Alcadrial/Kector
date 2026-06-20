@@ -1,27 +1,28 @@
 package com.alcadrial.kector.matrix;
 
+import com.alcadrial.kector.AngleUnit;
 import com.alcadrial.kector.Math;
-import com.alcadrial.kector.angle.AngleUnit;
 import com.alcadrial.kector.annotation.Angle;
 import com.alcadrial.kector.shape.OrthoShape;
-import com.alcadrial.kector.vector.Vector2f;
-import com.alcadrial.kector.vector.Vector3f;
-import com.alcadrial.kector.vector.Vector3i;
+import com.alcadrial.kector.vector.Vector2fr;
+import com.alcadrial.kector.vector.Vector3fr;
+import com.alcadrial.kector.vector.Vector3ir;
 import com.alcadrial.kector.vector.Vector4f;
-import com.alcadrial.kector.vector.axis.Axis;
+import com.alcadrial.kector.vector.Vector4fr;
+import com.alcadrial.kector.vector.axis.Axisf;
 
 public class Matrix4f {
 	
 	public static final Matrix4f IDENTITY = IdentityMatrix4f.IDENTITY;
-	protected float[][] values;
+	protected float[] values;
 	
 	/**
 	 * Initialize to identity.
 	 */
 	public Matrix4f()
 	{
-		values = new float[4][4];
-		for (int i = 0; i < 4; i++) values[i][i] = 1;
+		values = new float[16];
+		for (int i = 0; i < 4; i++) values[i * 5] = 1;
 	}
 	
 	/**
@@ -39,10 +40,10 @@ public class Matrix4f {
 	 * 
 	 * @param values used to initialize this matrix
 	 */
-	public Matrix4f(float[][] values)
+	public Matrix4f(float[] values)
 	{
-		this.values = new float[4][4];
-		for (int i = 0; i < 4; i++) System.arraycopy(values[i], 0, this.values[i], 0, 4);
+		this.values = new float[16];
+		System.arraycopy(values, 0, this.values, 0, 16);
 	}
 	
 	/**
@@ -52,11 +53,19 @@ public class Matrix4f {
 	 */
 	public Matrix4f identity()
 	{
-		values[0] = new float[] {1, 0, 0, 0};
-		values[1] = new float[] {0, 1, 0, 0};
-		values[2] = new float[] {0, 0, 1, 0};
-		values[3] = new float[] {0, 0, 0, 1};
+		for (int i = 0; i < 16; i++) values[i] = i % 5 == 0 ? 1 : 0;
 		return this;
+	}
+	
+	public Matrix4f set(int i, int j, float value)
+	{
+		values[i * 4 + j] = value;
+		return this;
+	}
+	
+	public float get(int i, int j)
+	{
+		return values[i * 4 + j];
 	}
 	
 	/**
@@ -72,12 +81,12 @@ public class Matrix4f {
 	public Matrix4f orthographicPositive(float width, float height)
 	{
 		identity();
-		values[0][0] = 2 / width;
-		values[1][1] = 2 / height;
-		values[2][2] = -0.02F;
-		values[0][3] = -1;
-		values[1][3] = -1;
-		values[2][3] = 1;
+		set(0, 0, 2 / width);
+		set(1, 1, 2 / height);
+		set(2, 2, -0.02F);
+		set(0, 3, -1);
+		set(1, 3, -1);
+		set(2, 3, 1);
 		return this;
 	}
 	
@@ -94,10 +103,10 @@ public class Matrix4f {
 	public Matrix4f orthographic(float width, float height)
 	{
 		identity();
-		values[0][0] = 2 / width;
-		values[1][1] = 2 / height;
-		values[2][2] = -0.02F;
-		values[2][3] = 1;
+		set(0, 0, 2 / width);
+		set(1, 1, 2 / height);
+		set(2, 2, -0.02F);
+		set(2, 3, 1);
 		return this;
 	}
 	
@@ -115,9 +124,9 @@ public class Matrix4f {
 	public Matrix4f orthographic(float width, float height, float length)
 	{
 		identity();
-		values[0][0] = 2 / width;
-		values[1][1] = 2 / height;
-		values[2][2] = -2 / length;
+		set(0, 0, 2 / width);
+		set(1, 1, 2 / height);
+		set(2, 2, -2 / length);
 		return this;
 	}
 	
@@ -132,14 +141,14 @@ public class Matrix4f {
 	public Matrix4f orthographic(OrthoShape boxShape)
 	{
 		identity();
-		Vector3f start = boxShape.getStart();
-		Vector3f end = boxShape.getEnd();
-		values[0][0] = 2 / (end.x() - start.x());
-		values[1][1] = 2 / (end.y() - start.y());
-		values[2][2] = -2 / (end.z() - start.z());
-		values[0][3] = -(end.x() + start.x()) / (end.x() - start.x());
-		values[1][3] = -(end.y() + start.y()) / (end.y() - start.y());
-		values[2][3] = (end.z() + start.z()) / (end.z() - start.z());
+		Vector3fr start = boxShape.getStart();
+		Vector3fr end = boxShape.getEnd();
+		set(0, 0, 2 / (end.x() - start.x()));
+		set(1, 1, 2 / (end.y() - start.y()));
+		set(2, 2, -2 / (end.z() - start.z()));
+		set(0, 3, -(end.x() + start.x()) / (end.x() - start.x()));
+		set(1, 3, -(end.y() + start.y()) / (end.y() - start.y()));
+		set(2, 3, (end.z() + start.z()) / (end.z() - start.z()));
 		return this;
 	}
 	
@@ -155,9 +164,9 @@ public class Matrix4f {
 	public Matrix4f plane(float width, float height)
 	{
 		identity();
-		values[0][0] = 2 / width;
-		values[1][1] = 2 / height;
-		values[2][2] = -1;
+		set(0, 0, 2 / width);
+		set(1, 1, 2 / height);
+		set(2, 2, -1);
 		return this;
 	}
 	
@@ -172,7 +181,7 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f cursor(float width, float height, Vector2f centerPos)
+	public Matrix4f cursor(float width, float height, Vector2fr centerPos)
 	{
 		return cursor(width, height, centerPos.x(), centerPos.y());
 	}
@@ -192,11 +201,11 @@ public class Matrix4f {
 	public Matrix4f cursor(float width, float height, float centerX, float centerY)
 	{
 		identity();
-		values[0][0] = 2 / width;
-		values[1][1] = 2 / height;
-		values[0][3] = -values[0][0] * centerX;
-		values[1][3] = -values[1][1] * centerY;
-		values[2][2] = -1;
+		set(0, 0, 2 / width);
+		set(1, 1, 2 / height);
+		set(0, 3, -get(0, 0) * centerX);
+		set(1, 3, -get(1, 1) * centerY);
+		set(2, 2, -1);
 		return this;
 	}
 	
@@ -215,12 +224,12 @@ public class Matrix4f {
 		identity();
 		float scale = Math.tan(fieldOfView / 2);
 		float frustum = maxDistance - minDistance;
-		values[0][0] = 1 / scale;
-		values[1][1] = aspectRatio / scale;
-		values[2][2] = -(maxDistance + minDistance) / frustum;
-		values[3][2] = -1;
-		values[2][3] = -2 * maxDistance * minDistance / frustum;
-		values[3][3] = 0;
+		set(0, 0, 1 / scale);
+		set(1, 1, aspectRatio / scale);
+		set(2, 2, -(maxDistance + minDistance) / frustum);
+		set(3, 2, -1);
+		set(2, 3, -2 * maxDistance * minDistance / frustum);
+		set(3, 3, 0);
 		return this;
 	}
 	
@@ -239,12 +248,12 @@ public class Matrix4f {
 		identity();
 		float scale = Math.tan(fieldOfView / 2);
 		float frustum = maxDistance - minDistance;
-		values[0][0] = 1 / scale;
-		values[1][1] = aspectRatio / scale;
-		values[2][2] = -(maxDistance) / frustum;
-		values[3][2] = -1;
-		values[2][3] = -maxDistance * minDistance / frustum;
-		values[3][3] = 0;
+		set(0, 0, 1 / scale);
+		set(1, 1, aspectRatio / scale);
+		set(2, 2, -(maxDistance) / frustum);
+		set(3, 2, -1);
+		set(2, 3, -maxDistance * minDistance / frustum);
+		set(3, 3, 0);
 		return this;
 	}
 	
@@ -257,11 +266,15 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f view(Vector3f position, float rotationX, float rotationY)
+	public Matrix4f view(Vector3fr position, float rotationX, float rotationY)
 	{
 		identity();
 		view(rotationX, rotationY);
-		return multiply(new Matrix4f().translate(Vector3f.copyOf(position).opposite()));
+		return multiply(new Matrix4f()
+			.translateX(-position.x())
+			.translateY(-position.y())
+			.translateZ(-position.z())
+		);
 	}
 	
 	/**
@@ -285,11 +298,11 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f scale(Vector3f vector)
+	public Matrix4f scale(Vector3fr vector)
 	{
-		values[0][0] = vector.x();
-		values[1][1] = vector.y();
-		values[2][2] = vector.z();
+		set(0, 0, vector.x());
+		set(1, 1, vector.y());
+		set(2, 2, vector.z());
 		return this;
 	}
 	
@@ -300,11 +313,11 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f scaleRelative(Vector3f vector)
+	public Matrix4f scaleRelative(Vector3fr vector)
 	{
-		values[0][0] *= vector.x();
-		values[1][1] *= vector.y();
-		values[2][2] *= vector.z();
+		set(0, 0, get(0, 0) * vector.x());
+		set(1, 1, get(1, 1) * vector.y());
+		set(2, 2, get(2, 2) * vector.z());
 		return this;
 	}
 	
@@ -315,11 +328,11 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f translateTo(Vector3f vector)
+	public Matrix4f translateTo(Vector3fr vector)
 	{
-		values[0][3] = vector.x();
-		values[1][3] = vector.y();
-		values[2][3] = vector.z();
+		set(0, 3, vector.x());
+		set(1, 3, vector.y());
+		set(2, 3, vector.z());
 		return this;
 	}
 	
@@ -330,11 +343,11 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f translateTo(Vector3i vector)
+	public Matrix4f translateTo(Vector3ir vector)
 	{
-		values[0][3] = vector.x();
-		values[1][3] = vector.y();
-		values[2][3] = vector.z();
+		set(0, 3, vector.x());
+		set(1, 3, vector.y());
+		set(2, 3, vector.z());
 		return this;
 	}
 	
@@ -347,7 +360,7 @@ public class Matrix4f {
 	 */
 	public Matrix4f translateXTo(float x)
 	{
-		values[0][3] = x;
+		set(0, 3, x);
 		return this;
 	}
 	
@@ -360,7 +373,7 @@ public class Matrix4f {
 	 */
 	public Matrix4f translateYTo(float y)
 	{
-		values[1][3] = y;
+		set(1, 3, y);
 		return this;
 	}
 	
@@ -373,7 +386,7 @@ public class Matrix4f {
 	 */
 	public Matrix4f translateZTo(float z)
 	{
-		values[2][3] = z;
+		set(2, 3, z);
 		return this;
 	}
 	
@@ -386,7 +399,7 @@ public class Matrix4f {
 	 */
 	public Matrix4f translateX(float x)
 	{
-		values[0][3] += x;
+		set(0, 3, get(0, 3) + x);
 		return this;
 	}
 	
@@ -399,7 +412,7 @@ public class Matrix4f {
 	 */
 	public Matrix4f translateY(float y)
 	{
-		values[1][3] += y;
+		set(1, 3, get(1, 3) + y);
 		return this;
 	}
 	
@@ -412,7 +425,7 @@ public class Matrix4f {
 	 */
 	public Matrix4f translateZ(float z)
 	{
-		values[2][3] += z;
+		set(2, 3, get(2, 3) + z);
 		return this;
 	}
 	
@@ -423,11 +436,11 @@ public class Matrix4f {
 	 * 
 	 * @return itself
 	 */
-	public Matrix4f translate(Vector3f vector)
+	public Matrix4f translate(Vector3fr vector)
 	{
-		values[0][3] += vector.x();
-		values[1][3] += vector.y();
-		values[2][3] += vector.z();
+		set(0, 3, get(0, 3) + vector.x());
+		set(1, 3, get(1, 3) + vector.y());
+		set(2, 3, get(2, 3) + vector.z());
 		return this;
 	}
 	
@@ -439,16 +452,16 @@ public class Matrix4f {
 	 * @return itself
 	 */
 	
-	public Matrix4f translate(Vector3i vector)
+	public Matrix4f translate(Vector3ir vector)
 	{
-		values[0][3] += vector.x();
-		values[1][3] += vector.y();
-		values[2][3] += vector.z();
+		set(0, 3, get(0, 3) + vector.x());
+		set(1, 3, get(1, 3) + vector.y());
+		set(2, 3, get(2, 3) + vector.z());
 		return this;
 	}
 	
 	/**
-	 * Reset rotation around {@link Axis#X}
+	 * Reset rotation around {@link Axisf#X}
 	 * 
 	 * @param angle rotation value
 	 * 
@@ -458,15 +471,15 @@ public class Matrix4f {
 	{
 		float cos = Math.cos(angle);
 		float sin = Math.sin(angle);
-		values[1][1] = cos;
-		values[1][2] = -sin;
-		values[2][1] = sin;
-		values[2][2] = cos;
+		set(1, 1, cos);
+		set(1, 2, -sin);
+		set(2, 1, sin);
+		set(2, 2, cos);
 		return this;
 	}
 	
 	/**
-	 * Reset rotation around {@link Axis#Y}
+	 * Reset rotation around {@link Axisf#Y}
 	 * 
 	 * @param angle rotation value
 	 * 
@@ -476,15 +489,15 @@ public class Matrix4f {
 	{
 		float cos = Math.cos(angle);
 		float sin = Math.sin(angle);
-		values[0][0] = cos;
-		values[0][2] = sin;
-		values[2][0] = -sin;
-		values[2][2] = cos;
+		set(0, 0, cos);
+		set(0, 2, sin);
+		set(2, 0, -sin);
+		set(2, 2, cos);
 		return this;
 	}
 	
 	/**
-	 * Reset rotation around {@link Axis#Z}
+	 * Reset rotation around {@link Axisf#Z}
 	 * 
 	 * @param angle rotation value
 	 * 
@@ -494,15 +507,15 @@ public class Matrix4f {
 	{
 		float cos = Math.cos(angle);
 		float sin = Math.sin(angle);
-		values[0][0] = cos;
-		values[0][1] = -sin;
-		values[1][0] = sin;
-		values[1][1] = cos;
+		set(0, 0, cos);
+		set(0, 1, -sin);
+		set(1, 0, sin);
+		set(1, 1, cos);
 		return this;
 	}
 	
 	/**
-	 * Reset rotation around {@link Axis#X} of angleX, then around {@link Axis#Y} of angleY
+	 * Reset rotation around {@link Axisf#X} of angleX, then around {@link Axisf#Y} of angleY
 	 * 
 	 * @param angleX rotation value
 	 * @param angleY rotation value
@@ -515,14 +528,14 @@ public class Matrix4f {
 		float xSin = Math.sin(angleX);
 		float yCos = Math.cos(angleY);
 		float ySin = Math.sin(angleY);
-		values[0][0] = yCos;
-		values[0][2] = ySin;
-		values[1][0] = xSin * ySin;
-		values[1][1] = xCos;
-		values[1][2] = -xSin * yCos;
-		values[2][0] = -xCos * ySin;
-		values[2][1] = xSin;
-		values[2][2] = xCos * yCos;
+		set(0, 0, yCos);
+		set(0, 2, ySin);
+		set(1, 0, xSin * ySin);
+		set(1, 1, xCos);
+		set(1, 2, -xSin * yCos);
+		set(2, 0, -xCos * ySin);
+		set(2, 1, xSin);
+		set(2, 2, xCos * yCos);
 		return this;
 	}
 	
@@ -535,15 +548,15 @@ public class Matrix4f {
 	 */
 	public Matrix4f multiply(Matrix4f other)
 	{
-		float[][] self = new float[4][];
-		for (int i = 0; i < 4; i++) System.arraycopy(values[i], 0, self[i] = new float[4], 0, 4);
+		float[] self = new float[16];
+		System.arraycopy(values, 0, self, 0, 16);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
 				float sum = 0;
-				for (int k = 0; k < 4; k++) sum += self[i][k] * other.values[k][j];
-				values[i][j] = sum;
+				for (int k = 0; k < 4; k++) sum += self[i * 4 + k] * other.get(k, j);
+				set(i, j, sum);
 			}
 		}
 		return this;
@@ -556,16 +569,16 @@ public class Matrix4f {
 	 * 
 	 * @return a newly instanced transformed vector
 	 */
-	public Vector4f multiply(Vector4f vector)
+	public Vector4f multiply(Vector4fr vector)
 	{
 		float x = vector.x();
 		float y = vector.y();
 		float z = vector.z();
 		float w = vector.w();
-		float X = x * values[0][0] + y * values[0][1] + z * values[0][2] + w * values[0][3];
-		float Y = x * values[1][0] + y * values[1][1] + z * values[1][2] + w * values[1][3];
-		float Z = x * values[2][0] + y * values[2][1] + z * values[2][2] + w * values[2][3];
-		float W = x * values[3][0] + y * values[3][1] + z * values[3][2] + w * values[3][3];
+		float X = x * get(0, 0) + y * get(0, 1) + z * get(0, 2) + w * get(0, 3);
+		float Y = x * get(1, 0) + y * get(1, 1) + z * get(1, 2) + w * get(1, 3);
+		float Z = x * get(2, 0) + y * get(2, 1) + z * get(2, 2) + w * get(2, 3);
+		float W = x * get(3, 0) + y * get(3, 1) + z * get(3, 2) + w * get(3, 3);
 		return Vector4f.of(X, Y, Z, W);
 	}
 	
@@ -577,10 +590,10 @@ public class Matrix4f {
 	public float determinant()
 	{
 		float determinant = 0;
-		determinant += values[0][0] * (values[1][1] * (values[2][2] * values[3][3] - values[2][3] * values[3][2]) - values[1][2] * (values[2][1] * values[3][3] - values[2][3] * values[3][1]) + values[1][3] * (values[2][1] * values[3][2] - values[2][2] * values[3][1]));
-		determinant -= values[0][1] * (values[1][0] * (values[2][2] * values[3][3] - values[2][3] * values[3][2]) - values[1][2] * (values[2][0] * values[3][3] - values[2][3] * values[3][0]) + values[1][3] * (values[2][0] * values[3][2] - values[2][2] * values[3][0]));
-		determinant += values[0][2] * (values[1][0] * (values[2][1] * values[3][3] - values[2][3] * values[3][1]) - values[1][1] * (values[2][0] * values[3][3] - values[2][3] * values[3][0]) + values[1][3] * (values[2][0] * values[3][1] - values[2][1] * values[3][0]));
-		determinant -= values[0][3] * (values[1][0] * (values[2][1] * values[3][2] - values[2][2] * values[3][1]) - values[1][1] * (values[2][0] * values[3][2] - values[2][2] * values[3][0]) + values[1][2] * (values[2][0] * values[3][1] - values[2][1] * values[3][0]));
+		determinant += get(0, 0) * (get(1, 1) * (get(2, 2) * get(3, 3) - get(2, 3) * get(3, 2)) - get(1, 2) * (get(2, 1) * get(3, 3) - get(2, 3) * get(3, 1)) + get(1, 3) * (get(2, 1) * get(3, 2) - get(2, 2) * get(3, 1)));
+		determinant -= get(0, 1) * (get(1, 0) * (get(2, 2) * get(3, 3) - get(2, 3) * get(3, 2)) - get(1, 2) * (get(2, 0) * get(3, 3) - get(2, 3) * get(3, 0)) + get(1, 3) * (get(2, 0) * get(3, 2) - get(2, 2) * get(3, 0)));
+		determinant += get(0, 2) * (get(1, 0) * (get(2, 1) * get(3, 3) - get(2, 3) * get(3, 1)) - get(1, 1) * (get(2, 0) * get(3, 3) - get(2, 3) * get(3, 0)) + get(1, 3) * (get(2, 0) * get(3, 1) - get(2, 1) * get(3, 0)));
+		determinant -= get(0, 3) * (get(1, 0) * (get(2, 1) * get(3, 2) - get(2, 2) * get(3, 1)) - get(1, 1) * (get(2, 0) * get(3, 2) - get(2, 2) * get(3, 0)) + get(1, 2) * (get(2, 0) * get(3, 1) - get(2, 1) * get(3, 0)));
 		return determinant;
 	}
 	
@@ -595,9 +608,9 @@ public class Matrix4f {
 		{
 			for (int j = 0; j <= i; j++)
 			{
-				float d = values[i][j];
-				values[i][j] = values[j][i];
-				values[j][i] = d;
+				float d = get(i, j);
+				set(i, j, get(j, i));
+				set(j, i, d);
 			}
 		}
 		return this;
@@ -616,7 +629,7 @@ public class Matrix4f {
 		
 		for (int j = 0; j < 4; j++)
 		{
-			for (int i = 0; i < 4; i++) matrixBlock[j][i] = values[j][i];
+			for (int i = 0; i < 4; i++) matrixBlock[j][i] = get(j, i);
 			for (int i = 0; i < 4; i++) matrixBlock[j][4 + i] = j == i ? 1 : 0;
 		}
 		for (int j = 0; j < 4; j++)
@@ -660,27 +673,22 @@ public class Matrix4f {
 		}
 		
 		Matrix4f matrix = new Matrix4f();
-		for (int i = 0; i < 4; i++) for (int j = 0; j < 4; j++) matrix.values[i][j] = matrixBlock[i][4 + j];
+		for (int i = 0; i < 4; i++) for (int j = 0; j < 4; j++) matrix.set(i, j, matrixBlock[i][4 + j]);
 		return matrix;
 	}
 	
 	public float[] toArray()
 	{
-		return new float[] {
-			values[0][0], values[0][1], values[0][2], values[0][3],
-			values[1][0], values[1][1], values[1][2], values[1][3],
-			values[2][0], values[2][1], values[2][2], values[2][3],
-			values[3][0], values[3][1], values[3][2], values[3][3]
-		};
+		return values;
 	}
 	
 	public float[] toTransposedArray()
 	{
 		return new float[] {
-			values[0][0], values[1][0], values[2][0], values[3][0],
-			values[0][1], values[1][1], values[2][1], values[3][1],
-			values[0][2], values[1][2], values[2][2], values[3][2],
-			values[0][3], values[1][3], values[2][3], values[3][3]
+			get(0, 0), get(1, 0), get(2, 0), get(3, 0),
+			get(0, 1), get(1, 1), get(2, 1), get(3, 1),
+			get(0, 2), get(1, 2), get(2, 2), get(3, 2),
+			get(0, 3), get(1, 3), get(2, 3), get(3, 3)
 		};
 	}
 	
@@ -692,7 +700,7 @@ public class Matrix4f {
 		for (int i = 0; i < 4; i++)
 		{
 			ss.append("[");
-			for (int j = 0; j < 4; j++) ss.append(values[i][j]).append(", ");
+			for (int j = 0; j < 4; j++) ss.append(get(i, j)).append(", ");
 			ss.setCharAt(ss.length() - 2, ']');
 			ss.setCharAt(ss.length() - 1, ',');
 			ss.append(" ");
@@ -707,12 +715,9 @@ public class Matrix4f {
 		if (this == obj) return true;
 		if (obj instanceof Matrix4f m)
 		{
-			for (int i = 0; i < 4; i++)
+			for (int i = 0; i < 4; i++) for (int j = 0; j < 4; j++)
 			{
-				for (int j = 0; j < 4; j++)
-				{
-					if (Math.abs(values[i][j] - m.values[i][j]) > 0.00001F) return false;
-				}
+				if (!Math.looseEquals(get(i, j), m.get(i, j))) return false;
 			}
 			return true;
 		}
