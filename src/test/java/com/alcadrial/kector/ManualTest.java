@@ -9,7 +9,7 @@ import com.alcadrial.kector.vector.axis.Axisi;
 import com.alcadrial.kector.vector.quaternion.Quaternionf;
 import com.alcadrial.kector.vector.quaternion.Quaternionfr;
 
-public class Launch {
+public class ManualTest {
 	
 	private static String blocks = "";
 	
