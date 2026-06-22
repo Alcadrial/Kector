@@ -222,10 +222,30 @@ public class Math {
 	 * @param a a value
 	 * @return the floor fraction of a
 	 */
-	
 	public static float fractionFloor(float a)
 	{
 		return a > 0 ? 1 - a % 1 : a % 1;
+	}
+	
+	public static int align(int a, int alignment)
+	{
+		int q = a / alignment;
+		if (a * alignment == a) return a;
+		return (q + 1) * alignment;
+	}
+	
+	public static long align(long a, int alignment)
+	{
+		long q = a / alignment;
+		if (a * alignment == a) return a;
+		return (q + 1) * alignment;
+	}
+	
+	public static long align(long a, long alignment)
+	{
+		long q = a / alignment;
+		if (a * alignment == a) return a;
+		return (q + 1) * alignment;
 	}
 	
 	/**
@@ -704,6 +724,27 @@ public class Math {
 		return java.lang.Math.floorMod(x, y);
 	}
 	
+	public static int ceilDiv(int x, int y)
+	{
+		int q = x / y;
+		if ((x ^ y) >= 0 && (q * y != x)) return q + 1;
+		return q;
+	}
+	
+	public static long ceilDiv(long x, int y)
+	{
+		long q = x / y;
+		if ((x ^ y) >= 0 && (q * y != x)) return q + 1;
+		return q;
+	}
+	
+	public static long ceilDiv(long x, long y)
+	{
+		long q = x / y;
+		if ((x ^ y) >= 0 && (q * y != x)) return q + 1;
+		return q;
+	}
+	
 	/**
 	 * @see java.lang.Math#abs(int)
 	 */
@@ -1024,23 +1065,19 @@ public class Math {
 			case CEILING -> f <= 0 ? (int) f : f % 1 == 0 ? (int) f : (int) f + 1;
 			case DOWN -> (int) f;
 			case FLOOR -> f >= 0 ? (int) f : f % 1 < 0 ? (int) f - 1 : (int) f;
-			case HALF_DOWN ->
-			{
+			case HALF_DOWN -> {
 				float r = f % 1;
 				yield r > 0.5 ? (int) f + 1 : r < 0.5 ? (int) f - 1 : (int) f;
 			}
-			case HALF_EVEN ->
-			{
+			case HALF_EVEN -> {
 				float r = f % 1;
 				yield r > 0.5 ? (int) f + 1 : r < -0.5 ? (int) f - 1 : (int) f % 2 == 0 ? (int) f + 1 : (int) f;
 			}
-			case HALF_UP ->
-			{
+			case HALF_UP -> {
 				float r = f % 1;
 				yield r >= 0.5 ? (int) f + 1 : r <= -0.5 ? (int) f - 1 : (int) f;
 			}
-			case UNNECESSARY ->
-			{
+			case UNNECESSARY -> {
 				if (f % 1 != 0) throw new ArithmeticException();
 				yield (int) f;
 			}
@@ -1055,23 +1092,19 @@ public class Math {
 			case CEILING -> d <= 0 ? (int) d : d % 1 == 0 ? (int) d : (int) d + 1;
 			case DOWN -> (int) d;
 			case FLOOR -> d >= 0 ? (int) d : d % 1 < 0 ? (int) d - 1 : (int) d;
-			case HALF_DOWN ->
-			{
+			case HALF_DOWN -> {
 				double r = d % 1;
 				yield r > 0.5 ? (int) d + 1 : r < 0.5 ? (int) d - 1 : (int) d;
 			}
-			case HALF_EVEN ->
-			{
+			case HALF_EVEN -> {
 				double r = d % 1;
 				yield r > 0.5 ? (int) d + 1 : r < -0.5 ? (int) d - 1 : (int) d % 2 == 0 ? (int) d + 1 : (int) d;
 			}
-			case HALF_UP ->
-			{
+			case HALF_UP -> {
 				double r = d % 1;
 				yield r >= 0.5 ? (int) d + 1 : r <= -0.5 ? (int) d - 1 : (int) d;
 			}
-			case UNNECESSARY ->
-			{
+			case UNNECESSARY -> {
 				if (d % 1 != 0) throw new ArithmeticException();
 				yield (int) d;
 			}
@@ -1086,23 +1119,19 @@ public class Math {
 			case CEILING -> f <= 0 ? (long) f : f % 1 == 0 ? (long) f : (long) f + 1;
 			case DOWN -> (long) f;
 			case FLOOR -> f >= 0 ? (long) f : f % 1 < 0 ? (long) f - 1 : (long) f;
-			case HALF_DOWN ->
-			{
+			case HALF_DOWN -> {
 				float r = f % 1;
 				yield r > 0.5 ? (long) f + 1 : r < 0.5 ? (long) f - 1 : (long) f;
 			}
-			case HALF_EVEN ->
-			{
+			case HALF_EVEN -> {
 				float r = f % 1;
 				yield r > 0.5 ? (long) f + 1 : r < -0.5 ? (long) f - 1 : (long) f % 2 == 0 ? (long) f + 1 : (long) f;
 			}
-			case HALF_UP ->
-			{
+			case HALF_UP -> {
 				float r = f % 1;
 				yield r >= 0.5 ? (long) f + 1 : r <= -0.5 ? (long) f - 1 : (long) f;
 			}
-			case UNNECESSARY ->
-			{
+			case UNNECESSARY -> {
 				if (f % 1 != 0) throw new ArithmeticException();
 				yield (long) f;
 			}
@@ -1117,23 +1146,19 @@ public class Math {
 			case CEILING -> d <= 0 ? (long) d : d % 1 == 0 ? (long) d : (long) d + 1;
 			case DOWN -> (long) d;
 			case FLOOR -> d >= 0 ? (long) d : d % 1 < 0 ? (long) d - 1 : (long) d;
-			case HALF_DOWN ->
-			{
+			case HALF_DOWN -> {
 				double r = d % 1;
 				yield r > 0.5 ? (long) d + 1 : r < 0.5 ? (long) d - 1 : (long) d;
 			}
-			case HALF_EVEN ->
-			{
+			case HALF_EVEN -> {
 				double r = d % 1;
 				yield r > 0.5 ? (long) d + 1 : r < -0.5 ? (long) d - 1 : (long) d % 2 == 0 ? (long) d + 1 : (long) d;
 			}
-			case HALF_UP ->
-			{
+			case HALF_UP -> {
 				double r = d % 1;
 				yield r >= 0.5 ? (long) d + 1 : r <= -0.5 ? (long) d - 1 : (long) d;
 			}
-			case UNNECESSARY ->
-			{
+			case UNNECESSARY -> {
 				if (d % 1 != 0) throw new ArithmeticException();
 				yield (long) d;
 			}
