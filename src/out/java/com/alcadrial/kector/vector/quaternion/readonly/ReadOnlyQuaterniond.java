@@ -63,4 +63,9 @@ public class ReadOnlyQuaterniond extends ReadOnlyVector4d implements Quaterniond
 	{
 		return w();
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Quaterniondr{").append(i()).append("i + ").append(j()).append("j + ").append(k()).append("k + ").append(r()).append("}").toString();
+	}
 }

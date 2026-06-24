@@ -279,4 +279,9 @@ public class MutableVector2d extends AbstractVector2d implements Vector2d {
 	{
 		return x(x).y(y);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector2d{").append(x()).append(", ").append(y()).append("}").toString();
+	}
 }

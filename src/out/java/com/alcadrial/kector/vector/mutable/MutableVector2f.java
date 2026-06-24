@@ -279,4 +279,9 @@ public class MutableVector2f extends AbstractVector2f implements Vector2f {
 	{
 		return x(x).y(y);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector2f{").append(x()).append(", ").append(y()).append("}").toString();
+	}
 }

@@ -109,4 +109,9 @@ public class ReadOnlyVector4i extends AbstractVector4i {
 	{
 		return w;
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector4ir{").append(x()).append(", ").append(y()).append(", ").append(z()).append(", ").append(w()).append("}").toString();
+	}
 }

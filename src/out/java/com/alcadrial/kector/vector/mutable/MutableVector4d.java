@@ -675,4 +675,9 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 	{
 		return x(x).y(y).z(z).w(w);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector4d{").append(x()).append(", ").append(y()).append(", ").append(z()).append(", ").append(w()).append("}").toString();
+	}
 }

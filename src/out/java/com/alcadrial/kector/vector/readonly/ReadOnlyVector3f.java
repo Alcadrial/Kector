@@ -80,4 +80,9 @@ public class ReadOnlyVector3f extends AbstractVector3f {
 	{
 		return z;
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector3fr{").append(x()).append(", ").append(y()).append(", ").append(z()).append("}").toString();
+	}
 }

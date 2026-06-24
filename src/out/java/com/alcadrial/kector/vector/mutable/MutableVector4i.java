@@ -687,4 +687,9 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 	{
 		return x(x).y(y).z(z).w(w);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector4i{").append(x()).append(", ").append(y()).append(", ").append(z()).append(", ").append(w()).append("}").toString();
+	}
 }

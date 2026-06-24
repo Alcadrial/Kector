@@ -615,4 +615,9 @@ public class MutableQuaterniond extends MutableVector4d implements Quaterniond {
 		return (Quaterniond) super.setAll(vector);
 	}
 
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Quaterniond{").append(i()).append("i + ").append(j()).append("j + ").append(k()).append("k + ").append(r()).append("}").toString();
+	}
 }

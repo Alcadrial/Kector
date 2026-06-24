@@ -84,6 +84,10 @@ public final class Axisl {
 		{
 			return 0;
 		}
+		public String toString()
+		{
+			return "Axis{X}";
+		}
 	}
 	public static final class NX extends AbstractVector4l implements Vector4lr {
 	
@@ -106,6 +110,10 @@ public final class Axisl {
 		public long w()
 		{
 			return 0;
+		}
+		public String toString()
+		{
+			return "Axis{-X}";
 		}
 	}
 	public static final class Y extends AbstractVector4l implements Vector4lr {
@@ -130,6 +138,10 @@ public final class Axisl {
 		{
 			return 0;
 		}
+		public String toString()
+		{
+			return "Axis{Y}";
+		}
 	}
 	public static final class NY extends AbstractVector4l implements Vector4lr {
 	
@@ -152,6 +164,10 @@ public final class Axisl {
 		public long w()
 		{
 			return 0;
+		}
+		public String toString()
+		{
+			return "Axis{-Y}";
 		}
 	}
 	public static final class Z extends AbstractVector4l implements Vector4lr {
@@ -176,6 +192,10 @@ public final class Axisl {
 		{
 			return 0;
 		}
+		public String toString()
+		{
+			return "Axis{Z}";
+		}
 	}
 	public static final class NZ extends AbstractVector4l implements Vector4lr {
 	
@@ -198,6 +218,10 @@ public final class Axisl {
 		public long w()
 		{
 			return 0;
+		}
+		public String toString()
+		{
+			return "Axis{-Z}";
 		}
 	}
 	public static final class W extends AbstractVector4l implements Vector4lr {
@@ -222,6 +246,10 @@ public final class Axisl {
 		{
 			return 1;
 		}
+		public String toString()
+		{
+			return "Axis{W}";
+		}
 	}
 	public static final class NW extends AbstractVector4l implements Vector4lr {
 	
@@ -244,6 +272,10 @@ public final class Axisl {
 		public long w()
 		{
 			return -1;
+		}
+		public String toString()
+		{
+			return "Axis{-W}";
 		}
 	}
 }

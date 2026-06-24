@@ -486,4 +486,9 @@ public class MutableVector3l extends AbstractVector3l implements Vector3l {
 	{
 		return x(x).y(y).z(z);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector3l{").append(x()).append(", ").append(y()).append(", ").append(z()).append("}").toString();
+	}
 }

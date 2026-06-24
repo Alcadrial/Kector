@@ -54,4 +54,9 @@ public class ReadOnlyVector2f extends AbstractVector2f {
 	{
 		return y;
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector2fr{").append(x()).append(", ").append(y()).append("}").toString();
+	}
 }

@@ -615,4 +615,9 @@ public class MutableQuaternionf extends MutableVector4f implements Quaternionf {
 		return (Quaternionf) super.setAll(vector);
 	}
 
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Quaternionf{").append(i()).append("i + ").append(j()).append("j + ").append(k()).append("k + ").append(r()).append("}").toString();
+	}
 }

@@ -936,6 +936,17 @@ public class Launch {
 			return ss.replace(ss.length() - 1, ss.length(), ";").toString();
 		}
 		
+		String buildToStringBody(String className, int components)
+		{
+			StringBuilder ss = new StringBuilder(25);
+			ss.append("StringBuilder ss = new StringBuilder(25);\n");
+			ss.append("return ss.append(\"").append(className).append("{\").append(");
+			for (int k = 0; k < components; k++) ss.append(componentsNames[k]).append("()).append(\", \").append(");
+			ss.setLength(ss.length() - 12);
+			ss.append("}\").toString();");
+			return ss.toString();
+		}
+		
 		static int[] minorKeys(int k)
 		{
 			return switch (k)
@@ -1215,6 +1226,17 @@ public class Launch {
 				return ss.substring(0, ss.length() - 2);
 			}
 			
+			String buildToStringBody(String className, int components)
+			{
+				StringBuilder ss = new StringBuilder(25);
+				ss.append("StringBuilder ss = new StringBuilder(25);\n");
+				ss.append("return ss.append(\"").append(className).append("{\").append(");
+				for (int k = 0; k < components; k++) ss.append(componentsNames[k]).append("()).append(\"").append(componentsNames[k]).append(" + \").append(");
+				ss.setLength(ss.length() - 14);
+				ss.append("}\").toString();");
+				return ss.toString();
+			}
+			
 			class Mutable {
 				
 				void gen(Path parent) throws IOException
@@ -1320,6 +1342,9 @@ public class Launch {
 						
 						//overrides
 						genOverrides(stream, 4, elementType, false, interfaceName, true);
+
+						//toString
+						stream.append(indent(buildMethod("public", "String", "toString", "", buildToStringBody(interfaceName, 4)), 1));
 						
 						stream.append(buildClassFooter());
 					}
@@ -1381,6 +1406,8 @@ public class Launch {
 							stream.append(indent(buildMethod("public", elementType.typeName, "get" + componentsNames[k].toUpperCase(), "", buildDelegateReturnBody(componentsNames[k], "")), 1));
 							stream.append(indent(buildMethod("public", elementType.typeName, componentsNames[k], "", "return " + Vector.componentsNames[k] + "();"), 1));
 						}
+						//toString
+						stream.append(indent(buildMethod("public", "String", "toString", "", buildToStringBody(interfaceName, 4)), 1));
 						
 						stream.append(buildClassFooter());
 					}
@@ -1469,6 +1496,9 @@ public class Launch {
 						String name = componentsNames[k];
 						stream.append(indent(buildMethod("public", elementType.typeName, name, "", "return " + name + ";"), 1));
 					}
+					//toString
+					stream.append(indent(buildMethod("public", "String", "toString", "", buildToStringBody(interfaceName + "r", components)), 1));
+					
 					stream.append(buildClassFooter());
 				}
 			}
@@ -1677,6 +1707,8 @@ public class Launch {
 					{
 						stream.append(indent(buildMethod("public", interfaceName, "setAll", buildComponentParams(k, elementType), buildDelegateSetBody(k, elementType, elementType, null)), 1));
 					}
+					//toString
+					stream.append(indent(buildMethod("public", "String", "toString", "", buildToStringBody(interfaceName, components)), 1));
 					
 					stream.append(buildClassFooter());
 				}
@@ -1804,6 +1836,9 @@ public class Launch {
 								}
 								""".formatted(elementType.typeName, Vector.componentsNames[l], l == k ? 1 : 0), 2));
 						}
+						//toString
+						stream.append(indent(buildMethod("public", "String", "toString", "", "return \"Axis{" + names[k] + "}\";"), 2));
+						
 						stream.append(indent(buildClassFooter(), 1));
 						stream.append("\n");
 						stream.append(indent("public static final class N" + names[k] + " extends " + abstractClazzName + " implements " + readOnlyInterfaceName + " {\n\n", 1));
@@ -1817,6 +1852,9 @@ public class Launch {
 								}
 								""".formatted(elementType.typeName, Vector.componentsNames[l], l == k ? -1 : 0), 2));
 						}
+						//toString
+						stream.append(indent(buildMethod("public", "String", "toString", "", "return \"Axis{-" + names[k] + "}\";"), 2));
+						
 						stream.append(indent(buildClassFooter(), 1));
 						stream.append("\n");
 					}

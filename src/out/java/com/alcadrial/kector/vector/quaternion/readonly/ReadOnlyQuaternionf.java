@@ -63,4 +63,9 @@ public class ReadOnlyQuaternionf extends ReadOnlyVector4f implements Quaternionf
 	{
 		return w();
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Quaternionfr{").append(i()).append("i + ").append(j()).append("j + ").append(k()).append("k + ").append(r()).append("}").toString();
+	}
 }

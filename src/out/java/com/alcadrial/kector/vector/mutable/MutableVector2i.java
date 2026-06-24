@@ -291,4 +291,9 @@ public class MutableVector2i extends AbstractVector2i implements Vector2i {
 	{
 		return x(x).y(y);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector2i{").append(x()).append(", ").append(y()).append("}").toString();
+	}
 }

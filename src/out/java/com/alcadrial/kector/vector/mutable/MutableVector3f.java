@@ -473,4 +473,9 @@ public class MutableVector3f extends AbstractVector3f implements Vector3f {
 	{
 		return x(x).y(y).z(z);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector3f{").append(x()).append(", ").append(y()).append(", ").append(z()).append("}").toString();
+	}
 }

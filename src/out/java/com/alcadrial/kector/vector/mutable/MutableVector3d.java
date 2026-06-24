@@ -473,4 +473,9 @@ public class MutableVector3d extends AbstractVector3d implements Vector3d {
 	{
 		return x(x).y(y).z(z);
 	}
+	public String toString()
+	{
+		StringBuilder ss = new StringBuilder(25);
+		return ss.append("Vector3d{").append(x()).append(", ").append(y()).append(", ").append(z()).append("}").toString();
+	}
 }
