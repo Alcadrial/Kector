@@ -2373,27 +2373,27 @@ public class VectorMath {
 		float x = v.x(), y = v.y(), z = v.z();
 		float i = q.i(), j = q.j(), k = q.k(), r = q.r();
 		float i2 = i * i, j2 = j * j, k2 = k * k, r2 = r * r;
-		return v.setAll(x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * y)), y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k)), z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k)));
+		return v.setAll(x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * j)), y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k)), z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k)));
 	}
 	public static Vector3d rotate(Quaternionfr q, Vector3d v)
 	{
 		double x = v.x(), y = v.y(), z = v.z();
 		double i = q.i(), j = q.j(), k = q.k(), r = q.r();
 		double i2 = i * i, j2 = j * j, k2 = k * k, r2 = r * r;
-		return v.setAll(x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * y)), y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k)), z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k)));
+		return v.setAll(x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * j)), y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k)), z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k)));
 	}
 	public static Vector3f rotate(Quaterniondr q, Vector3f v)
 	{
 		double x = v.x(), y = v.y(), z = v.z();
 		double i = q.i(), j = q.j(), k = q.k(), r = q.r();
 		double i2 = i * i, j2 = j * j, k2 = k * k, r2 = r * r;
-		return v.setAll((float) (x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * y))), (float) (y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k))), (float) (z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k))));
+		return v.setAll((float) (x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * j))), (float) (y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k))), (float) (z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k))));
 	}
 	public static Vector3d rotate(Quaterniondr q, Vector3d v)
 	{
 		double x = v.x(), y = v.y(), z = v.z();
 		double i = q.i(), j = q.j(), k = q.k(), r = q.r();
 		double i2 = i * i, j2 = j * j, k2 = k * k, r2 = r * r;
-		return v.setAll(x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * y)), y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k)), z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k)));
+		return v.setAll(x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * j)), y * (r2 - i2 + j2 - k2) + 2 * (x * (r * k + i * j) + z * (-r * i + j * k)), z * (r2 - i2 - j2 + k2) + 2 * (x * (-r * j + i * k) + y * (r * i + j * k)));
 	}
 }

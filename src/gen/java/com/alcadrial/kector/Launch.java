@@ -248,7 +248,7 @@ public class Launch {
 						.append(d.typeName).append(" i2 = i * i, j2 = j * j, k2 = k * k, r2 = r * r;\n")
 						.append("return v.setAll(");
 					if (vt != d) ss.append("(").append(vt.typeName).append(") (");
-					ss.append("x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * y))");
+					ss.append("x * (r2 + i2 - j2 - k2) + 2 * (y * (i * j - r * k) + z * (i * k + r * j))");
 					if (vt != d) ss.append(")");
 					ss.append(", ");
 					if (vt != d) ss.append("(").append(vt.typeName).append(") (");
