@@ -229,23 +229,23 @@ public class Math {
 	
 	public static int align(int a, int alignment)
 	{
-		int q = a / alignment;
-		if (a * alignment == a) return a;
-		return (q + 1) * alignment;
+		int b = a / alignment * alignment;
+		if (b == a) return a;
+		return b + alignment;
 	}
 	
 	public static long align(long a, int alignment)
 	{
-		long q = a / alignment;
-		if (a * alignment == a) return a;
-		return (q + 1) * alignment;
+		long b = a / alignment * alignment;
+		if (b == a) return a;
+		return b + alignment;
 	}
 	
 	public static long align(long a, long alignment)
 	{
-		long q = a / alignment;
-		if (a * alignment == a) return a;
-		return (q + 1) * alignment;
+		long b = a / alignment * alignment;
+		if (b == a) return a;
+		return b + alignment;
 	}
 	
 	/**
