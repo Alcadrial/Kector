@@ -282,6 +282,21 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 		return this;
 	}
 
+	public Vector4f crossProduct(Vector3ir vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector4f crossProduct(int x, int y, int z)
+	{
+		float x0 = this.y * z - this.z * y;
+		float y0 = this.z * x - this.x * z;
+		float z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector4f setAll(Vector3ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -304,6 +319,11 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 	public Vector4f divide(Vector3lr vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z());
+	}
+
+	public Vector4f crossProduct(Vector3lr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
 	}
 
 	public Vector4f setAll(Vector3lr vector)
@@ -358,6 +378,21 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 		return this;
 	}
 
+	public Vector4f crossProduct(Vector3fr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector4f crossProduct(float x, float y, float z)
+	{
+		float x0 = this.y * z - this.z * y;
+		float y0 = this.z * x - this.x * z;
+		float z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector4f setAll(Vector3fr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -380,6 +415,11 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 	public Vector4f divide(Vector3dr vector)
 	{
 		return divide((float) vector.x(), (float) vector.y(), (float) vector.z());
+	}
+
+	public Vector4f crossProduct(Vector3dr vector)
+	{
+		return crossProduct((float) vector.x(), (float) vector.y(), (float) vector.z());
 	}
 
 	public Vector4f setAll(Vector3dr vector)
@@ -438,6 +478,22 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 		return this;
 	}
 
+	public Vector4f projectiveCrossProduct(Vector4ir vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+	public Vector4f projectiveCrossProduct(int x, int y, int z, int w)
+	{
+		float x0 = this.y * z - this.z * y;
+		float y0 = this.z * x - this.x * z;
+		float z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		this.w *= w;
+		return this;
+	}
+
 	public Vector4f setAll(Vector4ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z()).w(vector.w());
@@ -460,6 +516,11 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 	public Vector4f divide(Vector4lr vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+
+	public Vector4f projectiveCrossProduct(Vector4lr vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
 	}
 
 	public Vector4f setAll(Vector4lr vector)
@@ -518,6 +579,22 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 		return this;
 	}
 
+	public Vector4f projectiveCrossProduct(Vector4fr vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+	public Vector4f projectiveCrossProduct(float x, float y, float z, float w)
+	{
+		float x0 = this.y * z - this.z * y;
+		float y0 = this.z * x - this.x * z;
+		float z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		this.w *= w;
+		return this;
+	}
+
 	public Vector4f setAll(Vector4fr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z()).w(vector.w());
@@ -540,6 +617,11 @@ public class MutableVector4f extends AbstractVector4f implements Vector4f {
 	public Vector4f divide(Vector4dr vector)
 	{
 		return divide((float) vector.x(), (float) vector.y(), (float) vector.z(), (float) vector.w());
+	}
+
+	public Vector4f projectiveCrossProduct(Vector4dr vector)
+	{
+		return projectiveCrossProduct((float) vector.x(), (float) vector.y(), (float) vector.z(), (float) vector.w());
 	}
 
 	public Vector4f setAll(Vector4dr vector)

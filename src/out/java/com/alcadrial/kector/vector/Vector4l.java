@@ -119,6 +119,13 @@ public interface Vector4l extends Vector4lr, Vector3l {
 	Vector4l divideAll(double value, RoundingMode roundingMode);
 	Vector4l divideAll(long value);
 
+	Vector4l projectiveCrossProduct(Vector4ir vector);
+	Vector4l projectiveCrossProduct(Vector4lr vector);
+	Vector4l projectiveCrossProduct(Vector4fr vector, RoundingMode roundingMode);
+	Vector4l projectiveCrossProduct(Vector4dr vector, RoundingMode roundingMode);
+	Vector4l projectiveCrossProduct(long x, long y, long z, long w);
+	Vector4l projectiveCrossProduct(double x, double y, double z, double w, RoundingMode roundingMode);
+
 	Vector4l opposite();
 	Vector4l absolute();
 	Vector4l conjugate();

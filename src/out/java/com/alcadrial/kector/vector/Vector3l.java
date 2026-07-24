@@ -99,6 +99,13 @@ public interface Vector3l extends Vector3lr, Vector2l {
 	Vector3l divideAll(double value, RoundingMode roundingMode);
 	Vector3l divideAll(long value);
 
+	Vector3l crossProduct(Vector3ir vector);
+	Vector3l crossProduct(Vector3lr vector);
+	Vector3l crossProduct(Vector3fr vector, RoundingMode roundingMode);
+	Vector3l crossProduct(Vector3dr vector, RoundingMode roundingMode);
+	Vector3l crossProduct(long x, long y, long z);
+	Vector3l crossProduct(double x, double y, double z, RoundingMode roundingMode);
+
 	Vector3l opposite();
 	Vector3l absolute();
 	Vector3l conjugate();

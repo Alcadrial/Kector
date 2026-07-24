@@ -260,6 +260,21 @@ public class MutableVector3f extends AbstractVector3f implements Vector3f {
 		return this;
 	}
 
+	public Vector3f crossProduct(Vector3ir vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector3f crossProduct(int x, int y, int z)
+	{
+		float x0 = this.y * z - this.z * y;
+		float y0 = this.z * x - this.x * z;
+		float z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector3f setAll(Vector3ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -282,6 +297,11 @@ public class MutableVector3f extends AbstractVector3f implements Vector3f {
 	public Vector3f divide(Vector3lr vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z());
+	}
+
+	public Vector3f crossProduct(Vector3lr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
 	}
 
 	public Vector3f setAll(Vector3lr vector)
@@ -336,6 +356,21 @@ public class MutableVector3f extends AbstractVector3f implements Vector3f {
 		return this;
 	}
 
+	public Vector3f crossProduct(Vector3fr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector3f crossProduct(float x, float y, float z)
+	{
+		float x0 = this.y * z - this.z * y;
+		float y0 = this.z * x - this.x * z;
+		float z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector3f setAll(Vector3fr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -358,6 +393,11 @@ public class MutableVector3f extends AbstractVector3f implements Vector3f {
 	public Vector3f divide(Vector3dr vector)
 	{
 		return divide((float) vector.x(), (float) vector.y(), (float) vector.z());
+	}
+
+	public Vector3f crossProduct(Vector3dr vector)
+	{
+		return crossProduct((float) vector.x(), (float) vector.y(), (float) vector.z());
 	}
 
 	public Vector3f setAll(Vector3dr vector)

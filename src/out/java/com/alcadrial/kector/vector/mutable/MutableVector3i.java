@@ -253,6 +253,21 @@ public class MutableVector3i extends AbstractVector3i implements Vector3i {
 		return this;
 	}
 
+	public Vector3i crossProduct(Vector3ir vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector3i crossProduct(int x, int y, int z)
+	{
+		int x0 = this.y * z - this.z * y;
+		int y0 = this.z * x - this.x * z;
+		int z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector3i setAll(Vector3ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -275,6 +290,11 @@ public class MutableVector3i extends AbstractVector3i implements Vector3i {
 	public Vector3i divide(Vector3lr vector)
 	{
 		return divide((int) vector.x(), (int) vector.y(), (int) vector.z());
+	}
+
+	public Vector3i crossProduct(Vector3lr vector)
+	{
+		return crossProduct((int) vector.x(), (int) vector.y(), (int) vector.z());
 	}
 
 	public Vector3i setAll(Vector3lr vector)
@@ -317,6 +337,15 @@ public class MutableVector3i extends AbstractVector3i implements Vector3i {
 		return divide(toInt(x, roundingMode), toInt(y, roundingMode), toInt(z, roundingMode));
 	}
 
+	public Vector3i crossProduct(Vector3fr vector, RoundingMode roundingMode)
+	{
+		return crossProduct(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode));
+	}
+	public Vector3i crossProduct(float x, float y, float z, RoundingMode roundingMode)
+	{
+		return crossProduct(toInt(x, roundingMode), toInt(y, roundingMode), toInt(z, roundingMode));
+	}
+
 	public Vector3i setAll(Vector3fr vector, RoundingMode roundingMode)
 	{
 		return x(toInt(vector.x(), roundingMode)).y(toInt(vector.y(), roundingMode)).z(toInt(vector.z(), roundingMode));
@@ -339,6 +368,11 @@ public class MutableVector3i extends AbstractVector3i implements Vector3i {
 	public Vector3i divide(Vector3dr vector, RoundingMode roundingMode)
 	{
 		return divide(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode));
+	}
+
+	public Vector3i crossProduct(Vector3dr vector, RoundingMode roundingMode)
+	{
+		return crossProduct(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode));
 	}
 
 	public Vector3i setAll(Vector3dr vector, RoundingMode roundingMode)

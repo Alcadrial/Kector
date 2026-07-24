@@ -93,6 +93,13 @@ public interface Vector3f extends Vector3fr, Vector2f {
 	Vector3f divideAll(int value);
 	Vector3f divideAll(float value);
 
+	Vector3f crossProduct(Vector3ir vector);
+	Vector3f crossProduct(Vector3lr vector);
+	Vector3f crossProduct(Vector3fr vector);
+	Vector3f crossProduct(Vector3dr vector);
+	Vector3f crossProduct(float x, float y, float z);
+	Vector3f crossProduct(int x, int y, int z);
+
 	Vector3f opposite();
 	Vector3f absolute();
 	Vector3f conjugate();

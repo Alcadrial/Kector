@@ -247,6 +247,11 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 		return divide(vector.x(), vector.y(), vector.z());
 	}
 
+	public Vector4l crossProduct(Vector3ir vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+
 	public Vector4l setAll(Vector3ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -299,6 +304,21 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 		return this;
 	}
 
+	public Vector4l crossProduct(Vector3lr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector4l crossProduct(long x, long y, long z)
+	{
+		long x0 = this.y * z - this.z * y;
+		long y0 = this.z * x - this.x * z;
+		long z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector4l setAll(Vector3lr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -321,6 +341,11 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 	public Vector4l divide(Vector3fr vector, RoundingMode roundingMode)
 	{
 		return divide(toLong(vector.x(), roundingMode), toLong(vector.y(), roundingMode), toLong(vector.z(), roundingMode));
+	}
+
+	public Vector4l crossProduct(Vector3fr vector, RoundingMode roundingMode)
+	{
+		return crossProduct(toLong(vector.x(), roundingMode), toLong(vector.y(), roundingMode), toLong(vector.z(), roundingMode));
 	}
 
 	public Vector4l setAll(Vector3fr vector, RoundingMode roundingMode)
@@ -363,6 +388,15 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 		return divide(toLong(x, roundingMode), toLong(y, roundingMode), toLong(z, roundingMode), toLong(w, roundingMode));
 	}
 
+	public Vector4l crossProduct(Vector3dr vector, RoundingMode roundingMode)
+	{
+		return crossProduct(toLong(vector.x(), roundingMode), toLong(vector.y(), roundingMode), toLong(vector.z(), roundingMode));
+	}
+	public Vector4l crossProduct(double x, double y, double z, RoundingMode roundingMode)
+	{
+		return crossProduct(toLong(x, roundingMode), toLong(y, roundingMode), toLong(z, roundingMode));
+	}
+
 	public Vector4l setAll(Vector3dr vector, RoundingMode roundingMode)
 	{
 		return x(toLong(vector.x(), roundingMode)).y(toLong(vector.y(), roundingMode)).z(toLong(vector.z(), roundingMode));
@@ -385,6 +419,11 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 	public Vector4l divide(Vector4ir vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+
+	public Vector4l projectiveCrossProduct(Vector4ir vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
 	}
 
 	public Vector4l setAll(Vector4ir vector)
@@ -443,6 +482,22 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 		return this;
 	}
 
+	public Vector4l projectiveCrossProduct(Vector4lr vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+	public Vector4l projectiveCrossProduct(long x, long y, long z, long w)
+	{
+		long x0 = this.y * z - this.z * y;
+		long y0 = this.z * x - this.x * z;
+		long z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		this.w *= w;
+		return this;
+	}
+
 	public Vector4l setAll(Vector4lr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z()).w(vector.w());
@@ -465,6 +520,11 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 	public Vector4l divide(Vector4fr vector, RoundingMode roundingMode)
 	{
 		return divide(toLong(vector.x(), roundingMode), toLong(vector.y(), roundingMode), toLong(vector.z(), roundingMode), toLong(vector.w(), roundingMode));
+	}
+
+	public Vector4l projectiveCrossProduct(Vector4fr vector, RoundingMode roundingMode)
+	{
+		return projectiveCrossProduct(toLong(vector.x(), roundingMode), toLong(vector.y(), roundingMode), toLong(vector.z(), roundingMode), toLong(vector.w(), roundingMode));
 	}
 
 	public Vector4l setAll(Vector4fr vector, RoundingMode roundingMode)
@@ -505,6 +565,15 @@ public class MutableVector4l extends AbstractVector4l implements Vector4l {
 	public Vector4l divide(double x, double y, double z, double w, RoundingMode roundingMode)
 	{
 		return divide(toLong(x, roundingMode), toLong(y, roundingMode), toLong(z, roundingMode), toLong(w, roundingMode));
+	}
+
+	public Vector4l projectiveCrossProduct(Vector4dr vector, RoundingMode roundingMode)
+	{
+		return projectiveCrossProduct(toLong(vector.x(), roundingMode), toLong(vector.y(), roundingMode), toLong(vector.z(), roundingMode), toLong(vector.w(), roundingMode));
+	}
+	public Vector4l projectiveCrossProduct(double x, double y, double z, double w, RoundingMode roundingMode)
+	{
+		return projectiveCrossProduct(toLong(x, roundingMode), toLong(y, roundingMode), toLong(z, roundingMode), toLong(w, roundingMode));
 	}
 
 	public Vector4l setAll(Vector4dr vector, RoundingMode roundingMode)

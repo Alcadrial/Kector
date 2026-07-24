@@ -411,9 +411,11 @@ public class Launch {
 					
 					if (!readOnly)
 					{
-						// vector op vector TODO (crossProduct, projectiveCrossProduct)
-						for (String name : new String[] {"add", "subtract", "multiply", "divide"})
+						// vector op vector
+						for (String name : new String[] {"add", "subtract", "multiply", "divide", "crossProduct", "projectiveCrossProduct"})
 						{
+							if (components != 3 && name.equals("crossProduct")) continue;
+							if (components != 4 && name.equals("projectiveCrossProduct")) continue;
 							for (ElementType t : ElementType.values())
 							{
 								if (elementType.isIntegerType() && !t.isIntegerType())
@@ -428,10 +430,14 @@ public class Launch {
 							stream.append(indent(buildInterfaceMethod(clazzName, name, buildComponentParams(components, elementType)), 1));
 							if (elementType.isIntegerType()) stream.append(indent(buildInterfaceMethod(clazzName, name, buildComponentParams(components, elementType.floatingPointType(), "RoundingMode roundingMode")), 1));
 							else stream.append(indent(buildInterfaceMethod(clazzName, name, buildComponentParams(components, elementType.integerType())), 1));
-							name += "All";
-							if (elementType.isIntegerType()) stream.append(indent(buildInterfaceMethod(clazzName, name, elementType.floatingPointType().typeName + " value, RoundingMode roundingMode"), 1));
-							else stream.append(indent(buildInterfaceMethod(clazzName, name, elementType.integerType().typeName + " value"), 1));
-							stream.append(indent(buildInterfaceMethod(clazzName, name, elementType.typeName + " value"), 1));
+							
+							if (!name.equals("crossProduct") && !name.equals("projectiveCrossProduct"))
+							{
+								name += "All";
+								if (elementType.isIntegerType()) stream.append(indent(buildInterfaceMethod(clazzName, name, elementType.floatingPointType().typeName + " value, RoundingMode roundingMode"), 1));
+								else stream.append(indent(buildInterfaceMethod(clazzName, name, elementType.integerType().typeName + " value"), 1));
+								stream.append(indent(buildInterfaceMethod(clazzName, name, elementType.typeName + " value"), 1));
+							}
 							stream.append("\n");
 						}
 						//transformations
@@ -529,7 +535,6 @@ public class Launch {
 						}
 						stream.append("\n");
 					}
-					//copy TODO copy methods
 				}
 				stream.append(buildClassFooter());
 			}
@@ -1342,7 +1347,7 @@ public class Launch {
 						
 						//overrides
 						genOverrides(stream, 4, elementType, false, interfaceName, true);
-
+						
 						//toString
 						stream.append(indent(buildMethod("public", "String", "toString", "", buildToStringBody(interfaceName, 4)), 1));
 						
@@ -1609,6 +1614,63 @@ public class Launch {
 							}
 							
 							if (elementType == t || elementType == t.floatingPointType()) stream.append(indent(buildMethod("public", interfaceName, name, buildComponentParams(k, t), buildApplyOperation(k, op)), 1));
+							else if (elementType.floatingPointType() == t) stream.append(indent(buildMethod("public", interfaceName, name, buildComponentParams(k, t, "RoundingMode roundingMode"), buildDelegateReturnBody(name, buildDelegateArgs(components, elementType, t, null))), 1));
+							stream.append("\n");
+						}
+						if (components >= 3 && k == 3)
+						{
+							String name = "crossProduct";
+							
+							{
+								String params = getType(k, t, true) + " vector";
+								if (elementType.isIntegerType() && !t.isIntegerType()) params += ", RoundingMode roundingMode";
+								String delegateArgs = buildDelegateArgs(0, k, elementType, t, "vector");
+								
+								stream.append(indent(buildMethod("public", interfaceName, name, params, buildDelegateReturnBody(name, delegateArgs)), 1));
+							}
+
+							StringBuilder ss = new StringBuilder();
+							for (int l = 0; l < 3; l++)
+							{
+								ss.append(elementType.typeName).append(" ").append(componentsNames[l]).append("0 = ")
+									.append("this.").append(componentsNames[(l + 1) % 3]).append(" * ").append(componentsNames[(l + 2) % 3]).append(" - ")
+									.append("this.").append(componentsNames[(l + 2) % 3]).append(" * ").append(componentsNames[(l + 1) % 3]).append(";\n");
+							}
+							for (int l = 0; l < 3; l++)
+							{
+								ss.append("this.").append(componentsNames[l]).append(" = ").append(componentsNames[l]).append("0;\n");
+							}
+							ss.append("return this;");
+							if (elementType == t || elementType == t.floatingPointType()) stream.append(indent(buildMethod("public", interfaceName, name, buildComponentParams(k, t), ss.toString()), 1));
+							else if (elementType.floatingPointType() == t) stream.append(indent(buildMethod("public", interfaceName, name, buildComponentParams(k, t, "RoundingMode roundingMode"), buildDelegateReturnBody(name, buildDelegateArgs(k, elementType, t, null))), 1));
+							stream.append("\n");
+						}
+						if (components == 4 && k == 4)
+						{
+							String name = "projectiveCrossProduct";
+							
+							{
+								String params = getType(k, t, true) + " vector";
+								if (elementType.isIntegerType() && !t.isIntegerType()) params += ", RoundingMode roundingMode";
+								String delegateArgs = buildDelegateArgs(0, k, elementType, t, "vector");
+								
+								stream.append(indent(buildMethod("public", interfaceName, name, params, buildDelegateReturnBody(name, delegateArgs)), 1));
+							}
+
+							StringBuilder ss = new StringBuilder();
+							for (int l = 0; l < 3; l++)
+							{
+								ss.append(elementType.typeName).append(" ").append(componentsNames[l]).append("0 = ")
+									.append("this.").append(componentsNames[(l + 1) % 3]).append(" * ").append(componentsNames[(l + 2) % 3]).append(" - ")
+									.append("this.").append(componentsNames[(l + 2) % 3]).append(" * ").append(componentsNames[(l + 1) % 3]).append(";\n");
+							}
+							for (int l = 0; l < 3; l++)
+							{
+								ss.append("this.").append(componentsNames[l]).append(" = ").append(componentsNames[l]).append("0;\n");
+							}
+							ss.append("this.").append(componentsNames[3]).append(" *= ").append(componentsNames[3]).append(";\n");
+							ss.append("return this;");
+							if (elementType == t || elementType == t.floatingPointType()) stream.append(indent(buildMethod("public", interfaceName, name, buildComponentParams(k, t), ss.toString()), 1));
 							else if (elementType.floatingPointType() == t) stream.append(indent(buildMethod("public", interfaceName, name, buildComponentParams(k, t, "RoundingMode roundingMode"), buildDelegateReturnBody(name, buildDelegateArgs(components, elementType, t, null))), 1));
 							stream.append("\n");
 						}

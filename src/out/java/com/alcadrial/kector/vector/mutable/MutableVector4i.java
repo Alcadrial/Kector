@@ -275,6 +275,21 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 		return this;
 	}
 
+	public Vector4i crossProduct(Vector3ir vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector4i crossProduct(int x, int y, int z)
+	{
+		int x0 = this.y * z - this.z * y;
+		int y0 = this.z * x - this.x * z;
+		int z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector4i setAll(Vector3ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -297,6 +312,11 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 	public Vector4i divide(Vector3lr vector)
 	{
 		return divide((int) vector.x(), (int) vector.y(), (int) vector.z());
+	}
+
+	public Vector4i crossProduct(Vector3lr vector)
+	{
+		return crossProduct((int) vector.x(), (int) vector.y(), (int) vector.z());
 	}
 
 	public Vector4i setAll(Vector3lr vector)
@@ -339,6 +359,15 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 		return divide(toInt(x, roundingMode), toInt(y, roundingMode), toInt(z, roundingMode), toInt(w, roundingMode));
 	}
 
+	public Vector4i crossProduct(Vector3fr vector, RoundingMode roundingMode)
+	{
+		return crossProduct(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode));
+	}
+	public Vector4i crossProduct(float x, float y, float z, RoundingMode roundingMode)
+	{
+		return crossProduct(toInt(x, roundingMode), toInt(y, roundingMode), toInt(z, roundingMode));
+	}
+
 	public Vector4i setAll(Vector3fr vector, RoundingMode roundingMode)
 	{
 		return x(toInt(vector.x(), roundingMode)).y(toInt(vector.y(), roundingMode)).z(toInt(vector.z(), roundingMode));
@@ -361,6 +390,11 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 	public Vector4i divide(Vector3dr vector, RoundingMode roundingMode)
 	{
 		return divide(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode));
+	}
+
+	public Vector4i crossProduct(Vector3dr vector, RoundingMode roundingMode)
+	{
+		return crossProduct(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode));
 	}
 
 	public Vector4i setAll(Vector3dr vector, RoundingMode roundingMode)
@@ -419,6 +453,22 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 		return this;
 	}
 
+	public Vector4i projectiveCrossProduct(Vector4ir vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+	public Vector4i projectiveCrossProduct(int x, int y, int z, int w)
+	{
+		int x0 = this.y * z - this.z * y;
+		int y0 = this.z * x - this.x * z;
+		int z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		this.w *= w;
+		return this;
+	}
+
 	public Vector4i setAll(Vector4ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z()).w(vector.w());
@@ -441,6 +491,11 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 	public Vector4i divide(Vector4lr vector)
 	{
 		return divide((int) vector.x(), (int) vector.y(), (int) vector.z(), (int) vector.w());
+	}
+
+	public Vector4i projectiveCrossProduct(Vector4lr vector)
+	{
+		return projectiveCrossProduct((int) vector.x(), (int) vector.y(), (int) vector.z(), (int) vector.w());
 	}
 
 	public Vector4i setAll(Vector4lr vector)
@@ -483,6 +538,15 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 		return divide(toInt(x, roundingMode), toInt(y, roundingMode), toInt(z, roundingMode), toInt(w, roundingMode));
 	}
 
+	public Vector4i projectiveCrossProduct(Vector4fr vector, RoundingMode roundingMode)
+	{
+		return projectiveCrossProduct(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode), toInt(vector.w(), roundingMode));
+	}
+	public Vector4i projectiveCrossProduct(float x, float y, float z, float w, RoundingMode roundingMode)
+	{
+		return projectiveCrossProduct(toInt(x, roundingMode), toInt(y, roundingMode), toInt(z, roundingMode), toInt(w, roundingMode));
+	}
+
 	public Vector4i setAll(Vector4fr vector, RoundingMode roundingMode)
 	{
 		return x(toInt(vector.x(), roundingMode)).y(toInt(vector.y(), roundingMode)).z(toInt(vector.z(), roundingMode)).w(toInt(vector.w(), roundingMode));
@@ -505,6 +569,11 @@ public class MutableVector4i extends AbstractVector4i implements Vector4i {
 	public Vector4i divide(Vector4dr vector, RoundingMode roundingMode)
 	{
 		return divide(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode), toInt(vector.w(), roundingMode));
+	}
+
+	public Vector4i projectiveCrossProduct(Vector4dr vector, RoundingMode roundingMode)
+	{
+		return projectiveCrossProduct(toInt(vector.x(), roundingMode), toInt(vector.y(), roundingMode), toInt(vector.z(), roundingMode), toInt(vector.w(), roundingMode));
 	}
 
 	public Vector4i setAll(Vector4dr vector, RoundingMode roundingMode)

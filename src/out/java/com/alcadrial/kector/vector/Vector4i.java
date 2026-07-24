@@ -119,6 +119,13 @@ public interface Vector4i extends Vector4ir, Vector3i {
 	Vector4i divideAll(float value, RoundingMode roundingMode);
 	Vector4i divideAll(int value);
 
+	Vector4i projectiveCrossProduct(Vector4ir vector);
+	Vector4i projectiveCrossProduct(Vector4lr vector);
+	Vector4i projectiveCrossProduct(Vector4fr vector, RoundingMode roundingMode);
+	Vector4i projectiveCrossProduct(Vector4dr vector, RoundingMode roundingMode);
+	Vector4i projectiveCrossProduct(int x, int y, int z, int w);
+	Vector4i projectiveCrossProduct(float x, float y, float z, float w, RoundingMode roundingMode);
+
 	Vector4i opposite();
 	Vector4i absolute();
 	Vector4i conjugate();

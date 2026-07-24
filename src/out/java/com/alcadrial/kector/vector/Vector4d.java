@@ -113,6 +113,13 @@ public interface Vector4d extends Vector4dr, Vector3d {
 	Vector4d divideAll(long value);
 	Vector4d divideAll(double value);
 
+	Vector4d projectiveCrossProduct(Vector4ir vector);
+	Vector4d projectiveCrossProduct(Vector4lr vector);
+	Vector4d projectiveCrossProduct(Vector4fr vector);
+	Vector4d projectiveCrossProduct(Vector4dr vector);
+	Vector4d projectiveCrossProduct(double x, double y, double z, double w);
+	Vector4d projectiveCrossProduct(long x, long y, long z, long w);
+
 	Vector4d opposite();
 	Vector4d absolute();
 	Vector4d conjugate();

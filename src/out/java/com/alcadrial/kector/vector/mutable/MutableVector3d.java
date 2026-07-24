@@ -232,6 +232,11 @@ public class MutableVector3d extends AbstractVector3d implements Vector3d {
 		return divide(vector.x(), vector.y(), vector.z());
 	}
 
+	public Vector3d crossProduct(Vector3ir vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+
 	public Vector3d setAll(Vector3ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -284,6 +289,21 @@ public class MutableVector3d extends AbstractVector3d implements Vector3d {
 		return this;
 	}
 
+	public Vector3d crossProduct(Vector3lr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector3d crossProduct(long x, long y, long z)
+	{
+		double x0 = this.y * z - this.z * y;
+		double y0 = this.z * x - this.x * z;
+		double z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector3d setAll(Vector3lr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -306,6 +326,11 @@ public class MutableVector3d extends AbstractVector3d implements Vector3d {
 	public Vector3d divide(Vector3fr vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z());
+	}
+
+	public Vector3d crossProduct(Vector3fr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
 	}
 
 	public Vector3d setAll(Vector3fr vector)
@@ -357,6 +382,21 @@ public class MutableVector3d extends AbstractVector3d implements Vector3d {
 		this.x /= x;
 		this.y /= y;
 		this.z /= z;
+		return this;
+	}
+
+	public Vector3d crossProduct(Vector3dr vector)
+	{
+		return crossProduct((double) vector.x(), (double) vector.y(), (double) vector.z());
+	}
+	public Vector3d crossProduct(double x, double y, double z)
+	{
+		double x0 = this.y * z - this.z * y;
+		double y0 = this.z * x - this.x * z;
+		double z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
 		return this;
 	}
 

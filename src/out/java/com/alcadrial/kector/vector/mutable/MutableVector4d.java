@@ -254,6 +254,11 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 		return divide(vector.x(), vector.y(), vector.z());
 	}
 
+	public Vector4d crossProduct(Vector3ir vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+
 	public Vector4d setAll(Vector3ir vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -306,6 +311,21 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 		return this;
 	}
 
+	public Vector4d crossProduct(Vector3lr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
+	}
+	public Vector4d crossProduct(long x, long y, long z)
+	{
+		double x0 = this.y * z - this.z * y;
+		double y0 = this.z * x - this.x * z;
+		double z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector4d setAll(Vector3lr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -328,6 +348,11 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 	public Vector4d divide(Vector3fr vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z());
+	}
+
+	public Vector4d crossProduct(Vector3fr vector)
+	{
+		return crossProduct(vector.x(), vector.y(), vector.z());
 	}
 
 	public Vector4d setAll(Vector3fr vector)
@@ -382,6 +407,21 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 		return this;
 	}
 
+	public Vector4d crossProduct(Vector3dr vector)
+	{
+		return crossProduct((double) vector.x(), (double) vector.y(), (double) vector.z());
+	}
+	public Vector4d crossProduct(double x, double y, double z)
+	{
+		double x0 = this.y * z - this.z * y;
+		double y0 = this.z * x - this.x * z;
+		double z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		return this;
+	}
+
 	public Vector4d setAll(Vector3dr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z());
@@ -404,6 +444,11 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 	public Vector4d divide(Vector4ir vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+
+	public Vector4d projectiveCrossProduct(Vector4ir vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
 	}
 
 	public Vector4d setAll(Vector4ir vector)
@@ -462,6 +507,22 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 		return this;
 	}
 
+	public Vector4d projectiveCrossProduct(Vector4lr vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+	public Vector4d projectiveCrossProduct(long x, long y, long z, long w)
+	{
+		double x0 = this.y * z - this.z * y;
+		double y0 = this.z * x - this.x * z;
+		double z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		this.w *= w;
+		return this;
+	}
+
 	public Vector4d setAll(Vector4lr vector)
 	{
 		return x(vector.x()).y(vector.y()).z(vector.z()).w(vector.w());
@@ -484,6 +545,11 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 	public Vector4d divide(Vector4fr vector)
 	{
 		return divide(vector.x(), vector.y(), vector.z(), vector.w());
+	}
+
+	public Vector4d projectiveCrossProduct(Vector4fr vector)
+	{
+		return projectiveCrossProduct(vector.x(), vector.y(), vector.z(), vector.w());
 	}
 
 	public Vector4d setAll(Vector4fr vector)
@@ -539,6 +605,22 @@ public class MutableVector4d extends AbstractVector4d implements Vector4d {
 		this.y /= y;
 		this.z /= z;
 		this.w /= w;
+		return this;
+	}
+
+	public Vector4d projectiveCrossProduct(Vector4dr vector)
+	{
+		return projectiveCrossProduct((double) vector.x(), (double) vector.y(), (double) vector.z(), (double) vector.w());
+	}
+	public Vector4d projectiveCrossProduct(double x, double y, double z, double w)
+	{
+		double x0 = this.y * z - this.z * y;
+		double y0 = this.z * x - this.x * z;
+		double z0 = this.x * y - this.y * x;
+		this.x = x0;
+		this.y = y0;
+		this.z = z0;
+		this.w *= w;
 		return this;
 	}
 

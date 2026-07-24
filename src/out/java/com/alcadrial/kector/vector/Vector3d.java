@@ -93,6 +93,13 @@ public interface Vector3d extends Vector3dr, Vector2d {
 	Vector3d divideAll(long value);
 	Vector3d divideAll(double value);
 
+	Vector3d crossProduct(Vector3ir vector);
+	Vector3d crossProduct(Vector3lr vector);
+	Vector3d crossProduct(Vector3fr vector);
+	Vector3d crossProduct(Vector3dr vector);
+	Vector3d crossProduct(double x, double y, double z);
+	Vector3d crossProduct(long x, long y, long z);
+
 	Vector3d opposite();
 	Vector3d absolute();
 	Vector3d conjugate();

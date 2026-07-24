@@ -99,6 +99,13 @@ public interface Vector3i extends Vector3ir, Vector2i {
 	Vector3i divideAll(float value, RoundingMode roundingMode);
 	Vector3i divideAll(int value);
 
+	Vector3i crossProduct(Vector3ir vector);
+	Vector3i crossProduct(Vector3lr vector);
+	Vector3i crossProduct(Vector3fr vector, RoundingMode roundingMode);
+	Vector3i crossProduct(Vector3dr vector, RoundingMode roundingMode);
+	Vector3i crossProduct(int x, int y, int z);
+	Vector3i crossProduct(float x, float y, float z, RoundingMode roundingMode);
+
 	Vector3i opposite();
 	Vector3i absolute();
 	Vector3i conjugate();

@@ -113,6 +113,13 @@ public interface Vector4f extends Vector4fr, Vector3f {
 	Vector4f divideAll(int value);
 	Vector4f divideAll(float value);
 
+	Vector4f projectiveCrossProduct(Vector4ir vector);
+	Vector4f projectiveCrossProduct(Vector4lr vector);
+	Vector4f projectiveCrossProduct(Vector4fr vector);
+	Vector4f projectiveCrossProduct(Vector4dr vector);
+	Vector4f projectiveCrossProduct(float x, float y, float z, float w);
+	Vector4f projectiveCrossProduct(int x, int y, int z, int w);
+
 	Vector4f opposite();
 	Vector4f absolute();
 	Vector4f conjugate();
